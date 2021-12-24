@@ -1,0 +1,138 @@
+﻿@model School.Areas.Admin.Models.BoardModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h3>@ViewData["PageTitle"]</h3>
+                    </div>
+                    <div class="col-sm-3">
+                        <a asp-action="Index" class="btn btn-primary btn-outline-primary float-right"><i class="icofont icofont-ui-reply"></i> Back</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <h4 class="sub-title">Add New Records</h4>
+                <form method="post" enctype="multipart/form-data" asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group row">
+                        <label asp-for="AdharCard" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-4">
+                            <input asp-for="AdharCard" class="form-control" />
+                            <span asp-validation-for="AdharCard" class="text-danger"></span>
+                        </div>
+                        <label asp-for="Password" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-4">
+                            <input type="password" asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="DispalyName" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="DispalyName" class="form-control" />
+                            <span asp-validation-for="DispalyName" class="text-danger"></span>
+                        </div>
+                    </div>                     
+
+                    <div class="form-group row">
+                        <label asp-for="Mobile" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-4">
+                            <input asp-for="Mobile" class="form-control" />
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                        </div>
+                        <label asp-for="Whatsup" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-4">
+                            <input asp-for="Whatsup" class="form-control" />
+                            <span asp-validation-for="Whatsup" class="text-danger"></span>
+                        </div>
+                    </div>                    
+
+                    <div class="form-group row">
+                        <label asp-for="Address" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <textarea asp-for="Address" rows="3" cols="5" class="form-control"></textarea>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="Area" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="Area" class="form-control" />
+                            <span asp-validation-for="Area" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="City" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-4">
+                            <input asp-for="City" class="form-control" />
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                        <label asp-for="State" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-4">
+                            <input asp-for="State" class="form-control" />
+                            <span asp-validation-for="State" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="DateofBirth" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-4">
+                            <input type="text" asp-for="DateofBirth" class="form-control" />
+                            <span asp-validation-for="DateofBirth" class="text-danger"></span>
+                        </div>
+                        <label asp-for="DateofJoining" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-4">
+                            <input type="text" asp-for="DateofJoining" class="form-control" />
+                            <span asp-validation-for="DateofJoining" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="Salary" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-4">
+                            <input asp-for="Salary" class="form-control" />
+                            <span asp-validation-for="Salary" class="text-danger"></span>
+                        </div>
+                        <label asp-for="Opening" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-4">
+                            <input asp-for="Opening" class="form-control" />
+                            <span asp-validation-for="Opening" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="UserPicture" class="col-sm-2 col-form-label"></label>
+                        <div class="col-md-4">
+                            <p>Product Picture 200px X 300px</p>
+                            <img id="productPicture" src="" alt="" class="img-fluid img-thumbnail" />
+                        </div>
+                        <div class="col-md-4">
+                            <input type='file' name="postedFile" onchange="uploadPicture(this);" class="btn btn-success pull-right" />
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="submit" onclick="FormValidation();" value="Create" class="btn btn-primary btn-out float-right" />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <!-- Default card end -->
+    </div>
+</div>
+

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<School.Areas.Admin.Models.BoardModel>
+
+@{ 
+   Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+   int count = 0;
+}
+<div class="page-header animated bounceInRight">
+    <div class="card">
+        <div class="card-block ">
+            <div class="row ">
+                <div class="col-lg-4">
+                    <h5 class="text-uppercase font-weight-bold">@ViewData["PageTitle"]</h5>
+                </div>
+                <div class="col-lg-8 align-items-end">
+                    <div class="page-header-breadcrumb">
+                        <ul class="breadcrumb-title">
+                            <li class="breadcrumb-item">
+                                <a asp-controller="Dashboard" asp-action="Index"> <i class="icofont icofont-home"></i> Home </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a asp-controller="Masters" asp-action="Index"> Masters </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a asp-controller="Desgination" asp-action="Index"> @ViewData["PageTitle"] </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated bounceInUp">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>@ViewData["PageTitle"]</h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <a asp-action="Create" class="btn btn-primary btn-outline-primary float-right"><i class="icofont icofont-ui-add"></i> Add</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class='dt-responsive table-responsive'>
+                    <table id='cbtn-selectors1' class='table table-striped table-bordered nowrap'>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Board Name</th>
+                                <th>Board Description</th>                                
+                                <th>Edit</th>
+                                <th>Del</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@{count++;} @count</td>                                    
+                                    <td>@item.BoardName</td>                                    
+                                    <td>@item.BoardDescription</td>
+                                    <td><a asp-action="Edit" asp-route-id="@item.BoardID" class="btn btn-success btn-mini btn-outline-primary"><i class="icofont icofont-ui-edit"></i></a></td>
+                                    <td><a asp-action="Delete" asp-route-id="@item.BoardID" class="btn btn-danger btn-mini btn-outline-primary"><i class="icofont icofont-ui-close"></i></a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
