@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using School.Areas.Admin.Models;
 using System;
@@ -10,11 +12,10 @@ namespace School.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class BoardController : Controller
-    {      
-        public DBContext db = new DBContext();       
+    {
+        public DBContext db = new DBContext();
         public IActionResult Index()
         {
-            ViewData["PageTitle"] = "Board List";
             ViewData["PageTitle"] = "Board List";
             var model = db.BoardModels.ToList();
             return View(model);
@@ -42,7 +43,9 @@ namespace School.Areas.Admin.Controllers
                     obj.BoardID = incid + 1;
                     db.BoardModels.Add(obj);
                     db.SaveChanges();
-                    //HttpContext.Session.SetString("Create", "Yes");
+                    Response.Cookies.Append("Create", "Yes");
+                    string s = Request.Cookies["Create"];
+                    
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -74,11 +77,11 @@ namespace School.Areas.Admin.Controllers
                         return View();
                     }
                     else
-                    {                       
-                        
+                    {
+
                         db.Entry(obj).State = EntityState.Modified;
                         db.SaveChanges();
-                        //HttpContext.Session.SetString("Edit", "Yes");
+                        HttpContext.Response.Cookies.Append("Edit", "Yes");
                         return RedirectToAction(nameof(Index));
                     }
                 }
@@ -86,7 +89,7 @@ namespace School.Areas.Admin.Controllers
                 {
                     db.Entry(obj).State = EntityState.Modified;
                     db.SaveChanges();
-                    //HttpContext.Session.SetString("Edit", "Yes");
+                    HttpContext.Response.Cookies.Append("Edit", "Yes");
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -103,7 +106,7 @@ namespace School.Areas.Admin.Controllers
         }
         [HttpPost]
         public IActionResult Delete(int id, string confirm)
-        {            
+        {
             if (confirm == "Yes")
             {
                 db.BoardModels.RemoveRange(db.BoardModels.Where(x => x.BoardID == id));
@@ -114,6 +117,6 @@ namespace School.Areas.Admin.Controllers
             {
                 return View();
             }
-        }         
+        }
     }
 }

@@ -8,10 +8,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School.Areas.Admin.Models
 {
-    class SessionYearModel
+    public class SessionYearModel
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SessionYearID { get; set; }
         public string SessionYearName { get; set; }
         public string SessionYearRemark { get; set; }

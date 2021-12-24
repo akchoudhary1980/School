@@ -8,10 +8,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School.Areas.Admin.Models
 {
-    class StaffModel
+    public class StaffModel
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int StaffID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }

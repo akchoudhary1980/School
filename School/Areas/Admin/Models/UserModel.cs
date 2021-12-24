@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School.Areas.Admin.Models
 {
-    class UserModel
+    public class UserModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

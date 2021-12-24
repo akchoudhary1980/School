@@ -11,9 +11,13 @@ namespace School.Areas.Admin.Models
     public class BoardModel
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]        
         public int BoardID { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Board Name")]
+        [Display(Name = "Board Name")]
         public string BoardName { get; set; }
+        [Display(Name = "Board Description")]
         public string BoardDescription { get; set; }        
     }
 }

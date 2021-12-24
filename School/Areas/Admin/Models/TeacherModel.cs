@@ -11,7 +11,7 @@ namespace School.Areas.Admin.Models
     public class TeacherModel
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TeacherID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
