@@ -15,6 +15,7 @@ namespace School.Areas.Admin.Controllers
         public IActionResult Index()
         {
             ViewData["PageTitle"] = "Board List";
+            ViewData["PageTitle"] = "Board List";
             var model = db.BoardModels.ToList();
             return View(model);
         }
