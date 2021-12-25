@@ -104,7 +104,7 @@ namespace School.Areas.Admin.Controllers
 
                     db.CityModels.Add(obj);
                     db.SaveChanges();
-                    HttpContext.Session.SetString("Create", "Yes");
+                    Response.Cookies.Append("Create", "Yes");
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -140,7 +140,7 @@ namespace School.Areas.Admin.Controllers
 
                         db.Entry(obj).State = EntityState.Modified;
                         db.SaveChanges();
-                        HttpContext.Session.SetString("Edit", "Yes");
+                        Response.Cookies.Append("Edit", "Yes");
                         return RedirectToAction(nameof(Index));
                     }
                 }
@@ -149,7 +149,7 @@ namespace School.Areas.Admin.Controllers
 
                     db.Entry(obj).State = EntityState.Modified;
                     db.SaveChanges();
-                    HttpContext.Session.SetString("Edit", "Yes");
+                    Response.Cookies.Append("Edit", "Yes");
                     return RedirectToAction(nameof(Index));
                 }
             }

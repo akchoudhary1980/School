@@ -1,0 +1,56 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@model IEnumerable<School.Areas.Admin.Models.BoardModel>
+@using School.Areas.Admin.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int count = 0;
+}
+
+<partial name="_Breadcrumb" , model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
+<!-- general form elements -->
+<div class="card card-outline card-info">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h6>@ViewData["PageName"]</h6>
+            </div>
+            <div class="col-sm-6">
+                <a asp-action="Create" class="btn btn-outline-primary float-right"><i class="fas fa-plus-square"></i> Add</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Board Name</th>
+                            <th>Board Description</th>
+                            <th>Edit</th>
+                            <th>Del</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@{count++;} @count</td>
+                                <td>@item.BoardName</td>
+                                <td>@item.BoardDescription</td>
+                                <td><a asp-action="Edit" asp-route-id="@item.BoardID" class="btn btn-xs btn-outline-success"><i class="fas fa-edit"></i></a></td>
+                                <td><a asp-action="Delete" asp-route-id="@item.BoardID" class="btn btn-xs btn-outline-danger"><i class="fas fa-window-close"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <p>Use <i style="color:blue" class="fas fa-plus-square"></i> for Insert Record, <i style="color:green" class="fas fa-edit"></i> for Update Record and <i style="color:red" class="fas fa-window-close"></i> for Delete Record </p>
+    </div>
+
+</div>
+<!-- /.card -->

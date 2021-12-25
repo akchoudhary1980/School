@@ -16,7 +16,9 @@ namespace School.Areas.Admin.Controllers
         public DBContext db = new DBContext();
         public IActionResult Index()
         {
-            ViewData["PageTitle"] = "Country List";
+            ViewData["PageTitle"] = "Country Manage";
+            ViewData["PageName"] = "Country List";
+            ViewData["ControllerName"] = "Country";
             return View();
         }
         [HttpPost]
@@ -78,7 +80,9 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Create()
         {
-            ViewData["PageTitle"] = "New Country";
+            ViewData["PageTitle"] = "Country Manage";
+            ViewData["PageName"] = "New Country";
+            ViewData["ControllerName"] = "Country";
             return View();
         }
         [HttpPost]
@@ -100,7 +104,7 @@ namespace School.Areas.Admin.Controllers
 
                     db.CountryModels.Add(obj);
                     db.SaveChanges();
-                    HttpContext.Session.SetString("Create", "Yes");
+                    Response.Cookies.Append("Create", "Yes");
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -111,7 +115,9 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Edit(int id)
         {
-            ViewData["PageTitle"] = "Edit Country";
+            ViewData["PageTitle"] = "Country Manage";
+            ViewData["PageName"] = "Edit Country";
+            ViewData["ControllerName"] = "Country";
             var model = db.CountryModels.Where(x => x.CountryID == id).FirstOrDefault();
             return View(model);
         }
@@ -136,7 +142,7 @@ namespace School.Areas.Admin.Controllers
 
                         db.Entry(obj).State = EntityState.Modified;
                         db.SaveChanges();
-                        HttpContext.Session.SetString("Edit", "Yes");
+                        Response.Cookies.Append("Edit", "Yes");
                         return RedirectToAction(nameof(Index));
                     }
                 }
@@ -145,7 +151,7 @@ namespace School.Areas.Admin.Controllers
 
                     db.Entry(obj).State = EntityState.Modified;
                     db.SaveChanges();
-                    HttpContext.Session.SetString("Edit", "Yes");
+                    Response.Cookies.Append("Edit", "Yes");
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -156,7 +162,9 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Delete(int id)
         {
-            ViewData["PageTitle"] = "Delete Country";
+            ViewData["PageTitle"] = "Country Manage";
+            ViewData["PageName"] = "Delete Country";
+            ViewData["ControllerName"] = "Country";
             var model = db.CountryModels.Where(x => x.CountryID == id).FirstOrDefault();
             return View(model);
         }
