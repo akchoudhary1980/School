@@ -23,7 +23,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
@@ -34,6 +34,12 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-controller="SessionYear" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Session Year</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a asp-controller="School" asp-action="Index" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -57,8 +63,8 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Section</p>
                             </a>
-                        </li>                        
-                        
+                        </li>
+
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -75,6 +81,18 @@
                             <a asp-controller="Desgination" asp-action="Index" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Desgination</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Qualification" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Qualification</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Subject" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Subject</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -96,6 +114,37 @@
                             </a>
                         </li>
 
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Manpower
+                            <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right">6</span>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-controller="Teacher" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Teacher</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Staff" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Office Staff</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Vehicle" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Transport Vehicle</p>
+                            </a>
+                        </li>                      
 
                     </ul>
                 </li>
