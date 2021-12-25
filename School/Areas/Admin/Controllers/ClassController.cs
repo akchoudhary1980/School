@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,43 +10,43 @@ using School.Areas.Admin.Models;
 namespace School.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class BoardController : Controller
+    public class ClassController : Controller
     {
         public DBContext db = new DBContext();
         public IActionResult Index()
         {
-            ViewData["PageTitle"] = "Board Manage";
-            ViewData["PageName"] = "Board List";
-            ViewData["ControllerName"] = "Board";
-            var model = db.BoardModels.ToList();
+            ViewData["PageTitle"] = "Class Manage";
+            ViewData["PageName"] = "Class List";
+            ViewData["ControllerName"] = "Class";
+            var model = db.ClassModels.ToList();
             return View(model);
         }
         public IActionResult Create()
         {
-            ViewData["PageTitle"] = "Board Manage";
-            ViewData["PageName"] = "New Board";
-            ViewData["ControllerName"] = "Board";
+            ViewData["PageTitle"] = "Class Manage";
+            ViewData["PageName"] = "New Class";
+            ViewData["ControllerName"] = "Class";
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(BoardModel obj)
+        public IActionResult Create(ClassModel obj)
         {
             if (ModelState.IsValid)
             {
-                bool duplicate = db.BoardModels.Any(x => x.BoardName == obj.BoardName);
+                bool duplicate = db.ClassModels.Any(x => x.ClassName == obj.ClassName);
                 if (duplicate)
                 {
-                    ModelState.AddModelError("BoardName", "Duplicate Record Found");
+                    ModelState.AddModelError("ClassName", "Duplicate Record Found");
                     return View();
                 }
                 else
                 {
-                    int incid = db.BoardModels.DefaultIfEmpty().Max(r => r == null ? 0 : r.BoardID);
-                    obj.BoardID = incid + 1;
-                    db.BoardModels.Add(obj);
+                    int incid = db.ClassModels.DefaultIfEmpty().Max(r => r == null ? 0 : r.ClassID);
+                    obj.ClassID = incid + 1;
+                    db.ClassModels.Add(obj);
                     db.SaveChanges();
-                    Response.Cookies.Append("Create", "Yes");                   
+                    Response.Cookies.Append("Create", "Yes");
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -58,26 +57,26 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Edit(int id)
         {
-            ViewData["PageTitle"] = "Board Manage";
-            ViewData["PageName"] = "Update Board";
-            ViewData["ControllerName"] = "Board";
-            var model = db.BoardModels.Where(x => x.BoardID == id).FirstOrDefault();
+            ViewData["PageTitle"] = "Class Manage";
+            ViewData["PageName"] = "Update Class";
+            ViewData["ControllerName"] = "Class";
+            var model = db.ClassModels.Where(x => x.ClassID == id).FirstOrDefault();
             return View(model);
         }
         [HttpPost]
-        public IActionResult Edit(BoardModel obj)
+        public IActionResult Edit(ClassModel obj)
         {
             if (ModelState.IsValid)
             {
                 // Check Duplicate and prevet duplication at the time of edit 
                 DBContext db1 = new DBContext();
-                var oldvalue = db1.BoardModels.Where(x => x.BoardID == obj.BoardID).SingleOrDefault();
-                if (oldvalue.BoardName != obj.BoardName)
+                var oldvalue = db1.ClassModels.Where(x => x.ClassID == obj.ClassID).SingleOrDefault();
+                if (oldvalue.ClassName != obj.ClassName)
                 {
-                    bool duplicate = db1.BoardModels.Any(x => x.BoardName == obj.BoardName);
+                    bool duplicate = db1.ClassModels.Any(x => x.ClassName == obj.ClassName);
                     if (duplicate)
                     {
-                        ModelState.AddModelError("BoardName", "Duplicate Record Found");
+                        ModelState.AddModelError("ClassName", "Duplicate Record Found");
                         return View();
                     }
                     else
@@ -104,18 +103,18 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Delete(int id)
         {
-            ViewData["PageTitle"] = "Board Manage";
-            ViewData["PageName"] = "Delete Board";
-            ViewData["ControllerName"] = "Board";
-            var model = db.BoardModels.Where(x => x.BoardID == id).FirstOrDefault();
+            ViewData["PageTitle"] = "Class Manage";
+            ViewData["PageName"] = "Delete Class";
+            ViewData["ControllerName"] = "Class";
+            var model = db.ClassModels.Where(x => x.ClassID == id).FirstOrDefault();
             return View(model);
         }
         [HttpPost]
-        public IActionResult Delete(BoardModel obj, string confirm)
+        public IActionResult Delete(ClassModel obj, string confirm)
         {
             if (confirm == "Yes")
             {
-                db.BoardModels.RemoveRange(db.BoardModels.Where(x => x.BoardID == obj.BoardID));
+                db.ClassModels.RemoveRange(db.ClassModels.Where(x => x.ClassID == obj.ClassID));
                 db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }

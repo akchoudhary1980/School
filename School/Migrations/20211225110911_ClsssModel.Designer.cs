@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using School;
 
 namespace School.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20211225110911_ClsssModel")]
+    partial class ClsssModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,23 +38,6 @@ namespace School.Migrations
                     b.ToTable("BoardModels");
                 });
 
-            modelBuilder.Entity("School.Areas.Admin.Models.CityModel", b =>
-                {
-                    b.Property<int>("CityID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CityName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StateID")
-                        .HasColumnType("int");
-
-                    b.HasKey("CityID");
-
-                    b.ToTable("CityModels");
-                });
-
             modelBuilder.Entity("School.Areas.Admin.Models.ClassModel", b =>
                 {
                     b.Property<int>("ClassID")
@@ -68,41 +53,6 @@ namespace School.Migrations
                     b.HasKey("ClassID");
 
                     b.ToTable("ClassModels");
-                });
-
-            modelBuilder.Entity("School.Areas.Admin.Models.CountryModel", b =>
-                {
-                    b.Property<int>("CountryID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CountryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Region")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CountryID");
-
-                    b.ToTable("CountryModels");
-                });
-
-            modelBuilder.Entity("School.Areas.Admin.Models.DesginationModel", b =>
-                {
-                    b.Property<int>("DesginationID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DesginationName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Remark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DesginationID");
-
-                    b.ToTable("DesginationModels");
                 });
 
             modelBuilder.Entity("School.Areas.Admin.Models.SchoolModel", b =>
@@ -283,27 +233,6 @@ namespace School.Migrations
                     b.HasKey("StaffID");
 
                     b.ToTable("StaffModels");
-                });
-
-            modelBuilder.Entity("School.Areas.Admin.Models.StateModel", b =>
-                {
-                    b.Property<int>("StateID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CountryID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StateName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StateType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("StateID");
-
-                    b.ToTable("StateModels");
                 });
 
             modelBuilder.Entity("School.Areas.Admin.Models.TeacherModel", b =>

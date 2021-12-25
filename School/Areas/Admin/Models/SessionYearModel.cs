@@ -13,7 +13,12 @@ namespace School.Areas.Admin.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SessionYearID { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Session Year Name")]
+        [Display(Name = "Session Year Name")]
         public string SessionYearName { get; set; }
+
+        [Display(Name = "Remark")]
         public string SessionYearRemark { get; set; }
     }
 }

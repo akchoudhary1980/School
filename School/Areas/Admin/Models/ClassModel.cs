@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
 using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School.Areas.Admin.Models
@@ -13,10 +9,13 @@ namespace School.Areas.Admin.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ClassID { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Class Name")]
+        [Display(Name = "Class Name")]
         public string ClassName { get; set; }
-        public string ClassDescription { get; set; }
-        public string ClassOf { get; set; } // Board / CBSCE
-        public string ClassSection { get; set; } // Section 
-        public string ClassTeacher { get; set; }  // Teacher      
+
+        [Display(Name = "Class Description")]
+        public string ClassDescription { get; set; }             
+          
     }
 }

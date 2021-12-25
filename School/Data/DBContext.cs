@@ -8,8 +8,20 @@ namespace School
     public class DBContext : DbContext
     {
         // Project Flow 
-        public DbSet<TeacherModel> TeacherModels { get; set; }
+        public DbSet<SchoolModel> SchoolModels { get; set; }
+        public DbSet<SessionYearModel> SessionYearModels { get; set; }
         public DbSet<BoardModel> BoardModels { get; set; }
+        public DbSet<ClassModel> ClassModels { get; set; }
+        public DbSet<SectionModel> SectionModels { get; set; }
+        public DbSet<DesginationModel> DesginationModels { get; set; }
+        public DbSet<TeacherModel> TeacherModels { get; set; }
+        public DbSet<StaffModel> StaffModels { get; set; }
+        public DbSet<UserModel> UserModels { get; set; }
+        // helping 
+        public DbSet<CountryModel> CountryModels { get; set; }
+        public DbSet<StateModel> StateModels { get; set; }
+        public DbSet<CityModel> CityModels { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
