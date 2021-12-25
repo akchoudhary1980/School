@@ -24,7 +24,9 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Create()
         {
-            ViewData["PageTitle"] = "New Board";
+            ViewData["PageTitle"] = "Board Manage";
+            ViewData["PageName"] = "New Board";
+            ViewData["ControllerName"] = "Board";
             return View();
         }
         [HttpPost]
@@ -56,7 +58,9 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Edit(int id)
         {
-            ViewData["PageTitle"] = "Edit Board";
+            ViewData["PageTitle"] = "Board Manage";
+            ViewData["PageName"] = "Update Board";
+            ViewData["ControllerName"] = "Board";
             var model = db.BoardModels.Where(x => x.BoardID == id).FirstOrDefault();
             return View(model);
         }
@@ -100,7 +104,9 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Delete(int id)
         {
-            ViewData["PageTitle"] = "Delete Board";
+            ViewData["PageTitle"] = "Board Manage";
+            ViewData["PageName"] = "Delete Board";
+            ViewData["ControllerName"] = "Board";
             var model = db.BoardModels.Where(x => x.BoardID == id).FirstOrDefault();
             return View(model);
         }
