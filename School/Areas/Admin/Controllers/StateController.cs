@@ -10,12 +10,15 @@ using System.Threading.Tasks;
 
 namespace School.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class StateController : Controller
     {
         public DBContext db = new DBContext();
         public IActionResult Index()
         {
-            ViewData["PageTitle"] = "State List";
+            ViewData["PageTitle"] = "State Manage";
+            ViewData["PageName"] = "State List";
+            ViewData["ControllerName"] = "State";
             return View();
         }
         [HttpPost]
@@ -81,7 +84,9 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Create()
         {
-            ViewData["PageTitle"] = "New State";
+            ViewData["PageTitle"] = "State Manage";
+            ViewData["PageName"] = "New State";
+            ViewData["ControllerName"] = "State";
             return View();
         }
         [HttpPost]
@@ -114,7 +119,9 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Edit(int id)
         {
-            ViewData["PageTitle"] = "Edit State";
+            ViewData["PageTitle"] = "State Manage";
+            ViewData["PageName"] = "Update State";
+            ViewData["ControllerName"] = "State";
             var model = db.StateModels.Where(x => x.StateID == id).FirstOrDefault();
             return View(model);
         }
@@ -159,17 +166,19 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Delete(int id)
         {
-            ViewData["PageTitle"] = "Delete State";
+            ViewData["PageTitle"] = "State Manage";
+            ViewData["PageName"] = "Delete State";
+            ViewData["ControllerName"] = "State";
             var model = db.StateModels.Where(x => x.StateID == id).FirstOrDefault();
             return View(model);
         }
         [HttpPost]
-        public IActionResult Delete(int id, string confirm)
+        public IActionResult Delete(StateModel obj, string confirm)
         {
             string s = confirm;
             if (confirm == "Yes")
             {
-                db.StateModels.RemoveRange(db.StateModels.Where(x => x.StateID == id));
+                db.StateModels.RemoveRange(db.StateModels.Where(x => x.StateID == obj.StateID));
                 db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }

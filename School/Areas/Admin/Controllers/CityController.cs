@@ -10,12 +10,15 @@ using School.Areas.Admin.Models;
 
 namespace School.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CityController : Controller
     {
         public DBContext db = new DBContext();      
         public IActionResult Index()
         {
-            ViewData["PageTitle"] = "City List";
+            ViewData["PageTitle"] = "City Manage";
+            ViewData["PageName"] = "City List";
+            ViewData["ControllerName"] = "City";
             var model = db.CityModels.ToList();
             return View(model);
         }
@@ -82,7 +85,9 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Create()
         {
-            ViewData["PageTitle"] = "New City";
+            ViewData["PageTitle"] = "City Manage";
+            ViewData["PageName"] = "New City";
+            ViewData["ControllerName"] = "City";
             return View();
         }
         [HttpPost]
@@ -115,7 +120,9 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Edit(int id)
         {
-            ViewData["PageTitle"] = "Edit City";
+            ViewData["PageTitle"] = "City Manage";
+            ViewData["PageName"] = "Update City";
+            ViewData["ControllerName"] = "City";
             var model = db.CityModels.Where(x => x.CityID == id).FirstOrDefault();
             return View(model);
         }
@@ -160,17 +167,19 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Delete(int id)
         {
-            ViewData["PageTitle"] = "Delete City";
+            ViewData["PageTitle"] = "City Manage";
+            ViewData["PageName"] = "Delete City";
+            ViewData["ControllerName"] = "City";
             var model = db.CityModels.Where(x => x.CityID == id).FirstOrDefault();
             return View(model);
         }
         [HttpPost]
-        public IActionResult Delete(int id, string confirm)
+        public IActionResult Delete(CityModel obj, string confirm)
         {
             string s = confirm;
             if (confirm == "Yes")
             {
-                db.CityModels.RemoveRange(db.CityModels.Where(x => x.CityID == id));
+                db.CityModels.RemoveRange(db.CityModels.Where(x => x.CityID == obj.CityID));
                 db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }

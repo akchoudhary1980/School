@@ -169,12 +169,12 @@ namespace School.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult Delete(int id, string confirm)
+        public IActionResult Delete(CountryModel obj, string confirm)
         {
             string s = confirm;
             if (confirm == "Yes")
             {
-                db.CountryModels.RemoveRange(db.CountryModels.Where(x => x.CountryID == id));
+                db.CountryModels.RemoveRange(db.CountryModels.Where(x => x.CountryID == obj.CountryID));
                 db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }

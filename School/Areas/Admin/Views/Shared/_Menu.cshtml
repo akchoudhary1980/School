@@ -23,27 +23,27 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
+         with font-awesome or any other icon font library -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
-                            Masters
+                            Acdemic
                             <i class="fas fa-angle-left right"></i>
                             <span class="badge badge-info right">6</span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a asp-controller="Board" asp-action="Index" class="nav-link">
+                            <a asp-controller="School" asp-action="Index" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Board</p>
+                                <p>School</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a asp-controller="Section" asp-action="Index" class="nav-link">
+                            <a asp-controller="Board" asp-action="Index" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Section</p>
+                                <p>Board</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -52,6 +52,25 @@
                                 <p>Class</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a asp-controller="Section" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Section</p>
+                            </a>
+                        </li>                        
+                        
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Supporting
+                            <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right">6</span>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a asp-controller="Desgination" asp-action="Index" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -64,6 +83,20 @@
                                 <p>Country</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a asp-controller="State" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>State</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="City" asp-action="Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>City</p>
+                            </a>
+                        </li>
+
+
                     </ul>
                 </li>
                 <li class="nav-header">EXAMPLES</li>
