@@ -16,7 +16,9 @@ namespace School.Areas.Admin.Controllers
         public DBContext db = new DBContext();
         public IActionResult Index()
         {
-            ViewData["PageTitle"] = "Board List";
+            ViewData["PageTitle"] = "Board Manage";
+            ViewData["PageName"] = "Board List";
+            ViewData["ControllerName"] = "Board";
             var model = db.BoardModels.ToList();
             return View(model);
         }

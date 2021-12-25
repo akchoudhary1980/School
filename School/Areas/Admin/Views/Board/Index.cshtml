@@ -1,33 +1,16 @@
 ﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
 @model IEnumerable<School.Areas.Admin.Models.BoardModel>
-
+@using School.Areas.Admin.Models;
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    int count = 0;
+    int count = 0; 
 }
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Dashboard</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a asp-areas="Admin" asp-controller="Dashboard" asp-action="Index">Home</a></li>
-                    <li class="breadcrumb-item active"><a asp-areas="Admin" asp-controller="Board" asp-action="Index"> @ViewData["PageTitle"] </a></li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
 
-
-
+<partial name="_Breadcrumb", model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
 <!-- general form elements -->
 <div class="card card-outline card-primary">
     <div class="card-header">
-        <h5>Form Title</h5>
+        <h5>@ViewData["PageTitle"]</h5>
     </div>
     <!-- /.card-header -->
     <!-- form start -->
@@ -35,7 +18,7 @@
         <div class="card-body">
             <div class="row mb-3">
                 <div class="col-sm-6">
-                    <h4>@ViewData["PageTitle"]</h4>
+                    <h6>@ViewData["PageName"]</h6>
                 </div>
                 <div class="col-sm-6">
                     <a asp-action="Create" class="btn btn-outline-success float-right"><i class="fas fa-plus-square"></i> Add</a>
@@ -70,12 +53,7 @@
                     </div>
                 </div>
             </div>
-
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-            @*<button type="submit" class="btn btn-primary">Submit</button>*@
-        </div>
+        </div>       
     </form>
 </div>
 <!-- /.card -->
