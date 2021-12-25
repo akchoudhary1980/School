@@ -14,6 +14,10 @@ namespace School
         public DbSet<ClassModel> ClassModels { get; set; }
         public DbSet<SectionModel> SectionModels { get; set; }
         public DbSet<DesginationModel> DesginationModels { get; set; }
+        public DbSet<QualificationModel> QualificationModels { get; set; }
+        public DbSet<QualificationTransModel> QualificationTransModels { get; set; }
+        public DbSet<SubjectModel> SubjectModels { get; set; }
+        public DbSet<SubJectTransModel> SubJectTransModels { get; set; }
         public DbSet<TeacherModel> TeacherModels { get; set; }
         public DbSet<StaffModel> StaffModels { get; set; }
         public DbSet<UserModel> UserModels { get; set; }

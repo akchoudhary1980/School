@@ -13,18 +13,11 @@ namespace School.Areas.Admin.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int QualificationID { get; set; }
-        public string ExaminationName { get; set; }
-        public string SpecilisedInSubject { get; set; }
-        public DateTime? PassingYear { get; set; }
-        public string Boards { get; set; } // Or University
-        public string BoardName { get; set; } 
-        public string IsGradeSystem { get; set; } // yes or No        
-        public string FindGrade { get; set; }
-        public string GradePercent { get; set; } 
-        public double? FindMarks { get; set; }
-        public double? OutofMarks { get; set; }
-        public string MarksPecent { get; set; }
-        public int TeacherID { get; set; }
-        public int StaffID { get; set; }
+        [Required(ErrorMessage = "Please Enter Qualification Name")]
+        [Display(Name = "Qualification Name")]
+        public string QualificationName { get; set; }
+
+        [Display(Name = "Qualification Name")]
+        public string Remark { get; set; }
     }
 }

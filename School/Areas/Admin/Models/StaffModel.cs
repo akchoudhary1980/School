@@ -20,11 +20,13 @@ namespace School.Areas.Admin.Models
         public string Mobile { get; set; }
         public string WhatsApp { get; set; }
         public string Email { get; set; }
+        public int DesginationID { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public DateTime? DateOfAppointment { get; set; }
         public double? Salary { get; set; }
         public string IsPF { get; set; } // Yes Or No 
         public string PFNumber { get; set; } // Yes Or No 
-        public string Qualification { get; set; } // Add Pulse        
-        public string Designation { get; set; } // from Desgination                
+        public string Picture { get; set; }
+        public string ScanDocuments { get; set; }
     }
 }
