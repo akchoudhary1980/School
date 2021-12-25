@@ -1,29 +1,11 @@
 ﻿$(document).ready(function () {
-    $("#cbtn-selectors").DataTable({
-        //
-        dom: 'Bfrtip',
-        buttons: [{
-            extend: 'copyHtml5',
-            exportOptions: {
-                columns: [0, ':visible']
-            }
-        }, {
-            extend: 'excelHtml5',
-            exportOptions: {
-                columns: ':visible'
-            }
-        }, {
-            extend: 'pdfHtml5',
-            exportOptions: {
-                columns: [0, 1, 2, 5]
-            }
-        }, 'colvis'],
-        //
+    $("#mytable").DataTable({
+        
         "processing": true,
         "serverSide": true,
         "filter": true,
         "ajax": {
-            "url": "/City/GetIndex",
+            "url": "/Admin/City/GetIndex",
             "type": "POST",
             "datatype": "json"
         },
@@ -35,18 +17,18 @@
         "columns": [
             { "data": "cityID", "name": "cityID", "autoWidth": true }, 
             { "data": "cityName", "name": "cityName", "autoWidth": true },
-            { "data": "stateName", "name": "stateName", "autoWidth": true },           
+            { "data": "stateName", "name": "stateName", "autoWidth": true },   
+            
             {
-                "render": function (data, type, full)
-                {
-                    return "<a href='City/Edit/" + full.cityID + "' class='btn btn-success btn-mini btn-outline-primary'><i class='icofont icofont-ui-edit'></i></a>";                        
+                "render": function (data, type, full) {
+                    return "<a href='City/Edit?id=" + full.cityID + "' class='btn btn-xs btn-outline-success'><i class='fas fa-edit'></i></a>";
                 }
             },
             {
                 "render": function (data, type, full) {
-                    return "<a href='City/Edit/" + full.cityID + "' class='btn btn-danger btn-mini btn-outline-primary'><i class='icofont icofont-ui-close'></i></a>";        
+                    return "<a href='City/Delete?id=" + full.cityID + "' class='btn btn-xs btn-outline-danger'><i class='fas fa-window-close'></i></a>";
                 }
-            },
+            }, 
            
         ]
     });

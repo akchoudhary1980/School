@@ -1,29 +1,10 @@
 ﻿$(document).ready(function () {
-    $("#cbtn-selectors").DataTable({
-        //
-        dom: 'Bfrtip',
-        buttons: [{
-            extend: 'copyHtml5',
-            exportOptions: {
-                columns: [0, ':visible']
-            }
-        }, {
-            extend: 'excelHtml5',
-            exportOptions: {
-                columns: ':visible'
-            }
-        }, {
-            extend: 'pdfHtml5',
-            exportOptions: {
-                columns: [0, 1, 2, 5]
-            }
-        }, 'colvis'],
-        //
+    $("#mytable").DataTable({        
         "processing": true,
         "serverSide": true,
         "filter": true,
         "ajax": {
-            "url": "/State/GetIndex",
+            "url": "/Admin/State/GetIndex",
             "type": "POST",
             "datatype": "json"
         },
@@ -37,17 +18,17 @@
             { "data": "stateName", "name": "stateName", "autoWidth": true },
             { "data": "stateType", "name": "stateType", "autoWidth": true },    
             { "data": "countryName", "name": "countryName", "autoWidth": true },   
+
             {
-                "render": function (data, type, full)
-                {
-                    return "<a href='City/Edit/" + full.stateID + "' class='btn btn-success btn-mini btn-outline-primary'><i class='icofont icofont-ui-edit'></i></a>";                        
+                "render": function (data, type, full) {
+                    return "<a href='State/Edit?id=" + full.stateID + "' class='btn btn-xs btn-outline-success'><i class='fas fa-edit'></i></a>";
                 }
             },
             {
                 "render": function (data, type, full) {
-                    return "<a href='City/Edit/" + full.stateID + "' class='btn btn-danger btn-mini btn-outline-primary'><i class='icofont icofont-ui-close'></i></a>";        
+                    return "<a href='State/Delete?id=" + full.stateID + "' class='btn btn-xs btn-outline-danger'><i class='fas fa-window-close'></i></a>";
                 }
-            },
+            }, 
            
         ]
     });

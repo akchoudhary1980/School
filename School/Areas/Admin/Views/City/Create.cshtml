@@ -1,5 +1,5 @@
 ﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
-@model School.Areas.Admin.Models.BoardModel
+@model School.Areas.Admin.Models.CityModel
 @using School.Areas.Admin.Models;
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -24,17 +24,18 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group row">
-                <label asp-for="BoardName" class="col-sm-2 col-form-label"></label>
+                <label asp-for="CityName" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <input asp-for="BoardName" class="form-control" />
-                    <span asp-validation-for="BoardName" class="text-danger"></span>
+                    <input asp-for="CityName" class="form-control" placeholder="eg Jabalpur" />
+                    <span asp-validation-for="CityName" class="text-danger"></span>
                 </div>
             </div>
+
             <div class="form-group row">
-                <label asp-for="BoardDescription" class="col-sm-2 col-form-label"></label>
+                <label asp-for="StateID" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <textarea asp-for="BoardDescription" class="form-control"></textarea>
-                    <span asp-validation-for="BoardDescription" class="text-danger"></span>
+                    <select asp-for="StateID" class="form-control" asp-items="@School.Areas.Admin.Controllers.CityController.GetStateList()"> </select>
+                    <span asp-validation-for="StateID" class="text-danger"></span>
                 </div>
             </div>
 
