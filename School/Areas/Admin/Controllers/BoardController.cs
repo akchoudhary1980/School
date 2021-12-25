@@ -43,9 +43,7 @@ namespace School.Areas.Admin.Controllers
                     obj.BoardID = incid + 1;
                     db.BoardModels.Add(obj);
                     db.SaveChanges();
-                    Response.Cookies.Append("Create", "Yes");
-                    string s = Request.Cookies["Create"];
-                    
+                    Response.Cookies.Append("Create", "Yes");                   
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -105,11 +103,11 @@ namespace School.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult Delete(int id, string confirm)
+        public IActionResult Delete(BoardModel obj, string confirm)
         {
             if (confirm == "Yes")
             {
-                db.BoardModels.RemoveRange(db.BoardModels.Where(x => x.BoardID == id));
+                db.BoardModels.RemoveRange(db.BoardModels.Where(x => x.BoardID == obj.BoardID));
                 db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
