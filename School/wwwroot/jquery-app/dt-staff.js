@@ -4,7 +4,7 @@
         "serverSide": true,
         "filter": true,
         "ajax": {
-            "url": "/Admin/State/GetIndex",
+            "url": "/Admin/Staff/GetIndex",
             "type": "POST",
             "datatype": "json"
         },
@@ -14,19 +14,26 @@
             "searchable": false
         }],
         "columns": [
-            { "data": "stateID", "name": "stateID", "autoWidth": true }, 
-            { "data": "stateName", "name": "stateName", "autoWidth": true },
-            { "data": "stateType", "name": "stateType", "autoWidth": true },    
-            { "data": "countryName", "name": "countryName", "autoWidth": true },   
+            { "data": "staffID", "name": "staffID", "autoWidth": true }, 
+            { "data": "name", "name": "name", "autoWidth": true },
+            { "data": "desginationName", "name": "desginationName", "autoWidth": true },    
+            { "data": "city", "name": "city", "autoWidth": true },  
+            { "data": "mobile", "name": "mobile", "autoWidth": true }, 
 
             {
                 "render": function (data, type, full) {
-                    return "<a href='State/Edit?id=" + full.stateID + "' class='btn btn-xs btn-outline-success'><i class='fas fa-edit'></i></a>";
+                    return "<a href='Staff/View?id=" + full.staffID + "' class='btn btn-xs btn-outline-info'><i class='fas fa-search-plus'></i></a>";
+                }
+            },
+
+            {
+                "render": function (data, type, full) {
+                    return "<a href='Staff/Edit?id=" + full.staffID + "' class='btn btn-xs btn-outline-success'><i class='fas fa-edit'></i></a>";
                 }
             },
             {
                 "render": function (data, type, full) {
-                    return "<a href='State/Delete?id=" + full.stateID + "' class='btn btn-xs btn-outline-danger'><i class='fas fa-window-close'></i></a>";
+                    return "<a href='Staff/Delete?id=" + full.staffID + "' class='btn btn-xs btn-outline-danger'><i class='fas fa-window-close'></i></a>";
                 }
             }, 
            

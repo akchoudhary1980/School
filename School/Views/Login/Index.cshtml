@@ -1,0 +1,107 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Management</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="~/Content/adminty/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/login-style.css" rel="stylesheet" />
+    <link href="~/Content/adminty/css/icofont.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery-app/ajax-modules.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Content/adminty/js/popper.min.js"></script>
+    <script src="~/Content/adminty/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-app/vl-challange.js"></script>
+    <style type="text/css">
+        .error, textarea.error, input.error {
+            color: #FF0000;
+            font-size: small;
+        }
+    </style>
+</head>
+<body style="background-color: #87cefa;">
+    <div class="container">        
+        <section class="row whitebox">
+            <div class="col-sm-6 loginside">
+                <div class="loginheader d-flex align-items-center justify-content-center">
+                    <img src="~/UploadFiles/CommonFile/semec-login.png" height="50" />                    
+                </div>
+                <div class="loginbody">
+                    
+
+                    @using (Html.BeginForm("Challenge", "Login", FormMethod.Post, new { id = "challangeform", name = "challangeform" }))
+                    {
+                        <div class="form-group row">
+                            <div class="col-sm-12">                               
+                                <i class="icofont icofont-user-alt-6 icofont-2x" style="color:#E12B38"></i>
+                                <h4 class="text-uppercase float-right">Employee Login</h4>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12"> 
+                                @Html.TextBox("Mobile", null, new { required = "Please enter mobile number", placeholder = "User Name / Mobile", @class = "form-control border-success rounded-0", maxlength = "10", autocomplete = "off" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                @Html.TextBox("Password", null, new { required = "Please enter otp code", placeholder = "Password", @class = "form-control border-success rounded-0", type = "password", autocomplete = "off" })
+                                <span class="form-bar"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4 col-4">
+                                <img id="captcha" src="~/UploadFiles/captcha.jpg?" + new Date().getTime(); />
+                            </div>
+                            <div class="col-sm-6 col-6">
+                                @Html.TextBox("CaptchaCode", null, new { required = "Please enter captcha code", placeholder = "Captcha Code", @class = "form-control border-success rounded-0", maxlength = "6", autocomplete = "off" })
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-2  col-2">
+                                <button id="refCpatcha" type="button" onclick="refreshCaptcha();" class="btn btn-outline-info rounded-0 float-right"><i class="icofont icofont-refresh"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-9">
+                                @if(ViewData["LoginError"] != null)
+                                {
+                                <div class="alert alert-warning">
+                                    <strong>@ViewData["LoginError"]</strong> 
+                                </div>
+                                }
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="submit" value="Login" class="btn btn-outline-success rounded-0 float-right" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="pwd"><a href="@Url.Action("PasswordRecovery", "Login")">Forget Password</a></label>
+                                <label for="pwd" class="float-right"><a href="@Url.Action("LoginOTP", "Login")">Login OTP</a></label>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-sm-6 picside">
+                <div class="picsidefooter d-flex align-items-center justify-content-center">
+                    <h5>Welcome to you Semec</h5>
+                </div>
+            </div>
+        </section>
+        <div class="row mt-3">
+            <div class="col-sm-12 text-center">
+                <h5><a class="sitelink" href="www.semec.in">www.semec.in</a></h5>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -16,9 +16,9 @@ namespace School.Areas.Admin.Controllers
         public DBContext db = new DBContext();
         public IActionResult Index()
         {
-            ViewData["PageTitle"] = "State Manage";
-            ViewData["PageName"] = "State List";
-            ViewData["ControllerName"] = "State";
+            ViewData["PageTitle"] = "Staff Manage";
+            ViewData["PageName"] = "Staff List";
+            ViewData["ControllerName"] = "Staff";
             return View();
         }
         [HttpPost]
@@ -48,15 +48,16 @@ namespace School.Areas.Admin.Controllers
             // data
             using (DBContext dc = new DBContext())
             {
-                var citylist = (from t1 in db.StateModels // state                                                                    
-                                join t2 in db.CountryModels // country 
-                                on t1.CountryID equals t2.CountryID
+                var list = (from t1 in db.StaffModels // state                                                                    
+                                join t2 in db.DesginationModels // country 
+                                on t1.DesginationID equals t2.DesginationID
                                 select new
                                 {
-                                    t1.StateID,
-                                    t1.StateName,
-                                    t1.StateType,
-                                    t2.CountryName,
+                                    t1.StaffID,
+                                    t1.Name,
+                                    t2.DesginationName,
+                                    t1.City,
+                                    t1.Mobile,
                                 });
 
 
@@ -64,49 +65,50 @@ namespace School.Areas.Admin.Controllers
                 // for Sorting
                 if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
                 {
-                    citylist = citylist.OrderBy(sortColumn + " " + sortColumnDir);
+                    list = list.OrderBy(sortColumn + " " + sortColumnDir);
                 }
                 // for Searching 
                 // searching 
                 if (!string.IsNullOrEmpty(searchValue))
                 {
-                    citylist = citylist.Where(m => m.StateName.Contains(searchValue)
-                                                        || m.StateType.Contains(searchValue)
-                                                        || m.CountryName.Contains(searchValue)
+                   list = list.Where(m => m.Name.Contains(searchValue)
+                                                        || m.DesginationName.Contains(searchValue)
+                                                        || m.City.Contains(searchValue)
+                                                        || m.Mobile.Contains(searchValue)
                                                         );
                 }
                 //
-                recordsTotal = citylist.Count();
-                var data = citylist.Skip(skip).Take(pageSize).ToList();
+                recordsTotal = list.Count();
+                var data = list.Skip(skip).Take(pageSize).ToList();
                 var jsonData = new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data };
                 return Ok(jsonData);
             }
         }
         public IActionResult Create()
         {
-            ViewData["PageTitle"] = "State Manage";
-            ViewData["PageName"] = "New State";
-            ViewData["ControllerName"] = "State";
+            ViewData["PageTitle"] = "Staff Manage";
+            ViewData["PageName"] = "New Staff";
+            ViewData["ControllerName"] = "Staff";
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(StateModel obj)
+        public IActionResult Create(StaffModel obj)
         {
             if (ModelState.IsValid)
             {
-                bool duplicate = db.StateModels.Any(x => x.StateName == obj.StateName);
+                bool duplicate = db.StaffModels.Any(x => x.Mobile == obj.Mobile);
                 if (duplicate)
                 {
-                    ModelState.AddModelError("StateName", "Duplicate Record Found");
+                    ModelState.AddModelError("Mobile", "Duplicate Record Found");
                     return View();
                 }
                 else
                 {
-                    int incid = db.StateModels.DefaultIfEmpty().Max(r => r == null ? 0 : r.StateID);
-                    obj.StateID = incid + 1;
+                    int incid = db.StaffModels.DefaultIfEmpty().Max(r => r == null ? 0 : r.StaffID);
+                    obj.StaffID = incid + 1;
 
-                    db.StateModels.Add(obj);
+                    db.StaffModels.Add(obj);
                     db.SaveChanges();
                     Response.Cookies.Append("Create", "Yes");
                     return RedirectToAction(nameof(Index));
@@ -119,26 +121,26 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Edit(int id)
         {
-            ViewData["PageTitle"] = "State Manage";
-            ViewData["PageName"] = "Update State";
-            ViewData["ControllerName"] = "State";
-            var model = db.StateModels.Where(x => x.StateID == id).FirstOrDefault();
+            ViewData["PageTitle"] = "Staff Manage";
+            ViewData["PageName"] = "Update Staff";
+            ViewData["ControllerName"] = "Staff";
+            var model = db.StaffModels.Where(x => x.StaffID == id).FirstOrDefault();
             return View(model);
         }
         [HttpPost]
-        public IActionResult Edit(StateModel obj)
+        public IActionResult Edit(StaffModel obj)
         {
             if (ModelState.IsValid)
             {
                 // Check Duplicate and prevet duplication at the time of edit 
                 DBContext db1 = new DBContext();
-                var oldvalue = db1.StateModels.Where(x => x.StateID == obj.StateID).SingleOrDefault();
-                if (oldvalue.StateName != obj.StateName)
+                var oldvalue = db1.StaffModels.Where(x => x.StaffID == obj.StaffID).SingleOrDefault();
+                if (oldvalue.Mobile != obj.Mobile)
                 {
-                    bool duplicate = db1.StateModels.Any(x => x.StateName == obj.StateName);
+                    bool duplicate = db1.StaffModels.Any(x => x.Mobile == obj.Mobile);
                     if (duplicate)
                     {
-                        ModelState.AddModelError("StateName", "Duplicate Record Found");
+                        ModelState.AddModelError("Mobile", "Duplicate Record Found");
                         return View();
                     }
                     else
@@ -166,19 +168,19 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Delete(int id)
         {
-            ViewData["PageTitle"] = "State Manage";
-            ViewData["PageName"] = "Delete State";
-            ViewData["ControllerName"] = "State";
-            var model = db.StateModels.Where(x => x.StateID == id).FirstOrDefault();
+            ViewData["PageTitle"] = "Staff Manage";
+            ViewData["PageName"] = "Delete Staff";
+            ViewData["ControllerName"] = "Staff";
+            var model = db.StaffModels.Where(x => x.StaffID == id).FirstOrDefault();
             return View(model);
         }
         [HttpPost]
-        public IActionResult Delete(StateModel obj, string confirm)
+        public IActionResult Delete(StaffModel obj, string confirm)
         {
             string s = confirm;
             if (confirm == "Yes")
             {
-                db.StateModels.RemoveRange(db.StateModels.Where(x => x.StateID == obj.StateID));
+                db.StaffModels.RemoveRange(db.StaffModels.Where(x => x.StaffID == obj.StaffID));
                 db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
