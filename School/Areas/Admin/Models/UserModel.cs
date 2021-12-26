@@ -19,10 +19,10 @@ namespace School.Areas.Admin.Models
         public string Email { get; set; } // Email from Employee 
         public string Mobile { get; set; } // Primary key usename or mobile should be same 
         public string UserType { get; set; } // Client or Admin
-        public string ReadRights { get; set; } // yes only own Data
-        public string WrightRights { get; set; } // yes only own Data
-        public string UserCreateRights { get; set; } // No 
-        public string SettingRights { get; set; } // yes only own Data
+        public bool ReadRights { get; set; } // yes only own Data
+        public bool WrightRights { get; set; } // yes only own Data
+        public bool UserCreateRights { get; set; } // No 
+        public bool SettingRights { get; set; } // yes only own Data
         public string AccountStatus { get; set; } // Active / Deactive         
     }
 }

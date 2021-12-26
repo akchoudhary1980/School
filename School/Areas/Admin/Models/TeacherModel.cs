@@ -14,7 +14,9 @@ namespace School.Areas.Admin.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TeacherID { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
+        public string FatherName { get; set; }
+        public string CurrentAddress { get; set; }
+        public string PermanetAddress { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Mobile { get; set; }
