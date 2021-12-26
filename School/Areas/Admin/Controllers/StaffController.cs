@@ -190,15 +190,15 @@ namespace School.Areas.Admin.Controllers
             }
         }
 
-        public static List<SelectListItem> GetCountryList()
+        public static List<SelectListItem> GetDesginationList()
         {
             DBContext db1 = new DBContext();
             List<SelectListItem> ls = new List<SelectListItem>();
-            var mylist = db1.CountryModels.ToList();
+            var mylist = db1.DesginationModels.ToList();
             ls.Add(new SelectListItem() { Text = "Select", Value = "" });
             foreach (var temp in mylist)
             {
-                ls.Add(new SelectListItem() { Text = temp.CountryName, Value = temp.CountryID.ToString() });
+                ls.Add(new SelectListItem() { Text = temp.DesginationName, Value = temp.DesginationID.ToString() });
             }
             db1.Dispose();
             return ls;

@@ -6,7 +6,6 @@
 }
 <partial name="_Breadcrumb" , model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
 
-
 <div class="card card-outline card-primary mt-3">
     <div class="card-header">
         <div class="row">
@@ -45,16 +44,18 @@
                 </div>
             </div>
             <div class="form-group row">
+                <div class="offset-sm-8 col-sm-4">
+                    <div class="form-check float-right">
+                        <input type="checkbox" class="form-check-input" id="sameaddress">
+                        <label class="form-check-label" for="sameaddress">Same as Current Address</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label asp-for="PermanetAddress" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
                     <textarea asp-for="PermanetAddress" class="form-control"></textarea>
                     <span asp-validation-for="PermanetAddress" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Same as</label>
-                <div class="col-sm-10">
-                    <che asp-for="PermanetAddress" class="form-control"></che>
                 </div>
             </div>
 
@@ -75,9 +76,15 @@
                     <span asp-validation-for="Mobile" class="text-danger"></span>
                 </div>
                 <label asp-for="WhatsApp" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <input asp-for="WhatsApp" class="form-control" autocomplete="off" />
                     <span asp-validation-for="WhatsApp" class="text-danger"></span>
+                </div>
+                <div class="col-sm-1">
+                    <div class="form-check float-right">
+                        <input type="checkbox" class="form-check-input" id="samemobile">
+                        <label class="form-check-label" for="samemobile">Same</label>
+                    </div>
                 </div>
             </div>
 
@@ -92,7 +99,7 @@
             <div class="form-group row">
                 <label asp-for="DesginationID" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-4">
-                    <select asp-for="DesginationID" class="form-control" asp-items="@School.Areas.Admin.Controllers.CityController.GetStateList()"> </select>
+                    <select asp-for="DesginationID" class="form-control select2" asp-items="@School.Areas.Admin.Controllers.StaffController.GetDesginationList()"> </select>
                     <span asp-validation-for="DesginationID" class="text-danger"></span>
                 </div>
                 <label asp-for="Salary" class="col-sm-2 col-form-label"></label>
@@ -104,14 +111,112 @@
 
             <div class="form-group row">
                 <label asp-for="IsPF" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <select asp-for="IsPF" class="form-control" asp-items="@School.Areas.Admin.Controllers.CityController.GetStateList()"> </select>
-                    <span asp-validation-for="IsPF" class="text-danger"></span>
+
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input asp-for="IsPF" class="form-check-input" value="Yes" type="radio" name="PF">
+                        <label class="form-check-label">Yes</label>
+                    </div>
                 </div>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input asp-for="IsPF" class="form-check-input" checked="checked" value="No" type="radio" name="PF">
+                        <label class="form-check-label">No</label>
+                    </div>
+                </div>
+
                 <label asp-for="PFNumber" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-4">
                     <input asp-for="PFNumber" class="form-control" autocomplete="off" />
                     <span asp-validation-for="PFNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="DateOfBirth" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </div>
+                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                    </div>
+                </div>
+                <label asp-for="DateOfAppointment" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </div>
+                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row" style="border:1px solid grey;padding:5px;">
+                <label class="col-sm-4 col-form-label">Educational Qualification</label>
+                <div class="col-sm-8">
+                    <button type="button" class="btn btn-outline-info float-right" on><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <div class="col-sm-12 mt-2">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Exam Name</th>
+                                <th>Board/University</th>
+                                <th>Passing Year</th>
+                                <th style="width: 40px">Percent</th>
+                                <th>Resulte</th>
+                                <th>Del</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1.</td>
+                                <td>10th Class</td>
+                                <td>MP Board</td>
+                                <td>
+                                    <div class="progress progress-xs">
+                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-danger">55%</span></td>
+                                <td>Pass</td>
+                                <td>Del</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           
+
+            <div class="form-group row">
+                <label asp-for="Resume" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        </div>
+                        <div class="input-group-append">
+                            <span class="input-group-text">Upload</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ScanDocuments" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        </div>
+                        <div class="input-group-append">
+                            <span class="input-group-text">Upload</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
