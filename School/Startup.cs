@@ -22,6 +22,12 @@ namespace School
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //JSON Serializer
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddRazorPages().AddRazorRuntimeCompilation();

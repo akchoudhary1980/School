@@ -16,8 +16,8 @@ function GetStateList() {
                 })
             },
             select: function (event, ui) {
-                 alert(ui.item.id);
-                $("#State").val(ui.item.id);
+               /* alert(ui.item.label);*/
+                $("#State").val(ui.item.label);
                 // $('#CusID').val(response);
             },           
         });
@@ -42,7 +42,7 @@ function GetCityList() {
             },
             select: function (event, ui) {
                 // alert(ui.item.id);
-                $("#City").val(ui.item.id);
+                $("#City").val(ui.item.label);
                 // $('#CusID').val(response);
             },            
         });
