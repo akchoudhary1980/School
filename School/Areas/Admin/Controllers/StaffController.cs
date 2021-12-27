@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using School.Areas.Admin.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using School.Areas.Admin.Models;
 
 namespace School.Areas.Admin.Controllers
 {
@@ -14,6 +15,11 @@ namespace School.Areas.Admin.Controllers
     public class StaffController : Controller
     {
         public DBContext db = new DBContext();
+        private IHostEnvironment Environment;
+        public StaffController(IHostEnvironment _environment)
+        {
+            Environment = _environment;
+        }
         public IActionResult Index()
         {
             ViewData["PageTitle"] = "Staff Manage";
@@ -93,7 +99,7 @@ namespace School.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(StaffModel obj)
+        public IActionResult Create(StaffModel obj, IFormFile file_resume, IFormFile file_scan, IFormFile file_passport)
         {
             if (ModelState.IsValid)
             {
@@ -107,6 +113,10 @@ namespace School.Areas.Admin.Controllers
                 {
                     int incid = db.StaffModels.DefaultIfEmpty().Max(r => r == null ? 0 : r.StaffID);
                     obj.StaffID = incid + 1;
+
+                    obj.Resume = TextLib.UploadFilewithHTMLControl(file_resume, Environment.ContentRootPath, "Staff_A" + obj.StaffID);
+                    obj.ScanDocuments = TextLib.UploadFilewithHTMLControl(file_scan, Environment.ContentRootPath, "Staff_B" + obj.StaffID);
+                    obj.Picture = TextLib.UploadFilewithHTMLControl(file_passport, Environment.ContentRootPath, "Staff_C" + obj.StaffID);
 
                     db.StaffModels.Add(obj);
                     db.SaveChanges();
