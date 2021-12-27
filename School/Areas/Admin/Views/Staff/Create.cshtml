@@ -6,10 +6,6 @@
 }
 <script src="~/jquery-app/tr-staff.js"></script>
 
-<script type="text/javascript">
-    
-    }
-</script>
 <partial name="_Breadcrumb" , model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
 
 <div class="card card-outline card-primary mt-3">
@@ -77,12 +73,12 @@
             <div class="form-group row">
                 <label asp-for="Mobile" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-4">
-                    <input asp-for="Mobile" class="form-control" autocomplete="off" />
+                    <input asp-for="Mobile" class="form-control" maxlength="10" autocomplete="off" />
                     <span asp-validation-for="Mobile" class="text-danger"></span>
                 </div>
                 <label asp-for="WhatsApp" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-3">
-                    <input asp-for="WhatsApp" class="form-control" autocomplete="off" />
+                    <input asp-for="WhatsApp" class="form-control" maxlength="10" autocomplete="off" />
                     <span asp-validation-for="WhatsApp" class="text-danger"></span>
                 </div>
                 <div class="col-sm-1">
@@ -201,21 +197,21 @@
 
 
             <div class="form-group row">
-                <label asp-for="Resume" class="col-sm-2 col-form-label"></label>
-                <div class="col-md-6">
+                <label asp-for="Resume" class="col-sm-2 col-12"></label>
+                <div class="col-sm-6 col-12 ">
                     <img src="~/uploadfiles/commonfile/pdfIcon.png" height="50" />
                 </div>
-                <div class="col-md-4">
+                <div class="col-sm-4 col-12">
                     <input type='file' name="file_resume" class="btn btn-outline-info pull-right" />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label asp-for="ScanDocuments" class="col-sm-2 col-form-label"></label>
-                <div class="col-md-6">
+                <div class="col-sm-6">
                     <img src="~/uploadfiles/commonfile/pdfIcon.png" height="50" />
                 </div>
-                <div class="col-md-4">
+                <div class="col-sm-4">
                     <input type='file' name="file_scan" class="btn btn-outline-info pull-right" />
                 </div>
             </div>
