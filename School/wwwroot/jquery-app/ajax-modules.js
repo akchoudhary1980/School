@@ -180,7 +180,9 @@ function SetInputNumericIndian(id) {
         $('#' + id).css("text-align", "right");
 
         // get foucs
-        $('#' + id).focus(function () {             
+        $('#' + id).focus(function () {     
+            var $this = $(this);
+            $this.select();
             $('#' + id).css("text-align", "right");
         });
         // key press event 

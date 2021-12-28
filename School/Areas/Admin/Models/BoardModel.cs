@@ -18,6 +18,7 @@ namespace School.Areas.Admin.Models
         [Display(Name = "Board Name")]
         public string BoardName { get; set; }
         [Display(Name = "Board Description")]
-        public string BoardDescription { get; set; }        
+        public string BoardDescription { get; set; }
+        public int SessionYearID { get; set; }
     }
 }

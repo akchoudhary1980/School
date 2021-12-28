@@ -15,6 +15,8 @@ namespace School.Areas.Admin.Models
 
         [Display(Name = "Remark")]
         [DataType(DataType.MultilineText)]
-        public string Remark { get; set; }        
+        public string Remark { get; set; }
+
+        public int SessionYearID { get; set; }
     }
 }

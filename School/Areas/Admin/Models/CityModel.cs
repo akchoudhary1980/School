@@ -21,5 +21,6 @@ namespace School.Areas.Admin.Models
         [Required(ErrorMessage = "Please Select State Name")]
         [Display(Name = "State Name")]
         public int StateID { get; set; }
+
     }
 }

@@ -21,6 +21,8 @@ namespace School
         public DbSet<TeacherModel> TeacherModels { get; set; }
         public DbSet<StaffModel> StaffModels { get; set; }
         public DbSet<UserModel> UserModels { get; set; }
+        public DbSet<FeesHeadModel> FeesHeadModels { get; set; }
+        public DbSet<FeesStructureModel> FeesStructureModels { get; set; }
         // helping 
         public DbSet<CountryModel> CountryModels { get; set; }
         public DbSet<StateModel> StateModels { get; set; }

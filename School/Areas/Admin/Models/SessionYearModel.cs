@@ -18,6 +18,12 @@ namespace School.Areas.Admin.Models
         [Display(Name = "Session Year Name")]
         public string SessionYearName { get; set; }
 
+        [Display(Name = "Start From")]
+        public DateTime Start { get; set; } 
+
+        [Display(Name = "End To")]
+        public DateTime End { get; set; } 
+
         [Display(Name = "Remark")]
         public string SessionYearRemark { get; set; }
     }

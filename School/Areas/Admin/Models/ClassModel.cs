@@ -15,7 +15,8 @@ namespace School.Areas.Admin.Models
         public string ClassName { get; set; }
 
         [Display(Name = "Class Description")]
-        public string ClassDescription { get; set; }             
-          
+        public string ClassDescription { get; set; }
+
+        public int SessionYearID { get; set; }
     }
 }

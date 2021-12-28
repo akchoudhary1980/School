@@ -19,5 +19,6 @@ namespace School.Areas.Admin.Models
 
         [Display(Name = "Qualification Name")]
         public string Remark { get; set; }
+        public int SessionYearID { get; set; }
     }
 }

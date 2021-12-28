@@ -18,6 +18,8 @@ namespace School.Areas.Admin.Models
         [Display(Name = "Section Name")]
         public string SectionName { get; set; }
         [Display(Name = "Section Description")]
-        public string SectionDescription { get; set; }        
+        public string SectionDescription { get; set; }
+
+        public int SessionYearID { get; set; }
     }
 }

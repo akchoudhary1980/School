@@ -23,6 +23,7 @@ namespace School.Areas.Admin.Models
         public bool WrightRights { get; set; } // yes only own Data
         public bool UserCreateRights { get; set; } // No 
         public bool SettingRights { get; set; } // yes only own Data
-        public string AccountStatus { get; set; } // Active / Deactive         
+        public string AccountStatus { get; set; } // Active / Deactive      
+        public int SessionYearID { get; set; }
     }
 }

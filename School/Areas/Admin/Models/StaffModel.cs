@@ -57,5 +57,6 @@ namespace School.Areas.Admin.Models
 
         [Display(Name = "Scan Certificate")]
         public string ScanDocuments { get; set; }
+        public int SessionYearID { get; set; }
     }
 }

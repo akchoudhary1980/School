@@ -14,6 +14,7 @@ namespace School.Areas.Admin.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SubJectTransID { get; set; }       
         public int SubjectID { get; set; }
-        public int TeacherID { get; set; }       
+        public int TeacherID { get; set; }
+        public int SessionYearID { get; set; }
     }
 }

@@ -24,5 +24,6 @@ namespace School.Areas.Admin.Models
         public double TotalMark { get; set; }       
         public int TeacherID { get; set; }
         public int StaffID { get; set; }
+        public int SessionYearID { get; set; }
     }
 }

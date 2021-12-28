@@ -60,6 +60,8 @@ namespace School.Areas.Admin.Models
 
         public string IsClassTeacher { get; set; } // Yes or No
         public string ClassName { get; set; } // if yes 
-        public string ClassSection { get; set; } // if yes         
+        public string ClassSection { get; set; } // if yes    
+
+        public int SessionYearID { get; set; }
     }
 }
