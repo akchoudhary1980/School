@@ -18,20 +18,7 @@ namespace School.Areas.Admin.Models
         [Display(Name = "Class Name")]
         public int ClassID { get; set; }
 
-
-        [Display(Name = "Fees Head Name")]
-        public int FeesHeadID { get; set; }
-
-        [Display(Name = "Fees Amount")]
-        public double FeesAmount { get; set; }
-
-        [Display(Name = "Billing Cycle")] 
-        public string BillingCycle { get; set; } // According to Cycle
-
-
-        [Display(Name = "Due On")]
-        public DateTime DueOn { get; set; } // Month and Date 
-
+        public string Pictures { get; set; }
         public int SessionYearID { get; set; }
     }
 }
