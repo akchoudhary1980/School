@@ -24,18 +24,35 @@ namespace School.Controllers
         // Get State List
         public JsonResult StateAutoComplete(string Prefix)
         {
-            var list = db.StateModels.Where(x => x.StateName.StartsWith(Prefix))
+            var list = db.StateModels.Where(x => x.StateName.Contains(Prefix))
                        .Select(x => new { x.StateID, x.StateName }).ToList();
             return Json(list, new Newtonsoft.Json.JsonSerializerSettings());
         }
         // Get City List
         public JsonResult CityAutoComplete(string Prefix)
         {
-            var list = db.CityModels.Where(x => x.CityName.StartsWith(Prefix))
+            var list = db.CityModels.Where(x => x.CityName.Contains(Prefix))
                        .Select(x => new { x.CityID, x.CityName }).ToList();
             return Json(list, new Newtonsoft.Json.JsonSerializerSettings());
-        }      
-        
+        }
+
+        // Get City List
+        public JsonResult FeesHeadAutoComplete(string Prefix)
+        {
+            var list = db.FeesHeadModels.Where(x => x.FeesHeadName.Contains(Prefix))
+                       .Select(x => new { x.FeesHeadID, x.FeesHeadName }).ToList();
+            return Json(list, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+
+        //  Get firm Name 
+        public JsonResult GetBillingCycle(int ID)
+        {
+            var billingcycle = db.FeesHeadModels.Where(x => x.FeesHeadID == ID).SingleOrDefault();
+            string result = billingcycle.FeesHeadType;
+            return Json(result, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+
+
         //  Get firm Name 
         public JsonResult GetCode(string Text)
         {

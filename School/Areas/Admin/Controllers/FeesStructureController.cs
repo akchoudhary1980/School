@@ -195,29 +195,19 @@ namespace School.Areas.Admin.Controllers
             }
         }
 
-        public static List<SelectListItem> GetDesginationList()
+        public static List<SelectListItem> GetClassList()
         {
             DBContext db1 = new DBContext();
             List<SelectListItem> ls = new List<SelectListItem>();
-            var mylist = db1.DesginationModels.ToList();
+            var mylist = db1.ClassModels.ToList();
             ls.Add(new SelectListItem() { Text = "Select", Value = "" });
             foreach (var temp in mylist)
             {
-                ls.Add(new SelectListItem() { Text = temp.DesginationName, Value = temp.DesginationID.ToString() });
+                ls.Add(new SelectListItem() { Text = temp.ClassName, Value = temp.ClassID.ToString() });
             }
             db1.Dispose();
             return ls;
         }
-
-        public static List<SelectListItem> GetStateTypeList()
-        {
-            List<SelectListItem> ls = new List<SelectListItem>
-            {
-                new SelectListItem() { Text = "Select", Value = "" },
-                new SelectListItem() { Text = "State", Value = "S" },
-                new SelectListItem() { Text = "Union Teritery", Value = "T" }
-            };
-            return ls;
-        }
+         
     }
 }

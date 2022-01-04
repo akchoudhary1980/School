@@ -4,7 +4,8 @@
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<script src="~/jquery-app/tr-staff.js"></script>
+
+<script src="~/jquery-app/tr-fees-structure.js"></script>
 
 <partial name="_Breadcrumb" , model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
 
@@ -22,11 +23,10 @@
     <div class="card-body">
         <form method="post" enctype="multipart/form-data" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
             <div class="form-group row">
                 <label asp-for="ClassID" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <input asp-for="ClassID" class="form-control" autocomplete="off" />
+                    <select asp-for="ClassID" class="form-control select2" asp-items="@School.Areas.Admin.Controllers.FeesStructureController.GetClassList()"> </select>
                     <span asp-validation-for="ClassID" class="text-danger"></span>
                 </div>
             </div>
@@ -34,85 +34,65 @@
                 <label asp-for="Pictures" class="col-sm-2 col-form-label"></label>
                 <div class="col-md-6">
                     <p>Passport Picture (Size: 250px X 350px)</p>
-                    <img id="img-passport" src="~/uploadfiles/commonfile/cameraIcon.png" alt="" class="img-fluid img-thumbnail" />
+                    <img id="img-passport" height="10" src="~/uploadfiles/commonfile/cameraIcon.png" alt="" class="img-fluid img-thumbnail" />
                 </div>
                 <div class="col-md-4">
                     <input type='file' name="file_passport" onchange="uploadpassort(this);" class="btn btn-outline-info pull-right" />
                 </div>
             </div>
 
-            <h4 class="sub-title">Fees Details</h4>
+            <h5 class="sub-title">Fees Details</h5>
+            <hr />
             <!-- Row start -->
-            <div class="row">
-                <div class="col-lg-12 col-xl-12">
-                    <div class="sub-title">Default</div>
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs  tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#product" role="tab">Fees</a>
-                        </li>                        
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content tabs card-block">
-                        <div class="tab-pane active" id="product" role="tabpanel">
-                            <div class="row">
-                                <div class="col-sm-5">
-                                    <label class="form-control-label">Fees Head</label>
-                                    <input type="text" id="FeesHead" name="FeesHead" class="form-control" />
-                                    <input type="hidden" id="FeesHeadID" name="FeesHeadID"  />                                    
-                                </div>
-                                <div class="col-sm-1">
-                                    <label class="form-control-label">Amount</label>
-                                    <input type="text" id="FeesAmount" name="FeesAmount" class="form-control" />
-                                </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <label class="form-control-label">Fees Head</label>
+                    <input type="text" id="FeesHead" name="FeesHead" class="form-control" />
+                    <input type="hidden" id="FeesHeadID" name="FeesHeadID" />
+                </div>
+                <div class="col-sm-2">
+                    <label class="form-control-label">Amount</label>
+                    <input type="text" id="FeesAmount" name="FeesAmount" class="form-control" />
+                </div>
 
-                                <div class="col-sm-2">
-                                    <label class=" form-control-label">B Cycle</label>
-                                    <select class="form-control select2"> </select>                                    
-                                </div>
+                <div class="col-sm-3">
+                    <label class=" form-control-label">Billing Cycle</label>
+                    <input type="text" id="BillingCycle" name="BillingCycle" disabled="disabled" class="form-control" />
+                </div>
 
-                                <div class="col-sm-2">
-                                    <label class=" form-control-label">Due On</label>
-                                    <input type="text" id="DueOn" name="DueOn" class="form-control" />
-                                </div>                               
-                                <div class="col-sm-1">
-                                    <br />
-                                    <button class="btn btn-primary btn-outline-primary float-right" type="button" onclick="InsertRow('P');"><i class="icofont icofont-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>                       
-                    </div>
+                <div class="col-sm-2">
+                    <label class="form-control-label">Due On</label>
+                    <input type="text" id="DueOn" name="DueOn" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                </div>
+                <div class="col-sm-1">
+                    <label class="form-control-label">Action</label>
+                    <button type="button" class="btn btn-outline-success float-right"><i class="fas fa-plus"></i> add</button>
+                    @*<button class="btn btn-primary btn-outline-primary float-right" type="button" onclick="InsertRow('P');"><i class="icofont icofont-plus"></i></button>*@
                 </div>
             </div>
-            <!-- Row end -->
-
-            <div class='dt-responsive table-responsive'>
-                <table id='dtTable' class='table table-striped table-bordered nowrap'>
+            <div class="form-group row">
+                <table id='dtTable' class='table table-sm'>
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Product/Service</th>
-                            <th>HSN/SAC</th>
-                            <th>Qty</th>
-                            <th>Unit</th>
-                            <th>Rate</th>
+                            <th>Fees Head</th>
                             <th>Amount</th>
-                            <th>GST %</th>
-                            <th>GST Amt</th>
+                            <th>Billing Cycle</th>
+                            <th>Due On</th>
                             <th>Del</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
-                <table class='table table-striped table-bordered nowrap'>
+                <table class='table table-sm'>
                     <thead style="visibility:collapse">
                         <tr>
                             <th>#</th>
                             <th>Fees Head</th>
                             <th>Amount</th>
                             <th>B Cycle</th>
-                            <th>DueOn</th>                           
+                            <th>DueOn</th>
                             <th>Del</th>
                         </tr>
                     </thead>
@@ -120,10 +100,10 @@
                         <tr>
                             @*<td align="right" colspan="6"><b>Discount</b></td>
 
-                            <td align="right"> @Html.EditorFor(model => model.DiscountPercent, new { htmlAttributes = new { @class = "form-control small-textbox" } })</td>
-                            <td align="right"> @Html.EditorFor(model => model.DiscountValue, new { htmlAttributes = new { @class = "form-control small-textbox" } })</td>
-                            <td align="right"> @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control small-textbox", @readonly = "readonly" } })</td>
-                            <td></td>*@
+                                <td align="right"> @Html.EditorFor(model => model.DiscountPercent, new { htmlAttributes = new { @class = "form-control small-textbox" } })</td>
+                                <td align="right"> @Html.EditorFor(model => model.DiscountValue, new { htmlAttributes = new { @class = "form-control small-textbox" } })</td>
+                                <td align="right"> @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control small-textbox", @readonly = "readonly" } })</td>
+                                <td></td>*@
                         </tr>
                         <tr>
                             <td align="right" colspan="8"><b>Grand Total (Sub Total - Discount)</b></td>
@@ -134,40 +114,42 @@
                 </table>
             </div>
 
+
+
             @*<div class="form-group row">
-            <label></label>
-            @Html.LabelFor(model => model.DealIn, htmlAttributes: new { @class = "control-label col-md-2 col-2" })
-            <div class="col-md-8 col-8">
+                    <label></label>
+                    @Html.LabelFor(model => model.DealIn, htmlAttributes: new { @class = "control-label col-md-2 col-2" })
+                    <div class="col-md-8 col-8">
 
-            </div>
+                    </div>
 
-            <div class="col-md-1 col-2">
-                <button type="button" class="btn btn-success btn-sm float-right" onclick="PushRow();"><i class="icofont icofont-plus"></i></button>
-            </div>
-            <div class="col-md-1 col-2">
-                <button type="button" class="btn btn-primary btn-sm float-right" onclick="ShowModel();"><i class="icofont icofont-tick-mark"></i></button>
-            </div>
-        </div>
-        <div class="form-group row">
-
-            <div id="list-items" class="col-md-12" style="border: 1px solid #D8D8D8; min-height: 100px; padding-top:10px;">
-
-                <div class='dt-responsive table-responsive'>
-                    <table id='dtTable' class='table table-striped table-bordered nowrap'>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Item Name</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    <div class="col-md-1 col-2">
+                        <button type="button" class="btn btn-success btn-sm float-right" onclick="PushRow();"><i class="icofont icofont-plus"></i></button>
+                    </div>
+                    <div class="col-md-1 col-2">
+                        <button type="button" class="btn btn-primary btn-sm float-right" onclick="ShowModel();"><i class="icofont icofont-tick-mark"></i></button>
+                    </div>
                 </div>
+                <div class="form-group row">
 
-            </div>
-        </div>*@
+                    <div id="list-items" class="col-md-12" style="border: 1px solid #D8D8D8; min-height: 100px; padding-top:10px;">
+
+                        <div class='dt-responsive table-responsive'>
+                            <table id='dtTable' class='table table-striped table-bordered nowrap'>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Item Name</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>*@
 
 
 
@@ -179,7 +161,7 @@
 
         </form>
 
-</div>
+    </div>
     <div class="card-footer">
         <p>Use <i style="color:blue" class="fas fa-plus-square"></i> for Insert Record, <i style="color:green" class="fas fa-edit"></i> for Update Record and <i style="color:red" class="fas fa-window-close"></i> for Delete Record </p>
     </div>
