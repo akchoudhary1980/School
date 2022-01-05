@@ -7,7 +7,7 @@ namespace School
 {
     public class DBContext : DbContext
     {
-        // Project Flow 
+        // Project Flow ///
         public DbSet<SchoolModel> SchoolModels { get; set; }
         public DbSet<SessionYearModel> SessionYearModels { get; set; }
         public DbSet<BoardModel> BoardModels { get; set; }
