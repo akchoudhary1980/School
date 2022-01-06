@@ -24,6 +24,7 @@ namespace School
         public DbSet<FeesHeadModel> FeesHeadModels { get; set; }
         public DbSet<FeesStructureModel> FeesStructureModels { get; set; }
         public DbSet<FeesStructureTransModel> FeesStructureTransModels { get; set; }
+        public DbSet<FeesStructureTransTempModel> FeesStructureTransTempModels { get; set; }
         // helping 
         public DbSet<CountryModel> CountryModels { get; set; }
         public DbSet<StateModel> StateModels { get; set; }

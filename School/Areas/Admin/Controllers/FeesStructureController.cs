@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using School.Areas.Admin.Models;
 
 namespace School.Areas.Admin.Controllers
@@ -15,6 +17,7 @@ namespace School.Areas.Admin.Controllers
     public class FeesStructureController : Controller
     {
         public DBContext db = new DBContext();
+        public DataTable Trans; // Items Trans
         private IHostEnvironment Environment;
         public FeesStructureController(IHostEnvironment _environment)
         {
@@ -87,6 +90,11 @@ namespace School.Areas.Admin.Controllers
         }
         public IActionResult Create()
         {
+            // Remove from Temp 
+            //db.StaffModels.RemoveRange(db.StaffModels.Where(x => x.StaffID == obj.StaffID));
+            //db.SaveChanges();
+
+            // End
             ViewData["PageTitle"] = "Staff Manage";
             ViewData["PageName"] = "New Staff";
             ViewData["ControllerName"] = "Staff";
@@ -208,6 +216,37 @@ namespace School.Areas.Admin.Controllers
             db1.Dispose();
             return ls;
         }
-         
+
+        //public JsonResult InsertRow(string ID)
+        //{
+        //    int id = Convert.ToInt32(ID);
+        //    DataTable dt = Session["Trans"] as DataTable;
+        //    //Add to Datatable
+        //    var item = db.ItemModels.Where(x => x.ItemID == id).SingleOrDefault();
+        //    dt.Rows.Add(TextLib.GetMaxDataTableColoumn(dt, "SerNo") + 1, id, item.ItemName);
+        //    // for return data
+        //    List<ItemTrans> list = new List<ItemTrans>();
+        //    foreach (DataRow dr in dt.Rows)
+        //    {
+        //        list.Add(new ItemTrans(
+        //            Convert.ToInt32(dr["SerNo"].ToString()),
+        //            Convert.ToInt32(dr["ItemID"].ToString()),
+        //            dr["ItemName"].ToString()
+        //            ));
+        //    }
+        //    return Json(list, JsonRequestBehavior.AllowGet);
+        //}
+
+        // Insert
+        [HttpPost]
+        public JsonResult InsertRow([FromBody] FeesStructureTransTempModel obj)
+        {            
+            int incid = db.FeesStructureTransTempModels.DefaultIfEmpty().Max(r => r == null ? 0 : r.FeesStructureTransTempID);
+            obj.FeesStructureTransTempID = incid + 1;               
+            db.SaveChanges();
+            var list = db.FeesStructureTransTempModels.ToList();                
+            return Json(list, new Newtonsoft.Json.JsonSerializerSettings()); // return data            
+            
+        }
     }
 }
