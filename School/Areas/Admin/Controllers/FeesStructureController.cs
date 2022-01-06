@@ -239,6 +239,8 @@ namespace School.Areas.Admin.Controllers
             obj.FeesStructureTransTempID = incid + 1;
             int token = Convert.ToInt32(Request.Cookies["Token"].ToString());
             obj.Tokon = token;
+            obj.ClassID = 1;
+            obj.SessionYearID = 1;
             db.FeesStructureTransTempModels.Add(obj);
             db.SaveChanges();
 

@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {     
-    SetInputNumericIndian('FeesAmount');
-
+    /*SetInputNumericIndian('FeesAmount');*/
     $(document).ready(function () {
         $("#FeesHead").autocomplete({
             source: function (request, response) {
@@ -21,21 +20,13 @@
                 GetBillingCycle(ui.item.id);
             },
         });
-    })
-    
+    })    
 })
-function GetBillingCycle(id) {  
-    $.ajax({
-        type: "POST",
-        url: "/Share/GetBillingCycle",
-        data: { "ID": id },
-        dataType: "json",
-        success: function (response) {
-            alert(response);
-            $("#BillingCycle").val(response);     
-        },       
+function GetBillingCycle(id) {
+
+    $.post("/Share/GetBillingCycle", { ID: id }, function (response) {
+        $("#BillingCycle").val(response);
     });
-            //
 }
 // main picture
 function uploadpassort(input) {
@@ -52,9 +43,8 @@ function uploadpassort(input) {
 }
 
 // for add Trans Data
-function PushRow() {
-   /* var url = "/Admin/FeesStructure/InsertRow";*/
-    var model = { FeesHeadID: 1, FeesHead: "Name dfd", FeesAmount: 600, BillingCycle: 'Monthly', DueOn: '22-01-2022', ClassID: 1};
+function PushRow() {    
+    var model = { FeesHeadID: $('#FeesHeadID').val(), FeesHead: $('#FeesHead').val(), FeesAmount: $('#FeesAmount').val(), BillingCycle: $('#BillingCycle').val(), DueOn: $('#DueOn').val()};    
     $.post("/Admin/FeesStructure/InsertRow", model, function (data) {
         DisplayData(data);
     });
@@ -77,13 +67,13 @@ function DisplayData(data) {
             + "<td>" + item.FeesHead + "</td>"
             + "<td>" + item.FeesAmount + "</td>"
             + "<td>" + item.BillingCycle + "</td>"
-            + "<td>" + item.DueOn + "</td>"
+            + "<td>" + ToDDMMYYYY(item.DueOn) + "</td>"
             + "<td><button type='button' id=" + item.FeesStructureTransTempID + " onclick='PopRow(this.id)' class='btn btn-xs btn-outline-danger'><i class='fas fa-window-close'></i></button></td>"
             + "</tr>";
         $('#dtTable tbody').append(rows);
     });
     // Clear Item
-    $('#DealIn').val("");
+    $('#FeesHead').val("");
 }
 // for Looad Data on Edit-- > 
 function LoadRow(itemid) {
@@ -96,4 +86,23 @@ function LoadRow(itemid) {
             DisplayData(data);
         }
     });
+}
+
+function ToDDMMYYYY(stingdate) {
+    alert(stingdate);
+    var pattern = /Date\(([^)]+)\)/;
+    var results = pattern.exec(stingdate);
+    var mydate = new Date(parseFloat(results[1]));
+    year = mydate.getFullYear();
+    month = mydate.getMonth() + 1;
+    day = mydate.getDate();
+
+    if (day < 10) {
+        day = '0' + day;
+    }
+    if (month < 10) {
+        month = '0' + month;
+    }
+    var outdate = day + '/' + month + '/' + year;
+    return outdate;
 }
