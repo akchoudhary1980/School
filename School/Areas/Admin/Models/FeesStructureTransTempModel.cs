@@ -14,11 +14,14 @@ namespace School.Areas.Admin.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]        
         public int FeesStructureTransTempID { get; set; }
 
+        [Display(Name = "Tokon No")]
+        public int Tokon { get; set; }
+
         [Display(Name = "Fees Head")]
         public int FeesHeadID { get; set; }
 
         [Display(Name = "Fees Head Name")]
-        public int FeesHead { get; set; }
+        public string FeesHead { get; set; }
 
         [Display(Name = "Fees Amount")]
         public double FeesAmount { get; set; }
@@ -28,9 +31,8 @@ namespace School.Areas.Admin.Models
 
 
         [Display(Name = "Due On")]
-        public DateTime DueOn { get; set; } // Month and Date 
-
-        public int SessionYearID { get; set; }
+        public DateTime DueOn { get; set; } // Month and Date        
         public int ClassID { get; set; }
+        public int SessionYearID { get; set; }
     }
 }

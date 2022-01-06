@@ -53,62 +53,32 @@ function uploadpassort(input) {
 
 // for add Trans Data
 function PushRow() {
-    var row = { FeesHeadID: '1', FeesHead: "Name", FeesAmount: 600, BillingCycle: 'Monthly', DueOn:'22-01-2022' };
-    $.ajax({
-        url: '/Admin/FeesStructure/InsertRow',
-        type: 'POST',
-        data: JSON.stringify(row),
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        async: false,
-        success: function (msg) {
-            alert(msg);
-        }
+   /* var url = "/Admin/FeesStructure/InsertRow";*/
+    var model = { FeesHeadID: 1, FeesHead: "Name dfd", FeesAmount: 600, BillingCycle: 'Monthly', DueOn: '22-01-2022', ClassID: 1};
+    $.post("/Admin/FeesStructure/InsertRow", model, function (data) {
+        DisplayData(data);
     });
-
-    //var itemid = $('#ItemID').val();
-
-    //var arr = { City: 'Moscow', Age: 25 };
-
-
-    //if (itemid = "") {
-    //    alert('Please select Item from list');
-    //}
-    //else {
-    //    $.ajax({
-    //        type: 'POST',
-    //        url: '/DealersManage/Dealers/InsertRow',
-    //        dataType: 'json',
-    //        data: { 'ID': $('#ItemID').val(), "__RequestVerificationToken": $('input[name=__RequestVerificationToken]').val() },
-    //        success: function (data) {
-    //            DisplayData(data);
-    //        }
-    //    });
-    //}
 }
 // for Remove Trans Data
-function PopRow(serno) {
-    $.ajax({
-        type: 'POST',
-        url: "/DealersManage/Dealers/DeleteRow",
-        dataType: 'json',
-        data: { iSer: serno, "__RequestVerificationToken": $('input[name=__RequestVerificationToken]').val() },
-        success: function (data) {
-            DisplayData(data);
-        }
+function PopRow(Ser) {      
+    $.post("/Admin/FeesStructure/DeleteRow", { iSer: Ser }, function (data) {
+        DisplayData(data);
     });
 }
 // for Display Data-- > 
 function DisplayData(data) {
-    var counter = 0;
+    var Counter = 0;
     $("#dtTable tbody tr").remove();
     var items = '';
     $.each(data, function (i, item) {
-        counter = counter + 1;
+        Counter = Counter + 1;
         var rows = "<tr>"
-            + "<td>" + counter + "</td>"
-            + "<td>" + item.ItemName + "</td>"
-            + "<td><button type='button' id=" + item.SerNo + " onclick='PopRow(this.id)' class='btn btn-danger btn-mini btn-outline-primary'><i class='icofont icofont-ui-close'></i></button></td>"
+            + "<td>" + Counter + "</td>"
+            + "<td>" + item.FeesHead + "</td>"
+            + "<td>" + item.FeesAmount + "</td>"
+            + "<td>" + item.BillingCycle + "</td>"
+            + "<td>" + item.DueOn + "</td>"
+            + "<td><button type='button' id=" + item.FeesStructureTransTempID + " onclick='PopRow(this.id)' class='btn btn-xs btn-outline-danger'><i class='fas fa-window-close'></i></button></td>"
             + "</tr>";
         $('#dtTable tbody').append(rows);
     });
