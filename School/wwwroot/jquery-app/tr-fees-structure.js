@@ -1,12 +1,12 @@
 ﻿// main picture
-function uploadpassort(input) {
+function uploadicon(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('#img-passport')
+            $('#imgicon')
                 .attr('src', e.target.result)
-                .width(100)
-                .height(150);
+                .width(30)
+                .height(30);
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -37,32 +37,43 @@ $(document).ready(function () {
     })    
 })
 function GetBillingCycle(id) {
-
     $.post("/Admin/FeesStructure/GetBillingCycle", { ID: id }, function (response) {
         $("#BillingCycle").val(response);
     });
 }
 
-
 // for Add Trans Data
-function PushRow() {
-    // if button text == add
-    var Cap = $('#Add').text(); 
-    if (Cap == "Add") {    
-        var model = { FeesHeadID: $('#FeesHeadID').val(), FeesHead: $('#FeesHead').val(), FeesAmount: DoubleFromIndianCulture($('#FeesAmount').val()), BillingCycle: $('#BillingCycle').val(), DueOn: $('#DueOn').val() };
-        $.post("/Admin/FeesStructure/InsertRow", model, function (data) {
-            DisplayData(data);
-            SetTotal();
-        });
-    }
-    else {       
-        var model = { FeesStructureTransTempID: $('#FeesStructureTransTempID').val(),FeesHeadID: $('#FeesHeadID').val(), FeesHead: $('#FeesHead').val(), FeesAmount: DoubleFromIndianCulture($('#FeesAmount').val()), BillingCycle: $('#BillingCycle').val(), DueOn: $('#DueOn').val() };
-        $.post("/Admin/FeesStructure/UpdateRow", model, function (data) {
-            DisplayData(data);
-            SetTotal();
-            $('#Add').text("Add");
-        });
-    }
+function PushRow() {    
+        // if button text == add
+    var Cap = $('#Add').text();
+
+        if (Cap == "Add") {
+            var istrue = IsDuplicateRow($('#FeesHeadID').val());
+            if(istrue == true) {
+                alert('Duplicate Records');
+            }
+            else {
+                var model = { FeesHeadID: $('#FeesHeadID').val(), FeesHead: $('#FeesHead').val(), FeesAmount: DoubleFromIndianCulture($('#FeesAmount').val()), BillingCycle: $('#BillingCycle').val(), DueOn: $('#DueOn').val() };
+                $.post("/Admin/FeesStructure/InsertRow", model, function (data) {
+                    DisplayData(data);
+                    SetTotal();
+                });
+            }
+        }
+        else {
+            var istrue = IsDuplicateRow($('#FeesHeadID').val());
+            if (istrue == true) {
+                alert('Duplicate Records');
+            }
+            else {
+                var model = { FeesStructureTransTempID: $('#FeesStructureTransTempID').val(), FeesHeadID: $('#FeesHeadID').val(), FeesHead: $('#FeesHead').val(), FeesAmount: DoubleFromIndianCulture($('#FeesAmount').val()), BillingCycle: $('#BillingCycle').val(), DueOn: $('#DueOn').val() };
+                $.post("/Admin/FeesStructure/UpdateRow", model, function (data) {
+                    DisplayData(data);
+                    SetTotal();
+                    $('#Add').text("Add");
+                });
+            }           
+        }   
 }
 // for Remove Trans Data
 function PopRow(Ser) {      
@@ -83,10 +94,11 @@ function EditRow(Ser) {
     });
 }
 // for Is Duplicate
-function EditRow(Ser) {
-    var result = "";
+function IsDuplicateRow(Ser) {
+    var result = false;
     $.post("/Admin/FeesStructure/IsDuplicate", { iSer: Ser }, function (response) {
         result = response;
+       /* alert(result);*/
     });
     return result;
 }
@@ -141,4 +153,31 @@ function LoadRow(itemid) {
             DisplayData(data);
         }
     });
+}
+
+function IsForm() {
+    var res = false;
+
+    if ($('#FeesHead').val() = "") {
+        alert('message 1');
+        res = false;
+    }
+    else {
+        res = true;
+    }
+    if ($('#FeesAmount').val() = "") {
+        alert('message 2');
+        res = false;
+    }
+    else {
+        res = true;
+    }
+    if ($('#DueOn').val() = "") {
+        alert('message 3');
+        res = false;
+    }
+    else {
+        res = true;
+    }
+    return res;
 }

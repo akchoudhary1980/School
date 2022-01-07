@@ -33,43 +33,46 @@
             <div class="form-group row">
                 <label asp-for="Pictures" class="col-sm-2 col-form-label"></label>
                 <div class="col-md-6">
-                    <p>Passport Picture (Size: 250px X 350px)</p>
-                    <img id="img-passport" height="10" src="~/uploadfiles/commonfile/cameraIcon.png" alt="" class="img-fluid img-thumbnail" />
+                    <p>Passport Picture (Size: 50px X 50px)</p>
+                    <img id="imgicon" height="10" src="~/uploadfiles/commonfile/cameraIcon.png" width="50" />
                 </div>
                 <div class="col-md-4">
-                    <input type='file' name="file_passport" onchange="uploadpassort(this);" class="btn btn-outline-info pull-right" />
+                    <input type='file' name="file_icon" onchange="uploadicon(this);" class="btn btn-outline-info pull-right" />
                 </div>
             </div>
 
             <h5 class="sub-title">Fees Details</h5>
             <hr />
             <!-- Row start -->
-            <div class="form-group row">
-                <div class="col-sm-4">
-                    <label class="form-control-label">Fees Head</label>
-                    <input type="text" id="FeesHead" name="FeesHead" class="form-control" />
-                    <input type="hidden" id="FeesHeadID" name="FeesHeadID" />
-                    <input type="hidden" id="FeesStructureTransTempID" name="FeesHeadID" />
-                </div>
-                <div class="col-sm-2">
-                    <label class="form-control-label">Amount</label>
-                    <input type="text" id="FeesAmount" name="FeesAmount" class="form-control" />
-                </div>
+           
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <label class="form-control-label">Fees Head</label>
+                        <input type="text" id="FeesHead" name="FeesHead" class="form-control" />
+                        <input type="hidden" id="FeesHeadID" name="FeesHeadID" />
+                        <input type="hidden" id="FeesStructureTransTempID" name="FeesHeadID" />
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="form-control-label">Amount</label>
+                        <input type="text" id="FeesAmount" name="FeesAmount" class="form-control" />
+                    </div>
 
-                <div class="col-sm-3">
-                    <label class=" form-control-label">Billing Cycle</label>
-                    <input type="text" id="BillingCycle" name="BillingCycle" disabled="disabled" class="form-control" />
-                </div>
+                    <div class="col-sm-3">
+                        <label class=" form-control-label">Billing Cycle</label>
+                        <input type="text" id="BillingCycle" name="BillingCycle" disabled="disabled" class="form-control" />
+                    </div>
 
-                <div class="col-sm-2">
-                    <label class="form-control-label">Due On</label>
-                    <input type="text" id="DueOn" name="DueOn" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                    <div class="col-sm-2">
+                        <label class="form-control-label">Due On</label>
+                        <input type="text" id="DueOn" name="DueOn" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                    </div>
+                    <div class="col-sm-1">
+                        <label class="form-control-label">Action</label>
+                        <button type="button" id="Add" name="Add" class="btn btn-outline-success float-right" onclick="PushRow();">Add</button>
+                    </div>
                 </div>
-                <div class="col-sm-1">
-                    <label class="form-control-label">Action</label>
-                    <button type="button" id="Add" name="Add" class="btn btn-outline-success float-right" onclick="PushRow();">Add</button>                    
-                </div>
-            </div>
+            
+
             <div class="form-group row">
                 <table id='dtTable' class='table table-sm'>
                     <thead>

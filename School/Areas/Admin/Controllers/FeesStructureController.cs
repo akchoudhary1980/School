@@ -27,7 +27,7 @@ namespace School.Areas.Admin.Controllers
         {
             ViewData["PageTitle"] = "Fees Structure Manage";
             ViewData["PageName"] = "Fees Structure List";
-            ViewData["ControllerName"] = "Fees Structure";
+            ViewData["ControllerName"] = "FeesStructure";
             return View();
         }
         [HttpPost]
@@ -109,34 +109,59 @@ namespace School.Areas.Admin.Controllers
             //db.SaveChanges();
 
 
-            ViewData["PageTitle"] = "Staff Manage";
-            ViewData["PageName"] = "New Staff";
-            ViewData["ControllerName"] = "Staff";
+            ViewData["PageTitle"] = "Fees Structure Manage";
+            ViewData["PageName"] = "New Fees Structure";
+            ViewData["ControllerName"] = "FeesStructure";
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(StaffModel obj, IFormFile file_resume, IFormFile file_scan, IFormFile file_passport)
+        public IActionResult Create(FeesStructureModel obj, IFormFile file_icon)
         {
             if (ModelState.IsValid)
             {
-                bool duplicate = db.StaffModels.Any(x => x.Mobile == obj.Mobile);
+                bool duplicate = db.FeesStructureModels.Any(x => x.ClassID == obj.ClassID);
                 if (duplicate)
                 {
-                    ModelState.AddModelError("Mobile", "Duplicate Record Found");
+                    ModelState.AddModelError("ClassID", "Duplicate Record Found");
                     return View();
                 }
                 else
                 {
-                    int incid = db.StaffModels.DefaultIfEmpty().Max(r => r == null ? 0 : r.StaffID);
-                    obj.StaffID = incid + 1;
-
-                    obj.Resume = TextLib.UploadFilewithHTMLControl(file_resume, Environment.ContentRootPath, "Staff_A" + obj.StaffID);
-                    obj.ScanDocuments = TextLib.UploadFilewithHTMLControl(file_scan, Environment.ContentRootPath, "Staff_B" + obj.StaffID);
-                    obj.Picture = TextLib.UploadFilewithHTMLControl(file_passport, Environment.ContentRootPath, "Staff_C" + obj.StaffID);
-
-                    db.StaffModels.Add(obj);
+                    int incid = db.FeesStructureModels.DefaultIfEmpty().Max(r => r == null ? 0 : r.FeesStructureID);
+                    obj.FeesStructureID = incid + 1;
+                    obj.SessionYearID = 1;
+                    obj.Pictures = TextLib.UploadFilewithHTMLControl(file_icon, Environment.ContentRootPath, "FeesIcon" + obj.FeesStructureID);                    
+                    db.FeesStructureModels.Add(obj);
                     db.SaveChanges();
+                    // Fees Structure Trans 
+                    int token = Convert.ToInt32(Request.Cookies["Token"].ToString());
+                    var list = db.FeesStructureTransTempModels.Where(x => x.Tokon == token).ToList();
+                    List<FeesStructureTransModel> fst = new List<FeesStructureTransModel>();
+                    int maxid = db.FeesStructureTransModels.DefaultIfEmpty().Max(r => r == null ? 0 : r.FeesStructureTransID);
+                    foreach (var l in list)
+                    {
+                        maxid++;
+                        fst.Add(new FeesStructureTransModel
+                        {         
+                            FeesStructureTransID = maxid,
+                            FeesHeadID = l.FeesHeadID,
+                            FeesAmount=l.FeesAmount,
+                            BillingCycle=l.BillingCycle,
+                            DueOn = l.DueOn,
+                            SessionYearID = l.SessionYearID,
+                            ClassID = l.ClassID
+                        });
+                    }
+
+                    DBContext db1 = new DBContext();
+
+                    db1.FeesStructureTransModels.AddRange(fst);
+                    db1.SaveChanges();
+                    // Remove toke Data
+                    db1.FeesStructureTransTempModels.RemoveRange(db.FeesStructureTransTempModels.Where(x => x.Tokon == token));
+                    db1.SaveChanges();
+
                     Response.Cookies.Append("Create", "Yes");
                     return RedirectToAction(nameof(Index));
                 }
@@ -277,6 +302,13 @@ namespace School.Areas.Admin.Controllers
         {
             var billingcycle = db.FeesHeadModels.Where(x => x.FeesHeadID == ID).SingleOrDefault();
             string result = billingcycle.FeesHeadType;
+            return Json(result, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+
+        public JsonResult IsDuplicate(int iSer)
+        {
+            int token = Convert.ToInt32(Request.Cookies["Token"].ToString());            
+            bool result = db.FeesStructureTransTempModels.Any(x => x.FeesHeadID == iSer && x.Tokon == token);           
             return Json(result, new Newtonsoft.Json.JsonSerializerSettings());
         }
 
