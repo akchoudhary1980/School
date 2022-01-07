@@ -47,17 +47,21 @@ function GetBillingCycle(id) {
 // for Add Trans Data
 function PushRow() {
     // if button text == add
-    var Cap = $('#Add').text();
-    alert(Cap);
-    if (Cap == "Add") {
+    var Cap = $('#Add').text(); 
+    if (Cap == "Add") {    
         var model = { FeesHeadID: $('#FeesHeadID').val(), FeesHead: $('#FeesHead').val(), FeesAmount: DoubleFromIndianCulture($('#FeesAmount').val()), BillingCycle: $('#BillingCycle').val(), DueOn: $('#DueOn').val() };
         $.post("/Admin/FeesStructure/InsertRow", model, function (data) {
             DisplayData(data);
             SetTotal();
         });
     }
-    else {
-        alert('update');
+    else {       
+        var model = { FeesStructureTransTempID: $('#FeesStructureTransTempID').val(),FeesHeadID: $('#FeesHeadID').val(), FeesHead: $('#FeesHead').val(), FeesAmount: DoubleFromIndianCulture($('#FeesAmount').val()), BillingCycle: $('#BillingCycle').val(), DueOn: $('#DueOn').val() };
+        $.post("/Admin/FeesStructure/UpdateRow", model, function (data) {
+            DisplayData(data);
+            SetTotal();
+            $('#Add').text("Add");
+        });
     }
 }
 // for Remove Trans Data
@@ -68,12 +72,13 @@ function PopRow(Ser) {
 }
 // for Edit Trans Data
 function EditRow(Ser) {
-    $.post("/Admin/FeesStructure/UpdateRow", { iSer: Ser }, function (row) {       
+    $.post("/Admin/FeesStructure/GetRow", { iSer: Ser }, function (row) {       
         $('#FeesHeadID').val(row.FeesHeadID);
         $('#FeesHead').val(row.FeesHead);
         $('#FeesAmount').val(row.FeesAmount);
         $('#BillingCycle').val(row.BillingCycle);
         $('#DueOn').val(row.DueOn);
+        $('#FeesStructureTransTempID').val(Ser);        
         $('#Add').text("Update");
     });
 }

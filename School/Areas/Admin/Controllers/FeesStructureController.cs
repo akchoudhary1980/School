@@ -242,12 +242,9 @@ namespace School.Areas.Admin.Controllers
             obj.ClassID = 1;
             obj.SessionYearID = 1;
             db.FeesStructureTransTempModels.Add(obj);
-            db.SaveChanges();
-
-          
+            db.SaveChanges();          
             var list = db.FeesStructureTransTempModels.Where(x=>x.Tokon==token).ToList();                
-            return Json(list, new Newtonsoft.Json.JsonSerializerSettings()); // return data            
-            
+            return Json(list, new Newtonsoft.Json.JsonSerializerSettings()); 
         }
         [HttpPost]
         public JsonResult DeleteRow(int iSer)
@@ -258,7 +255,19 @@ namespace School.Areas.Admin.Controllers
             var list = db.FeesStructureTransTempModels.Where(x => x.Tokon == token).ToList();
             return Json(list, new Newtonsoft.Json.JsonSerializerSettings()); // return data 
         }
-        public JsonResult UpdateRow(int iSer)
+
+        public JsonResult UpdateRow(FeesStructureTransTempModel obj)
+        {
+            int token = Convert.ToInt32(Request.Cookies["Token"].ToString());
+            obj.Tokon = token;
+            obj.ClassID = 1;
+            obj.SessionYearID = 1;
+            db.Entry(obj).State = EntityState.Modified;
+            db.SaveChanges();
+            var list = db.FeesStructureTransTempModels.Where(x => x.Tokon == token).ToList();
+            return Json(list, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+        public JsonResult GetRow(int iSer)
         {
            var row = db.FeesStructureTransTempModels.Where(x => x.FeesStructureTransTempID == iSer).SingleOrDefault();           
             return Json(row, new Newtonsoft.Json.JsonSerializerSettings()); // return data 
