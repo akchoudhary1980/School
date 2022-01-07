@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-sm-1">
                     <label class="form-control-label">Action</label>
-                    <button type="button" class="btn btn-outline-success float-right" onclick="PushRow();"><i class="fas fa-plus"></i> add</button>                    
+                    <button type="button" id="Add" name="Add" class="btn btn-outline-success float-right" onclick="PushRow();">Add</button>                    
                 </div>
             </div>
             <div class="form-group row">
@@ -75,42 +75,17 @@
                         <tr>
                             <th>#</th>
                             <th>Fees Head</th>
-                            <th>Amount</th>
                             <th>Billing Cycle</th>
                             <th>Due On</th>
-                            <th>Del</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table class='table table-sm'>
-                    <thead style="visibility:collapse">
-                        <tr>
-                            <th>#</th>
-                            <th>Fees Head</th>
                             <th>Amount</th>
-                            <th>B Cycle</th>
-                            <th>DueOn</th>
+                            <th>Edit</th>
                             <th>Del</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            @*<td align="right" colspan="6"><b>Discount</b></td>
-
-                                <td align="right"> @Html.EditorFor(model => model.DiscountPercent, new { htmlAttributes = new { @class = "form-control small-textbox" } })</td>
-                                <td align="right"> @Html.EditorFor(model => model.DiscountValue, new { htmlAttributes = new { @class = "form-control small-textbox" } })</td>
-                                <td align="right"> @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control small-textbox", @readonly = "readonly" } })</td>
-                                <td></td>*@
-                        </tr>
-                        <tr>
-                            <td align="right" colspan="8"><b>Grand Total (Sub Total - Discount)</b></td>
-                            <td align="right"><label id="GroundTotal" for="grandtotal"></label></td>
-                            <td></td>
-                        </tr>
                     </tbody>
                 </table>
+                
             </div>           
 
             <div class="form-group row">
@@ -126,28 +101,4 @@
         <p>Use <i style="color:blue" class="fas fa-plus-square"></i> for Insert Record, <i style="color:green" class="fas fa-edit"></i> for Update Record and <i style="color:red" class="fas fa-window-close"></i> for Delete Record </p>
     </div>
 </div>
-
-<!-- /.modal -->
-<div class="modal fade" id="modal-lg">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Large Modal</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>One fine body&hellip;</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
 

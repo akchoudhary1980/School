@@ -256,8 +256,26 @@ namespace School.Areas.Admin.Controllers
             db.SaveChanges();
             int token = Convert.ToInt32(Request.Cookies["Token"].ToString());
             var list = db.FeesStructureTransTempModels.Where(x => x.Tokon == token).ToList();
-            return Json(list, new Newtonsoft.Json.JsonSerializerSettings()); // return data            
+            return Json(list, new Newtonsoft.Json.JsonSerializerSettings()); // return data 
+        }
+        public JsonResult UpdateRow(int iSer)
+        {
+           var row = db.FeesStructureTransTempModels.Where(x => x.FeesStructureTransTempID == iSer).SingleOrDefault();           
+            return Json(row, new Newtonsoft.Json.JsonSerializerSettings()); // return data 
+        }
 
+        public JsonResult GetBillingCycle(int ID)
+        {
+            var billingcycle = db.FeesHeadModels.Where(x => x.FeesHeadID == ID).SingleOrDefault();
+            string result = billingcycle.FeesHeadType;
+            return Json(result, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+
+        public JsonResult GetTotal()
+        {
+            int token = Convert.ToInt32(Request.Cookies["Token"].ToString());
+            double sum = db.FeesStructureTransTempModels.Where(x => x.Tokon == token).Sum(y=>y.FeesAmount);           
+            return Json(sum, new Newtonsoft.Json.JsonSerializerSettings());
         }
     }
 }

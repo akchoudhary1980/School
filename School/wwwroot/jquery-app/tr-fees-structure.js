@@ -1,5 +1,19 @@
-﻿$(document).ready(function () {     
-    /*SetInputNumericIndian('FeesAmount');*/
+﻿// main picture
+function uploadpassort(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#img-passport')
+                .attr('src', e.target.result)
+                .width(100)
+                .height(150);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+// main function 
+$(document).ready(function () {     
+    SetDoubleIndian('FeesAmount');
     $(document).ready(function () {
         $("#FeesHead").autocomplete({
             source: function (request, response) {
@@ -24,30 +38,27 @@
 })
 function GetBillingCycle(id) {
 
-    $.post("/Share/GetBillingCycle", { ID: id }, function (response) {
+    $.post("/Admin/FeesStructure/GetBillingCycle", { ID: id }, function (response) {
         $("#BillingCycle").val(response);
     });
 }
-// main picture
-function uploadpassort(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $('#img-passport')
-                .attr('src', e.target.result)
-                .width(100)
-                .height(150);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
 
-// for add Trans Data
-function PushRow() {    
-    var model = { FeesHeadID: $('#FeesHeadID').val(), FeesHead: $('#FeesHead').val(), FeesAmount: $('#FeesAmount').val(), BillingCycle: $('#BillingCycle').val(), DueOn: $('#DueOn').val()};    
-    $.post("/Admin/FeesStructure/InsertRow", model, function (data) {
-        DisplayData(data);
-    });
+
+// for Add Trans Data
+function PushRow() {
+    // if button text == add
+    var Cap = $('#Add').text();
+    alert(Cap);
+    if (Cap == "Add") {
+        var model = { FeesHeadID: $('#FeesHeadID').val(), FeesHead: $('#FeesHead').val(), FeesAmount: DoubleFromIndianCulture($('#FeesAmount').val()), BillingCycle: $('#BillingCycle').val(), DueOn: $('#DueOn').val() };
+        $.post("/Admin/FeesStructure/InsertRow", model, function (data) {
+            DisplayData(data);
+            SetTotal();
+        });
+    }
+    else {
+        alert('update');
+    }
 }
 // for Remove Trans Data
 function PopRow(Ser) {      
@@ -55,6 +66,18 @@ function PopRow(Ser) {
         DisplayData(data);
     });
 }
+// for Edit Trans Data
+function EditRow(Ser) {
+    $.post("/Admin/FeesStructure/UpdateRow", { iSer: Ser }, function (row) {       
+        $('#FeesHeadID').val(row.FeesHeadID);
+        $('#FeesHead').val(row.FeesHead);
+        $('#FeesAmount').val(row.FeesAmount);
+        $('#BillingCycle').val(row.BillingCycle);
+        $('#DueOn').val(row.DueOn);
+        $('#Add').text("Update");
+    });
+}
+
 // for Display Data-- > 
 function DisplayData(data) {
     var Counter = 0;
@@ -64,16 +87,35 @@ function DisplayData(data) {
         Counter = Counter + 1;
         var rows = "<tr>"
             + "<td>" + Counter + "</td>"
-            + "<td>" + item.FeesHead + "</td>"
-            + "<td>" + item.FeesAmount + "</td>"
+            + "<td>" + item.FeesHead + "</td>"           
             + "<td>" + item.BillingCycle + "</td>"
-            + "<td>" + ToDDMMYYYY(item.DueOn) + "</td>"
+            + "<td>" + ConvertToDDMMYYYY(item.DueOn) + "</td>"
+            + "<td>" + ConvertToIndian(item.FeesAmount) + "</td>"
+            + "<td><button type='button' id=" + item.FeesStructureTransTempID + " onclick='EditRow(this.id)' class='btn btn-xs btn-outline-success'><i class='fas fa-edit'></i></button></td>"
             + "<td><button type='button' id=" + item.FeesStructureTransTempID + " onclick='PopRow(this.id)' class='btn btn-xs btn-outline-danger'><i class='fas fa-window-close'></i></button></td>"
             + "</tr>";
         $('#dtTable tbody').append(rows);
     });
+
+    var row2 ="<tr>"
+        +"<td align='right' colspan='4'><b>Total Fees</b></td>"
+        + "<td><label id='TotalFees' for='TotalFees'></label></td>"
+        + "<td></td><td></td>"
+        + " </tr>";
+    $('#dtTable tbody').append(row2);
+
     // Clear Item
+    $('#FeesHeadID').val("");
     $('#FeesHead').val("");
+    $('#FeesAmount').val("");
+    $('#BillingCycle').val("");
+    $('#DueOn').val("");
+    //SetInputNumericIndian('FeesAmount');
+}
+function SetTotal() {
+    $.post("/Admin/FeesStructure/GetTotal", function (response) {
+        $('#TotalFees').text(ConvertToIndian(response));
+    });
 }
 // for Looad Data on Edit-- > 
 function LoadRow(itemid) {
@@ -86,23 +128,4 @@ function LoadRow(itemid) {
             DisplayData(data);
         }
     });
-}
-
-function ToDDMMYYYY(stingdate) {
-    alert(stingdate);
-    var pattern = /Date\(([^)]+)\)/;
-    var results = pattern.exec(stingdate);
-    var mydate = new Date(parseFloat(results[1]));
-    year = mydate.getFullYear();
-    month = mydate.getMonth() + 1;
-    day = mydate.getDate();
-
-    if (day < 10) {
-        day = '0' + day;
-    }
-    if (month < 10) {
-        month = '0' + month;
-    }
-    var outdate = day + '/' + month + '/' + year;
-    return outdate;
 }

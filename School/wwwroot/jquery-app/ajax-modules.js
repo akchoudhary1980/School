@@ -235,6 +235,12 @@ function RemoveIndianCulture(id) {
     str = str.replace(",", "");
     $('#' + id).val(str);
 }
+function DoubleFromIndianCulture(indianvalue) {
+    var str = indianvalue;
+    str = str.replace("₹", "");
+    str = str.replace(",", "");
+    return str;
+}
 function ConvertToDDMMYYYY(dateString) {
     date = new Date(dateString);
     year = date.getFullYear();
@@ -247,7 +253,7 @@ function ConvertToDDMMYYYY(dateString) {
     if (month < 10) {
         month = '0' + month;
     }
-    var result = dt + '-' + month + '-' + year;
+    var result = dt + '/' + month + '/' + year;
     return result;
 }
 function ConvertToIndian(num) {

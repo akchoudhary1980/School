@@ -45,12 +45,7 @@ namespace School.Controllers
         }
 
         //  Get firm Name 
-        public JsonResult GetBillingCycle(int ID)
-        {
-            var billingcycle = db.FeesHeadModels.Where(x => x.FeesHeadID == ID).SingleOrDefault();
-            string result = billingcycle.FeesHeadType;
-            return Json(result, new Newtonsoft.Json.JsonSerializerSettings());
-        }
+        
 
 
         //  Get firm Name 
