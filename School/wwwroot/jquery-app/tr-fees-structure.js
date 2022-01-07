@@ -82,6 +82,14 @@ function EditRow(Ser) {
         $('#Add').text("Update");
     });
 }
+// for Is Duplicate
+function EditRow(Ser) {
+    var result = "";
+    $.post("/Admin/FeesStructure/IsDuplicate", { iSer: Ser }, function (response) {
+        result = response;
+    });
+    return result;
+}
 
 // for Display Data-- > 
 function DisplayData(data) {
