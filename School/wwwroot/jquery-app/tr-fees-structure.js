@@ -93,16 +93,6 @@ function EditRow(Ser) {
         $('#Add').text("Update");
     });
 }
-// for Is Duplicate
-function IsDuplicateRow(Ser) {
-    var result = false;
-    $.post("/Admin/FeesStructure/IsDuplicate", { iSer: Ser }, function (response) {
-        result = response;
-       /* alert(result);*/
-    });
-    return result;
-}
-
 // for Display Data-- > 
 function DisplayData(data) {
     var Counter = 0;
@@ -137,21 +127,24 @@ function DisplayData(data) {
     $('#DueOn').val("");
     //SetInputNumericIndian('FeesAmount');
 }
+// for Is Duplicate
+function IsDuplicateRow(Ser) {
+    var result = false;
+    $.post("/Admin/FeesStructure/IsDuplicate", { iSer: Ser }, function (response) {
+        result = response;
+        /* alert(result);*/
+    });
+    return result;
+}
 function SetTotal() {
     $.post("/Admin/FeesStructure/GetTotal", function (response) {
         $('#TotalFees').text(ConvertToIndian(response));
     });
 }
 // for Looad Data on Edit-- > 
-function LoadRow(itemid) {
-    $.ajax({
-        type: 'POST',
-        url: "/DealersManage/Dealers/FetchRow",
-        dataType: 'json',
-        data: { iID: itemid },
-        success: function (data) {
-            DisplayData(data);
-        }
+function LoadRow(id) {
+    $.post("/Admin/FeesStructure/FetchRow", { ID: id }, function (data) {
+        DisplayData(data);
     });
 }
 

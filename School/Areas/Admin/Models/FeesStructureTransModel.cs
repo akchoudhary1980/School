@@ -27,6 +27,8 @@ namespace School.Areas.Admin.Models
         [Display(Name = "Due On")]
         public DateTime DueOn { get; set; } // Month and Date 
 
+        [Display(Name = "Tokon No")]
+        public int Token { get; set; }
         public int SessionYearID { get; set; }
         public int ClassID { get; set; }
     }

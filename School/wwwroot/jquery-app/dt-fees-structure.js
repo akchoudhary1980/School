@@ -27,6 +27,7 @@
             },
 
             { "data": "className", "name": "className", "autoWidth": true },
+            { "data": "totalFees", "name": "totalFees", "autoWidth": true },
            
             {
                 "render": function (data, type, full) {

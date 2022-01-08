@@ -23,6 +23,7 @@
     <div class="card-body">
         <form method="post" enctype="multipart/form-data" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group row">
                 <label asp-for="ClassID" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
@@ -40,12 +41,10 @@
                     <input type='file' name="file_icon" onchange="uploadicon(this);" class="btn btn-outline-info pull-right" />
                 </div>
             </div>
-
             <h5 class="sub-title">Fees Details</h5>
             <hr />
-            <!-- Row start -->
-           
-                <div class="form-group row">
+            <!-- Row start -->           
+            <div class="form-group row">
                     <div class="col-sm-4">
                         <label class="form-control-label">Fees Head</label>
                         <input type="text" id="FeesHead" name="FeesHead" class="form-control" />
@@ -70,9 +69,7 @@
                         <label class="form-control-label">Action</label>
                         <button type="button" id="Add" name="Add" class="btn btn-outline-success float-right" onclick="PushRow();">Add</button>
                     </div>
-                </div>
-            
-
+                </div>   
             <div class="form-group row">
                 <table id='dtTable' class='table table-sm'>
                     <thead>
@@ -97,7 +94,6 @@
                     <button type="submit" class="btn btn-outline-primary float-right" on><i class="fas fa-plus"></i> Create</button>
                 </div>
             </div>
-
         </form>
 
     </div>

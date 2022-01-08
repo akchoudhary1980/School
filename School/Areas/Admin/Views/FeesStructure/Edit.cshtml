@@ -1,9 +1,13 @@
 ﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
-@model School.Areas.Admin.Models.StateModel
+@model School.Areas.Admin.Models.FeesStructureModel
 @using School.Areas.Admin.Models;
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<script src="~/jquery-app/tr-fees-structure.js"></script>
+$(document).ready(function () {
+   LoadRow(@Model.FeesStructureID);
+})
 <partial name="_Breadcrumb" , model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
 
 <div class="card card-outline card-success mt-3">
@@ -21,27 +25,70 @@
 
         <form method="post" enctype="multipart/form-data" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="StateID" />
+            <input type="hidden" asp-for="FeesStructureID" />
 
             <div class="form-group row">
-                <label asp-for="StateName" class="col-sm-2 col-form-label"></label>
+                <label asp-for="ClassID" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <input asp-for="StateName" class="form-control" placeholder="eg Madhya Pradesh" />
-                    <span asp-validation-for="StateName" class="text-danger"></span>
+                    <select asp-for="ClassID" class="form-control select2" asp-items="@School.Areas.Admin.Controllers.FeesStructureController.GetClassList()"> </select>
+                    <span asp-validation-for="ClassID" class="text-danger"></span>
                 </div>
             </div>
-
             <div class="form-group row">
-                <label asp-for="StateType" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <select asp-for="StateType" class="form-control" asp-items="@School.Areas.Admin.Controllers.StateController.GetStateTypeList()"> </select>
-                    <span asp-validation-for="StateType" class="text-danger"></span>
+                <label asp-for="Pictures" class="col-sm-2 col-form-label"></label>
+                <div class="col-md-6">
+                    <p>Passport Picture (Size: 50px X 50px)</p>
+                    <img id="imgicon" height="10" src="~/uploadfiles/commonfile/cameraIcon.png" width="50" />
                 </div>
-                <label asp-for="CountryID" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <select asp-for="CountryID" class="form-control" asp-items="@School.Areas.Admin.Controllers.StateController.GetCountryList()"> </select>
-                    <span asp-validation-for="CountryID" class="text-danger"></span>
+                <div class="col-md-4">
+                    <input type='file' name="file_icon" onchange="uploadicon(this);" class="btn btn-outline-info pull-right" />
                 </div>
+            </div>
+            <h5 class="sub-title">Fees Details</h5>
+            <hr />
+            <!-- Row start -->
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <label class="form-control-label">Fees Head</label>
+                    <input type="text" id="FeesHead" name="FeesHead" class="form-control" />
+                    <input type="hidden" id="FeesHeadID" name="FeesHeadID" />
+                    <input type="hidden" id="FeesStructureTransTempID" name="FeesHeadID" />
+                </div>
+                <div class="col-sm-2">
+                    <label class="form-control-label">Amount</label>
+                    <input type="text" id="FeesAmount" name="FeesAmount" class="form-control" />
+                </div>
+
+                <div class="col-sm-3">
+                    <label class=" form-control-label">Billing Cycle</label>
+                    <input type="text" id="BillingCycle" name="BillingCycle" disabled="disabled" class="form-control" />
+                </div>
+
+                <div class="col-sm-2">
+                    <label class="form-control-label">Due On</label>
+                    <input type="text" id="DueOn" name="DueOn" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                </div>
+                <div class="col-sm-1">
+                    <label class="form-control-label">Action</label>
+                    <button type="button" id="Add" name="Add" class="btn btn-outline-success float-right" onclick="PushRow();">Add</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <table id='dtTable' class='table table-sm'>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Fees Head</th>
+                            <th>Billing Cycle</th>
+                            <th>Due On</th>
+                            <th>Amount</th>
+                            <th>Edit</th>
+                            <th>Del</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
 
             <div class="form-group row">

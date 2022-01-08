@@ -18,7 +18,12 @@ namespace School.Areas.Admin.Models
         [Display(Name = "Class Name")]
         public int ClassID { get; set; }
 
+        [Display(Name = "Icon")]
         public string Pictures { get; set; }
+
+        [Display(Name = "Total Fees")]
+        public double TotalFees { get; set; }
+
         public int SessionYearID { get; set; }
     }
 }
