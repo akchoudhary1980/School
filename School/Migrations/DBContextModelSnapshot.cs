@@ -179,6 +179,9 @@ namespace School.Migrations
                     b.Property<double>("FeesAmount")
                         .HasColumnType("float");
 
+                    b.Property<string>("FeesHead")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("FeesHeadID")
                         .HasColumnType("int");
 

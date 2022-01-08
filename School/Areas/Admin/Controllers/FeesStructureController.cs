@@ -152,6 +152,7 @@ namespace School.Areas.Admin.Controllers
                         {         
                             FeesStructureTransID = maxid,
                             FeesHeadID = l.FeesHeadID,
+                            FeesHead = l.FeesHead,
                             FeesAmount=l.FeesAmount,
                             BillingCycle=l.BillingCycle,
                             DueOn = l.DueOn,
@@ -196,6 +197,7 @@ namespace School.Areas.Admin.Controllers
                 {
                     FeesStructureTransTempID = maxid,
                     FeesHeadID = l.FeesHeadID,
+                    FeesHead = l.FeesHead,
                     FeesAmount = l.FeesAmount,
                     BillingCycle = l.BillingCycle,
                     DueOn = l.DueOn,

@@ -14,8 +14,13 @@ namespace School.Areas.Admin.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]        
         public int FeesStructureTransID { get; set; }
 
-        [Display(Name = "Fees Head Name")]
+        [Display(Name = "Fees Head")]
         public int FeesHeadID { get; set; }
+
+        [Display(Name = "Fees Head Name")]
+        public string FeesHead { get; set; }
+
+
 
         [Display(Name = "Fees Amount")]
         public double FeesAmount { get; set; }

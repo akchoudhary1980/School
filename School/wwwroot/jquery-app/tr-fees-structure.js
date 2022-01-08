@@ -79,6 +79,7 @@ function PushRow() {
 function PopRow(Ser) {      
     $.post("/Admin/FeesStructure/DeleteRow", { iSer: Ser }, function (data) {
         DisplayData(data);
+        SetTotal();
     });
 }
 // for Edit Trans Data
@@ -145,32 +146,6 @@ function SetTotal() {
 function LoadRow(token) {
     $.post("/Admin/FeesStructure/FetchRow", { Token: token }, function (data) {
         DisplayData(data);
+        SetTotal();
     });
-}
-
-function IsForm() {
-    var res = false;
-
-    if ($('#FeesHead').val() = "") {
-        alert('message 1');
-        res = false;
-    }
-    else {
-        res = true;
-    }
-    if ($('#FeesAmount').val() = "") {
-        alert('message 2');
-        res = false;
-    }
-    else {
-        res = true;
-    }
-    if ($('#DueOn').val() = "") {
-        alert('message 3');
-        res = false;
-    }
-    else {
-        res = true;
-    }
-    return res;
 }
