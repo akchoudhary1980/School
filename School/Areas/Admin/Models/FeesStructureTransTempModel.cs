@@ -14,9 +14,8 @@ namespace School.Areas.Admin.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]        
         public int FeesStructureTransTempID { get; set; }
 
-        [Display(Name = "Tokon No")]
-        public int Tokon { get; set; }
-
+        public int FeesStructureID { get; set; } // key
+        
         [Display(Name = "Fees Head")]
         public int FeesHeadID { get; set; }
 
@@ -28,7 +27,6 @@ namespace School.Areas.Admin.Models
 
         [Display(Name = "Billing Cycle")] 
         public string BillingCycle { get; set; } // According to Cycle
-
 
         [Display(Name = "Due On")]
         public DateTime DueOn { get; set; } // Month and Date        

@@ -202,12 +202,12 @@ namespace School
                 }
                 else
                 {
-                    return "No";
+                    return "No.png";
                 }                
             }            
             catch
             {
-                return "No";
+                return "No.png";
             }
         }
         public static Tuple<string, string> UploadPDFwithHTMLControl(IFormFile postedFilePdf, string serverPath, string newFileName)

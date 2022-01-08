@@ -23,9 +23,6 @@ namespace School.Areas.Admin.Models
 
         [Display(Name = "Total Fees")]
         public double TotalFees { get; set; }
-
-        [Display(Name = "Tokon No")]
-        public int Token { get; set; }
         public int SessionYearID { get; set; }
     }
 }

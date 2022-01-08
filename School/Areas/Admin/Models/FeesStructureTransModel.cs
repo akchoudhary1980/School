@@ -13,6 +13,7 @@ namespace School.Areas.Admin.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]        
         public int FeesStructureTransID { get; set; }
+        public int FeesStructureID { get; set; } // key
 
         [Display(Name = "Fees Head")]
         public int FeesHeadID { get; set; }
@@ -20,20 +21,14 @@ namespace School.Areas.Admin.Models
         [Display(Name = "Fees Head Name")]
         public string FeesHead { get; set; }
 
-
-
         [Display(Name = "Fees Amount")]
         public double FeesAmount { get; set; }
 
         [Display(Name = "Billing Cycle")] 
         public string BillingCycle { get; set; } // According to Cycle
 
-
         [Display(Name = "Due On")]
-        public DateTime DueOn { get; set; } // Month and Date 
-
-        [Display(Name = "Tokon No")]
-        public int Token { get; set; }
+        public DateTime DueOn { get; set; } // Month and Date         
         public int SessionYearID { get; set; }
         public int ClassID { get; set; }
     }
