@@ -8,27 +8,16 @@ namespace School.Migrations
         {
             migrationBuilder.AddColumn<int>(
                 name: "Token",
-                table: "FeesStructureTransModels",
+                table: "FeesStructureModels",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
-
-            migrationBuilder.AddColumn<double>(
-                name: "TotalFees",
-                table: "FeesStructureModels",
-                type: "float",
-                nullable: false,
-                defaultValue: 0.0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
                 name: "Token",
-                table: "FeesStructureTransModels");
-
-            migrationBuilder.DropColumn(
-                name: "TotalFees",
                 table: "FeesStructureModels");
         }
     }

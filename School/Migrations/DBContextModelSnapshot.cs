@@ -151,6 +151,9 @@ namespace School.Migrations
                     b.Property<int>("SessionYearID")
                         .HasColumnType("int");
 
+                    b.Property<int>("Token")
+                        .HasColumnType("int");
+
                     b.Property<double>("TotalFees")
                         .HasColumnType("float");
 

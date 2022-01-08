@@ -5,9 +5,11 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <script src="~/jquery-app/tr-fees-structure.js"></script>
-$(document).ready(function () {
-   LoadRow(@Model.FeesStructureID);
+<script type="text/javascript">
+    $(document).ready(function () {
+   LoadRow(@Model.Token);
 })
+</script>
 <partial name="_Breadcrumb" , model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
 
 <div class="card card-outline card-success mt-3">

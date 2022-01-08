@@ -10,7 +10,7 @@ using School;
 namespace School.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20220108031252_CityModel")]
+    [Migration("20220108101922_CityModel")]
     partial class CityModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -151,6 +151,9 @@ namespace School.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Token")
                         .HasColumnType("int");
 
                     b.Property<double>("TotalFees")

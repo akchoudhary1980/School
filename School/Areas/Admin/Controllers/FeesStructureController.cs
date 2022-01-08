@@ -18,7 +18,7 @@ namespace School.Areas.Admin.Controllers
     {
         public DBContext db = new DBContext();
         private readonly Random _random = new Random();
-        private IHostEnvironment Environment;
+        private IHostEnvironment Environment;     
         public FeesStructureController(IHostEnvironment _environment)
         {
             Environment = _environment;
@@ -29,9 +29,9 @@ namespace School.Areas.Admin.Controllers
             ViewData["PageName"] = "Fees Structure List";
             ViewData["ControllerName"] = "FeesStructure";
 
-            Response.Cookies.Append("Token", "0");
+            Response.Cookies.Append("Token", "0");            
             // Remove token data
-            if (Request.Cookies["Token"].ToString() != "0")
+            if (Request.Cookies["Token"] != null)
             {
                 int token = Convert.ToInt32(Request.Cookies["Token"].ToString());
                 db.FeesStructureTransTempModels.RemoveRange(db.FeesStructureTransTempModels.Where(x => x.Tokon == token));
@@ -102,8 +102,18 @@ namespace School.Areas.Admin.Controllers
         public IActionResult Create()
         {
             // Generate new token 
+            loop:
             int num = _random.Next(1000, 100000);
-            Response.Cookies.Append("Token", num.ToString());
+            bool dup = db.FeesStructureModels.Any(x => x.Token == num);
+            
+            if(dup==false)
+            {
+                Response.Cookies.Append("Token", num.ToString());
+            }
+            else
+            {
+                goto loop;
+            }            
             
             ViewData["PageTitle"] = "Fees Structure Manage";
             ViewData["PageName"] = "New Fees Structure";
@@ -124,14 +134,14 @@ namespace School.Areas.Admin.Controllers
                 }
                 else
                 {
+                    int token = Convert.ToInt32(Request.Cookies["Token"].ToString());                    
                     int incid = db.FeesStructureModels.DefaultIfEmpty().Max(r => r == null ? 0 : r.FeesStructureID);
                     obj.FeesStructureID = incid + 1;
                     obj.SessionYearID = 1;
+                    obj.Token = token;                   
                     obj.Pictures = TextLib.UploadFilewithHTMLControl(file_icon, Environment.ContentRootPath, "FeesIcon" + obj.FeesStructureID);                    
-                    db.FeesStructureModels.Add(obj);
-                    db.SaveChanges();
-                    // Fees Structure Trans 
-                    int token = Convert.ToInt32(Request.Cookies["Token"].ToString());
+                   
+                    // Fees Structure Trans                    
                     var list = db.FeesStructureTransTempModels.Where(x => x.Tokon == token).ToList();
                     List<FeesStructureTransModel> fst = new List<FeesStructureTransModel>();
                     int maxid = db.FeesStructureTransModels.DefaultIfEmpty().Max(r => r == null ? 0 : r.FeesStructureTransID);
@@ -150,11 +160,14 @@ namespace School.Areas.Admin.Controllers
                             ClassID = l.ClassID
                         });
                     }
-
                     DBContext db1 = new DBContext();
-
                     db1.FeesStructureTransModels.AddRange(fst);
-                    db1.SaveChanges(); 
+                    db1.SaveChanges();
+                    // fees trans save 
+                    double totalfees = db.FeesStructureTransModels.Where(x => x.Token == token).Sum(y => y.FeesAmount);
+                    obj.TotalFees = totalfees;
+                    db.FeesStructureModels.Add(obj);
+                    db.SaveChanges();
                     Response.Cookies.Append("Create", "Yes");
                     return RedirectToAction(nameof(Index));
                 }
@@ -170,6 +183,30 @@ namespace School.Areas.Admin.Controllers
             ViewData["PageName"] = "Update Fees Structure";
             ViewData["ControllerName"] = "FeesStructure";
             var model = db.FeesStructureModels.Where(x => x.FeesStructureID == id).FirstOrDefault();
+            // Load Data in Temp File 
+            List<FeesStructureTransTempModel> ls = new List<FeesStructureTransTempModel>();
+            var list = db.FeesStructureTransModels.Where(x => x.Token == model.Token).ToList();
+            Response.Cookies.Append("Token", model.Token.ToString());
+
+            int maxid = db.FeesStructureTransTempModels.DefaultIfEmpty().Max(r => r == null ? 0 : r.FeesStructureTransTempID);
+            foreach (var l in list)
+            {
+                maxid++;
+                ls.Add(new FeesStructureTransTempModel
+                {
+                    FeesStructureTransTempID = maxid,
+                    FeesHeadID = l.FeesHeadID,
+                    FeesAmount = l.FeesAmount,
+                    BillingCycle = l.BillingCycle,
+                    DueOn = l.DueOn,
+                    Tokon = l.Token,
+                    SessionYearID = l.SessionYearID,
+                    ClassID = l.ClassID
+                });
+            }
+            DBContext db1 = new DBContext();
+            db1.FeesStructureTransTempModels.AddRange(ls);
+            db1.SaveChanges();
             return View(model);
         }
         [HttpPost]
@@ -190,9 +227,38 @@ namespace School.Areas.Admin.Controllers
                     }
                     else
                     {
+                        int token = Convert.ToInt32(Request.Cookies["Token"].ToString());
+                        // Fees Structure Trans                    
+                        var list = db.FeesStructureTransTempModels.Where(x => x.Tokon == token).ToList();
+                        List<FeesStructureTransModel> fst = new List<FeesStructureTransModel>();
+                        int maxid = db.FeesStructureTransModels.DefaultIfEmpty().Max(r => r == null ? 0 : r.FeesStructureTransID);
+                        foreach (var l in list)
+                        {
+                            maxid++;
+                            fst.Add(new FeesStructureTransModel
+                            {
+                                FeesStructureTransID = maxid,
+                                FeesHeadID = l.FeesHeadID,
+                                FeesAmount = l.FeesAmount,
+                                BillingCycle = l.BillingCycle,
+                                DueOn = l.DueOn,
+                                Token = l.Tokon,
+                                SessionYearID = l.SessionYearID,
+                                ClassID = l.ClassID
+                            });
+                        }
+                        DBContext db2 = new DBContext();
+                        db2.FeesStructureTransModels.AddRange(fst);
+                        db2.SaveChanges();
+
+
                         // icon etc 
+                        obj.SessionYearID = 1;
+                        obj.Token = token;
+
                         db.Entry(obj).State = EntityState.Modified;
                         db.SaveChanges();
+
                         Response.Cookies.Append("Edit", "Yes");
                         return RedirectToAction(nameof(Index));
                     }
@@ -274,10 +340,9 @@ namespace School.Areas.Admin.Controllers
             return Json(list, new Newtonsoft.Json.JsonSerializerSettings()); // return data 
         }
         [HttpPost]
-        public JsonResult FetchRow(int token)
-        {           
-            // Fees Structure ID 
-            var list = db.FeesStructureTransModels.Where(x => x.Token == token).ToList();
+        public JsonResult FetchRow(int Token)
+        {   
+            var list = db.FeesStructureTransTempModels.Where(x => x.Tokon == Token).ToList();
             return Json(list, new Newtonsoft.Json.JsonSerializerSettings()); // return data 
         }
         public JsonResult UpdateRow(FeesStructureTransTempModel obj)

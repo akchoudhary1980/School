@@ -142,8 +142,8 @@ function SetTotal() {
     });
 }
 // for Looad Data on Edit-- > 
-function LoadRow(id) {
-    $.post("/Admin/FeesStructure/FetchRow", { ID: id }, function (data) {
+function LoadRow(token) {
+    $.post("/Admin/FeesStructure/FetchRow", { Token: token }, function (data) {
         DisplayData(data);
     });
 }
