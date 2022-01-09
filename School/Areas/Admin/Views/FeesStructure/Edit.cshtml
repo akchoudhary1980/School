@@ -7,7 +7,7 @@
 <script src="~/jquery-app/tr-fees-structure.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        LoadRow(@Model.FeesStructureID);
+        LoadRow(@Model.TokenID);
     });
 </script>
 <partial name="_Breadcrumb" , model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
