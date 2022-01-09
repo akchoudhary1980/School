@@ -14,7 +14,7 @@ namespace School.Areas.Admin.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]        
         public int FeesStructureTransTempID { get; set; }
 
-        public int FeesStructureID { get; set; } // key
+        public int TokenID { get; set; } // key
         
         [Display(Name = "Fees Head")]
         public int FeesHeadID { get; set; }

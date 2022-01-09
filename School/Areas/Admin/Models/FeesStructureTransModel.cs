@@ -13,7 +13,7 @@ namespace School.Areas.Admin.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]        
         public int FeesStructureTransID { get; set; }
-        public int FeesStructureID { get; set; } // key
+        public int TokenID { get; set; } // key
 
         [Display(Name = "Fees Head")]
         public int FeesHeadID { get; set; }

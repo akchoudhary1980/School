@@ -24,5 +24,6 @@ namespace School.Areas.Admin.Models
         [Display(Name = "Total Fees")]
         public double TotalFees { get; set; }
         public int SessionYearID { get; set; }
+        public int TokenID { get; set; }
     }
 }

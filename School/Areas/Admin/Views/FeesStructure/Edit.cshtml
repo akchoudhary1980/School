@@ -7,8 +7,8 @@
 <script src="~/jquery-app/tr-fees-structure.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-   LoadRow(@Model.Token);
-})
+        LoadRow(@Model.FeesStructureID);
+    });
 </script>
 <partial name="_Breadcrumb" , model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
 
@@ -54,6 +54,7 @@
                     <label class="form-control-label">Fees Head</label>
                     <input type="text" id="FeesHead" name="FeesHead" class="form-control" />
                     <input type="hidden" id="FeesHeadID" name="FeesHeadID" />
+                    <input type="hidden" id="OldFeesHeadID" name="FeesHeadID" />
                     <input type="hidden" id="FeesStructureTransTempID" name="FeesHeadID" />
                 </div>
                 <div class="col-sm-2">

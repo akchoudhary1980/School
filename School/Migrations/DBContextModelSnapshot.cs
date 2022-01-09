@@ -151,7 +151,7 @@ namespace School.Migrations
                     b.Property<int>("SessionYearID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Token")
+                    b.Property<int>("TokenID")
                         .HasColumnType("int");
 
                     b.Property<double>("TotalFees")
@@ -188,7 +188,7 @@ namespace School.Migrations
                     b.Property<int>("SessionYearID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Token")
+                    b.Property<int>("TokenID")
                         .HasColumnType("int");
 
                     b.HasKey("FeesStructureTransID");
@@ -222,7 +222,7 @@ namespace School.Migrations
                     b.Property<int>("SessionYearID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Tokon")
+                    b.Property<int>("TokenID")
                         .HasColumnType("int");
 
                     b.HasKey("FeesStructureTransTempID");
