@@ -30,4 +30,9 @@
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.15" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admission\Controllers\" />
+    <Folder Include="Areas\Admission\Views\" />
+  </ItemGroup>
+
 </Project>

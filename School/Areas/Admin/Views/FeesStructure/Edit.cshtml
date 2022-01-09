@@ -40,7 +40,7 @@
                 <label asp-for="Pictures" class="col-sm-2 col-form-label"></label>
                 <div class="col-md-6">
                     <p>Passport Picture (Size: 50px X 50px)</p>
-                    <img id="imgicon" height="10" src="~/uploadfiles/commonfile/cameraIcon.png" width="50" />
+                    <img id="imgicon" height="50" src="~/uploadfiles/@Url.Content(Model.Pictures)" width="50" />
                 </div>
                 <div class="col-md-4">
                     <input type='file' name="file_icon" onchange="uploadicon(this);" class="btn btn-outline-info pull-right" />

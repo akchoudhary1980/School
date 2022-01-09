@@ -28,7 +28,7 @@ namespace School
         // helping 
         public DbSet<CountryModel> CountryModels { get; set; }
         public DbSet<StateModel> StateModels { get; set; }
-        public DbSet<CityModel> CityModels { get; set; }
+        public DbSet<AdmissionModel> CityModels { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

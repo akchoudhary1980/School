@@ -92,7 +92,7 @@ namespace School.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CityModel obj)
+        public IActionResult Create(AdmissionModel obj)
         {
             if (ModelState.IsValid)
             {
@@ -127,7 +127,7 @@ namespace School.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult Edit(CityModel obj)
+        public IActionResult Edit(AdmissionModel obj)
         {
             if (ModelState.IsValid)
             {
@@ -174,7 +174,7 @@ namespace School.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult Delete(CityModel obj, string confirm)
+        public IActionResult Delete(AdmissionModel obj, string confirm)
         {
             string s = confirm;
             if (confirm == "Yes")

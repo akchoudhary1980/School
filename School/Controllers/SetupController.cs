@@ -121,13 +121,13 @@ namespace School.Controllers
                 db.SaveChanges();
             }
         }
-        public static List<CityModel> GetCityList()
+        public static List<AdmissionModel> GetCityList()
         {
-            List<CityModel> citylist = new List<CityModel>();
+            List<AdmissionModel> citylist = new List<AdmissionModel>();
             DataTable dt = ReadXML("City");
             foreach (DataRow dr in dt.Rows)
             {
-                CityModel c = new CityModel
+                AdmissionModel c = new AdmissionModel
                 {
                     CityID = Convert.ToInt32(dr["CityID"]),
                     CityName = dr["CityName"].ToString(),

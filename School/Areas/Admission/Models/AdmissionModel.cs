@@ -6,13 +6,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace School.Areas.Admin.Models
+namespace School.Areas.Admission.Models
 {
     public class AdmissionModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CityID { get; set; }
+        public int AdmissionID { get; set; }
 
         [Required(ErrorMessage = "Please Enter City Name")]
         [Display(Name = "City Name")]

@@ -59,10 +59,9 @@ namespace School
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapAreaControllerRoute(
-                name: "Test",
-                areaName: "Test",
-                pattern: "Test/{controller=Home}/{action=Index}/{id?}"
+                endpoints.MapControllerRoute(
+                name: "Admission",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}"
                 );
 
                 endpoints.MapControllerRoute(
