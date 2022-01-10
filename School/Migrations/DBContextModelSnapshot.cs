@@ -686,6 +686,77 @@ namespace School.Migrations
 
                     b.ToTable("UserModels");
                 });
+
+            modelBuilder.Entity("School.Areas.Admission.Models.AdmissionModel", b =>
+                {
+                    b.Property<int>("AdmissionID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateOfAdmission")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StudentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TokenActID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TokenEduID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AdmissionID");
+
+                    b.ToTable("AdmissionModels");
+                });
+
+            modelBuilder.Entity("School.Areas.Admission.Models.StudentModel", b =>
+                {
+                    b.Property<int>("StudentID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CurrentAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FatherName")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Mobile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MotherName")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PermanetAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Picture")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StudentName")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WhatsApp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StudentID");
+
+                    b.ToTable("StudentModels");
+                });
 #pragma warning restore 612, 618
         }
     }

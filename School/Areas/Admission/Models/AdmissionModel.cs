@@ -14,13 +14,20 @@ namespace School.Areas.Admission.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int AdmissionID { get; set; }
 
-        [Required(ErrorMessage = "Please Enter City Name")]
-        [Display(Name = "City Name")]
-        public string CityName { get; set; }
+        [Display(Name = "Date of Admission")]
+        public DateTime DateOfAdmission { get; set; }
 
-        [Required(ErrorMessage = "Please Select State Name")]
-        [Display(Name = "State Name")]
-        public int StateID { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Class Name")]
+        [Display(Name = "Class Name")]
+        public int ClassID { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Student Name")]
+        [Display(Name = "Student Name")]
+        public int StudentID { get; set; }
+
+        public int TokenEduID { get; set; } // Education
+        public int TokenActID { get; set; } // Activity 
 
     }
 }

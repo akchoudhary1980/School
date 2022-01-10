@@ -10,8 +10,8 @@ using School;
 namespace School.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20211226094218_StaffModel")]
-    partial class StaffModel
+    [Migration("20220110033014_CityModel")]
+    partial class CityModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,9 @@ namespace School.Migrations
                     b.Property<string>("BoardName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
 
                     b.HasKey("BoardID");
 
@@ -66,6 +69,9 @@ namespace School.Migrations
                     b.Property<string>("ClassName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
 
                     b.HasKey("ClassID");
 
@@ -102,9 +108,128 @@ namespace School.Migrations
                     b.Property<string>("Remark")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
                     b.HasKey("DesginationID");
 
                     b.ToTable("DesginationModels");
+                });
+
+            modelBuilder.Entity("School.Areas.Admin.Models.FeesHeadModel", b =>
+                {
+                    b.Property<int>("FeesHeadID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FeesHeadName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FeesHeadType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
+                    b.HasKey("FeesHeadID");
+
+                    b.ToTable("FeesHeadModels");
+                });
+
+            modelBuilder.Entity("School.Areas.Admin.Models.FeesStructureModel", b =>
+                {
+                    b.Property<int>("FeesStructureID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Pictures")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TokenID")
+                        .HasColumnType("int");
+
+                    b.Property<double>("TotalFees")
+                        .HasColumnType("float");
+
+                    b.HasKey("FeesStructureID");
+
+                    b.ToTable("FeesStructureModels");
+                });
+
+            modelBuilder.Entity("School.Areas.Admin.Models.FeesStructureTransModel", b =>
+                {
+                    b.Property<int>("FeesStructureTransID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BillingCycle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DueOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("FeesAmount")
+                        .HasColumnType("float");
+
+                    b.Property<string>("FeesHead")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FeesHeadID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TokenID")
+                        .HasColumnType("int");
+
+                    b.HasKey("FeesStructureTransID");
+
+                    b.ToTable("FeesStructureTransModels");
+                });
+
+            modelBuilder.Entity("School.Areas.Admin.Models.FeesStructureTransTempModel", b =>
+                {
+                    b.Property<int>("FeesStructureTransTempID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BillingCycle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DueOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("FeesAmount")
+                        .HasColumnType("float");
+
+                    b.Property<string>("FeesHead")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FeesHeadID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TokenID")
+                        .HasColumnType("int");
+
+                    b.HasKey("FeesStructureTransTempID");
+
+                    b.ToTable("FeesStructureTransTempModels");
                 });
 
             modelBuilder.Entity("School.Areas.Admin.Models.QualificationModel", b =>
@@ -118,6 +243,9 @@ namespace School.Migrations
 
                     b.Property<string>("Remark")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
 
                     b.HasKey("QualificationID");
 
@@ -149,6 +277,9 @@ namespace School.Migrations
 
                     b.Property<string>("Result")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
 
                     b.Property<int>("StaffID")
                         .HasColumnType("int");
@@ -276,6 +407,9 @@ namespace School.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
                     b.HasKey("SectionID");
 
                     b.ToTable("SectionModels");
@@ -286,12 +420,18 @@ namespace School.Migrations
                     b.Property<int>("SessionYearID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("End")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("SessionYearName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SessionYearRemark")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("SessionYearID");
 
@@ -352,6 +492,9 @@ namespace School.Migrations
                     b.Property<string>("ScanDocuments")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
@@ -389,6 +532,9 @@ namespace School.Migrations
                     b.Property<int>("SubJectTransID")
                         .HasColumnType("int");
 
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
                     b.Property<int>("SubjectID")
                         .HasColumnType("int");
 
@@ -407,6 +553,9 @@ namespace School.Migrations
 
                     b.Property<string>("Remark")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
 
                     b.Property<string>("SubjectName")
                         .IsRequired()
@@ -480,6 +629,9 @@ namespace School.Migrations
                     b.Property<string>("ScanDocuments")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
@@ -514,6 +666,9 @@ namespace School.Migrations
                     b.Property<bool>("ReadRights")
                         .HasColumnType("bit");
 
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
                     b.Property<bool>("SettingRights")
                         .HasColumnType("bit");
 
@@ -532,6 +687,77 @@ namespace School.Migrations
                     b.HasKey("UserID");
 
                     b.ToTable("UserModels");
+                });
+
+            modelBuilder.Entity("School.Areas.Admission.Models.AdmissionModel", b =>
+                {
+                    b.Property<int>("AdmissionID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateOfAdmission")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StudentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TokenActID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TokenEduID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AdmissionID");
+
+                    b.ToTable("AdmissionModels");
+                });
+
+            modelBuilder.Entity("School.Areas.Admission.Models.StudentModel", b =>
+                {
+                    b.Property<int>("StudentID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CurrentAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FatherName")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Mobile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MotherName")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PermanetAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Picture")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StudentName")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WhatsApp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StudentID");
+
+                    b.ToTable("StudentModels");
                 });
 #pragma warning restore 612, 618
         }
