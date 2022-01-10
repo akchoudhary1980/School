@@ -55,6 +55,8 @@ namespace School.Areas.Admission.Models
         [Display(Name = "Passport Photo")]
         public string Picture { get; set; }
 
+        //
+
 
     }
 }
