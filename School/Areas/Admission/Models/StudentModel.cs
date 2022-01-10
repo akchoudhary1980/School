@@ -14,6 +14,9 @@ namespace School.Areas.Admission.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int StudentID { get; set; }
 
+        [Display(Name = "Student Code")]
+        public string StudentCode{ get; set; }
+
         [Display(Name = "Date of Birth")]
         public DateTime DateOfBirth { get; set; }
 

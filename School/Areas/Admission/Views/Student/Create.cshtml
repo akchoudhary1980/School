@@ -1,5 +1,5 @@
 ﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
-@model School.Areas.Admin.Models.StaffModel
+@model School.Areas.Admission.Models.StudentModel
 @using School.Areas.Admin.Models;
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -24,19 +24,42 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group row">
-                <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+                <label asp-for="StudentCode" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <input asp-for="StudentCode" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="StudentCode" class="text-danger"></span>
+                </div>
+                <label asp-for="DateOfBirth" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </div>
+                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="StudentName" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <input asp-for="Name" class="form-control" autocomplete="off" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <input asp-for="StudentName" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="StudentName" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <label asp-for="FatherName" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-10">
+                <div class="col-sm-4">
                     <input asp-for="FatherName" class="form-control" autocomplete="off" />
                     <span asp-validation-for="FatherName" class="text-danger"></span>
                 </div>
+                <label asp-for="MotherName" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <input asp-for="MotherName" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="MotherName" class="text-danger"></span>
+                </div>
             </div>
+
             <div class="form-group row">
                 <label asp-for="CurrentAddress" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
@@ -44,6 +67,7 @@
                     <span asp-validation-for="CurrentAddress" class="text-danger"></span>
                 </div>
             </div>
+
             <div class="form-group row">
                 <div class="offset-sm-8 col-sm-4">
                     <div class="form-check float-right">
@@ -52,6 +76,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label asp-for="PermanetAddress" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
@@ -70,6 +95,7 @@
                     <input asp-for="City" class="form-control" autocomplete="off" />
                 </div>
             </div>
+
             <div class="form-group row">
                 <label asp-for="Mobile" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-4">
@@ -98,134 +124,15 @@
             </div>
 
             <div class="form-group row">
-                <label asp-for="DesginationID" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <select asp-for="DesginationID" class="form-control select2" asp-items="@School.Areas.Admin.Controllers.StaffController.GetDesginationList()"> </select>
-                    <span asp-validation-for="DesginationID" class="text-danger"></span>
-                </div>
-                <label asp-for="Salary" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <input asp-for="Salary" class="form-control" autocomplete="off" />
-                    <span asp-validation-for="Salary" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label asp-for="IsPF" class="col-sm-2 col-form-label"></label>
-
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input asp-for="IsPF" class="form-check-input" value="Yes" type="radio" name="PF">
-                        <label class="form-check-label">Yes</label>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input asp-for="IsPF" class="form-check-input" checked="checked" value="No" type="radio" name="PF">
-                        <label class="form-check-label">No</label>
-                    </div>
-                </div>
-
-                <label asp-for="PFNumber" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <input asp-for="PFNumber" class="form-control" autocomplete="off" />
-                    <span asp-validation-for="PFNumber" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label asp-for="DateOfBirth" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                        </div>
-                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
-                    </div>
-                </div>
-                <label asp-for="DateOfAppointment" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                        </div>
-                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
-                    </div>
-                </div>
-            </div>
-
-            @*<div class="form-group row" style="border:1px solid #6495ED;padding:5px;">
-            <label class="col-sm-4 col-form-label">Educational Qualification</label>
-            <div class="col-sm-8">
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-lg">
-                    Launch Large Modal
-                </button>
-                <button type="button" class="btn btn-outline-info float-right" on><i class="fas fa-plus"></i> Add</button>
-            </div>
-            <div class="col-sm-12 mt-2">
-                <table class="table table-sm">
-                    <thead>
-                        <tr>
-                            <th style="width: 10px">#</th>
-                            <th>Exam Name</th>
-                            <th>Board/University</th>
-                            <th>Passing Year</th>
-                            <th style="width: 40px">Percent</th>
-                            <th>Resulte</th>
-                            <th>Del</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>10th Class</td>
-                            <td>MP Board</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-danger">55%</span></td>
-                            <td>Pass</td>
-                            <td>Del</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>*@
-
-
-            <div class="form-group row">
-                <label asp-for="Resume" class="col-sm-2 col-12"></label>
-                <div class="col-sm-6 col-12 ">
-                    <img src="~/uploadfiles/commonfile/pdfIcon.png" height="50" />
-                </div>
-                <div class="col-sm-4 col-12">
-                    <input type='file' name="file_resume" class="btn btn-outline-info pull-right" />
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label asp-for="ScanDocuments" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-6">
-                    <img src="~/uploadfiles/commonfile/pdfIcon.png" height="50" />
-                </div>
-                <div class="col-sm-4">
-                    <input type='file' name="file_scan" class="btn btn-outline-info pull-right" />
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <label asp-for="Picture" class="col-sm-2 col-form-label"></label>
                 <div class="col-md-6">
-                    <p>Passport Picture (Size: 250px X 350px)</p>                    
+                    <p>Passport Picture (Size: 250px X 350px)</p>
                     <img id="img-passport" src="~/uploadfiles/commonfile/cameraIcon.png" alt="" class="img-fluid img-thumbnail" />
                 </div>
                 <div class="col-md-4">
                     <input type='file' name="file_passport" onchange="uploadpassort(this);" class="btn btn-outline-info pull-right" />
                 </div>
-            </div>            
+            </div>
 
             <div class="form-group row">
                 <div class="col-sm-12">
@@ -241,27 +148,6 @@
     </div>
 </div>
 
-<!-- /.modal -->
-<div class="modal fade" id="modal-lg">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Large Modal</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>One fine body&hellip;</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+
 
 
