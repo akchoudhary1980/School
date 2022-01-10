@@ -20,16 +20,16 @@ namespace School.Areas.Admission.Models
 
         [Required(ErrorMessage = "Please Enter Student Name")]
         [Display(Name = "Student Name")]
-        public int StudentName { get; set; }
+        public string StudentName { get; set; }
 
 
         [Required(ErrorMessage = "Please Enter Father Name")]
         [Display(Name = "Father Name")]
-        public int FatherName { get; set; }
+        public string FatherName { get; set; }
 
         [Required(ErrorMessage = "Please Enter Mother Name")]
         [Display(Name = "Mother Name")]
-        public int MotherName { get; set; }
+        public string MotherName { get; set; }
 
 
         [Display(Name = "Current Address")]
