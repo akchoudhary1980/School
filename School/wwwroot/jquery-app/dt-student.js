@@ -14,7 +14,18 @@
             "searchable": false
         }],
         "columns": [
+
             { "data": "studentID", "name": "studentID", "autoWidth": true },
+
+            {
+                "data": "picture", "name": "picture",
+
+                "render": function (data, type, full, meta) {
+                    return "<img src='../uploadfiles/" + full.picture + "' height='50'/>";
+                },
+                "orderable": false,
+                "searchable": false
+            },
             { "data": "studentName", "name": "studentName", "autoWidth": true },
             { "data": "fatherName", "name": "fatherName", "autoWidth": true },
             { "data": "city", "name": "city", "autoWidth": true },  

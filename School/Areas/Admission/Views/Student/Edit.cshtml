@@ -6,6 +6,8 @@
 }
 
 <script src="~/jquery-app/tr-student.js"></script>
+<script src="~/jquery-app/vl-student.js"></script>
+
 <partial name="_Breadcrumb" , model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
 
 <div class="card card-outline card-success mt-3">
@@ -37,7 +39,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                         </div>
-                        <input asp-for="StudentCode" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                        <input asp-for="DateOfBirth" type="date" class="form-control">
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@
 }
 
 <script src="~/jquery-app/tr-student.js"></script>
+<script src="~/jquery-app/vl-student.js"></script>
 
 <partial name="_Breadcrumb" , model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
 
@@ -21,7 +22,7 @@
         </div>
     </div>
     <div class="card-body">
-        <form method="post" enctype="multipart/form-data" asp-action="Create">
+        <form id="vlform" name="vlform" method="post" enctype="multipart/form-data" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group row">
@@ -36,7 +37,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                         </div>
-                        <input asp-for="StudentCode" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                        <input asp-for="DateOfBirth" type="date"  class="form-control">
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -135,7 +137,7 @@
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row">              
                 <div class="col-sm-12">
                     <button type="submit" class="btn btn-outline-primary float-right" on><i class="fas fa-plus"></i> Create</button>
                 </div>

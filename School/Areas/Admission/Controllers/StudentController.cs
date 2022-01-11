@@ -59,6 +59,7 @@ namespace School.Areas.Admission.Controllers
                             select new
                             {
                                 t1.StudentID,
+                                t1.Picture,
                                 t1.StudentName,
                                 t1.FatherName,
                                 t1.City,

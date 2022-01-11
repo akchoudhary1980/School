@@ -3,6 +3,7 @@
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 <partial name="_Breadcrumb" , model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
 <!-- general form elements -->
 <div class="card card-outline card-info">
@@ -23,9 +24,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Picture</th>
                             <th>Student Name</th>
                             <th>Father Name</th>
-                            <th>City</th>                            
+                            <th>City</th>
                             <th>Mobile</th>
                             <th>WhatsApp</th>
                             <th>View</th>

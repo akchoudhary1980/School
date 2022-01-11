@@ -20,7 +20,7 @@
                 "data": "pictures", "name": "pictures",
 
                 "render": function (data, type, full, meta) {
-                    return "<img src='../UploadFiles/" + full.pictures + "' height='50'/>";
+                    return "<img src='../uploadfiles/" + full.pictures + "' height='50'/>";
                 },
                 "orderable": false,
                 "searchable": false
