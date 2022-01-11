@@ -22,18 +22,18 @@
             { "data": "whatsApp", "name": "whatsApp", "autoWidth": true },
             {
                 "render": function (data, type, full) {
-                    return "<a href='Student/View?id=" + full.staffID + "' class='btn btn-xs btn-outline-info'><i class='fas fa-search-plus'></i></a>";
+                    return "<a href='Student/View?id=" + full.studentID + "' class='btn btn-xs btn-outline-info'><i class='fas fa-search-plus'></i></a>";
                 }
             },
 
             {
                 "render": function (data, type, full) {
-                    return "<a href='Student/Edit?id=" + full.staffID + "' class='btn btn-xs btn-outline-success'><i class='fas fa-edit'></i></a>";
+                    return "<a href='Student/Edit?id=" + full.studentID + "' class='btn btn-xs btn-outline-success'><i class='fas fa-edit'></i></a>";
                 }
             },
             {
                 "render": function (data, type, full) {
-                    return "<a href='Student/Delete?id=" + full.staffID + "' class='btn btn-xs btn-outline-danger'><i class='fas fa-window-close'></i></a>";
+                    return "<a href='Student/Delete?id=" + full.studentID + "' class='btn btn-xs btn-outline-danger'><i class='fas fa-window-close'></i></a>";
                 }
             }, 
            
