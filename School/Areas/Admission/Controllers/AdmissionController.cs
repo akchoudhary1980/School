@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
-using School.Areas.Admin.Models;
+using School.Areas.Admission.Models;
 
 namespace School.Areas.Admission.Controllers
 {
@@ -98,34 +98,34 @@ namespace School.Areas.Admission.Controllers
         }
         public IActionResult Create()
         {
-        loop:
-            int Token = _random.Next(1000, 100000);
-            bool dup = db.FeesStructureTransTempModels.Any(x => x.FeesStructureTransTempID == Token);
-            if (dup == true)
-            {
-                goto loop;
-            }
-            else
-            {
-                ClearTemp(Token);
-                Response.Cookies.Append("Token", Token.ToString());
-            }
+        //loop:
+        //    int Token = _random.Next(1000, 100000);
+        //    bool dup = db.FeesStructureTransTempModels.Any(x => x.FeesStructureTransTempID == Token);
+        //    if (dup == true)
+        //    {
+        //        goto loop;
+        //    }
+        //    else
+        //    {
+        //        ClearTemp(Token);
+        //        Response.Cookies.Append("Token", Token.ToString());
+        //    }
 
-            ViewData["PageTitle"] = "Fees Structure Manage";
-            ViewData["PageName"] = "New Fees Structure";
-            ViewData["ControllerName"] = "FeesStructure";
+            ViewData["PageTitle"] = "Admission Manage";
+            ViewData["PageName"] = "New Admission";
+            ViewData["ControllerName"] = "Admission";
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(FeesStructureModel obj, IFormFile file_icon)
+        public IActionResult Create(AdmissionModel obj, IFormFile file_icon)
         {
             if (ModelState.IsValid)
             {
-                bool duplicate = db.FeesStructureModels.Any(x => x.ClassID == obj.ClassID);
+                bool duplicate = db.AdmissionModels.Any(x => x.StudentID == obj.StudentID);
                 if (duplicate)
                 {
-                    ModelState.AddModelError("ClassID", "Duplicate Record Found");
+                    ModelState.AddModelError("StudentID", "Duplicate Record Found");
                     return View();
                 }
                 else

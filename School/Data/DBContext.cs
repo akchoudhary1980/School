@@ -38,6 +38,8 @@ namespace School
         /// Admission Area ///
         public DbSet<StudentModel> StudentModels { get; set; }
         public DbSet<AdmissionModel> AdmissionModels { get; set; }
+        public DbSet<EducationTransModel> EducationTransModels { get; set; }
+        public DbSet<ActivityTransModel> ActivityTransModels { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

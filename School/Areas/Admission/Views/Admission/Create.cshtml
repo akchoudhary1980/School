@@ -1,12 +1,12 @@
 ﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
-@model School.Areas.Admission.Models.StudentModel
+@model School.Areas.Admission.Models.AdmissionModel
 @using School.Areas.Admin.Models;
 @{
     Layout = "~/Areas/Admission/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/jquery-app/tr-student.js"></script>
-<script src="~/jquery-app/vl-student.js"></script>
+@*<script src="~/jquery-app/tr-student.js"></script>
+<script src="~/jquery-app/vl-student.js"></script>*@
 
 <partial name="_Breadcrumb" , model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
 
@@ -26,118 +26,84 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group row">
-                <label asp-for="StudentCode" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <input asp-for="StudentCode" class="form-control" autocomplete="off" />
-                    <span asp-validation-for="StudentCode" class="text-danger"></span>
-                </div>
-                <label asp-for="DateOfBirth" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                        </div>
-                        <input asp-for="DateOfBirth" type="date"  class="form-control">
-                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <label asp-for="StudentName" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-10">
+                <div class="col-sm-8">
                     <input asp-for="StudentName" class="form-control" autocomplete="off" />
                     <span asp-validation-for="StudentName" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label asp-for="FatherName" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <input asp-for="FatherName" class="form-control" autocomplete="off" />
-                    <span asp-validation-for="FatherName" class="text-danger"></span>
-                </div>
-                <label asp-for="MotherName" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <input asp-for="MotherName" class="form-control" autocomplete="off" />
-                    <span asp-validation-for="MotherName" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label asp-for="CurrentAddress" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-10">
-                    <textarea asp-for="CurrentAddress" class="form-control"></textarea>
-                    <span asp-validation-for="CurrentAddress" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="offset-sm-8 col-sm-4">
-                    <div class="form-check float-right">
-                        <input type="checkbox" class="form-check-input" id="sameaddress">
-                        <label class="form-check-label" for="sameaddress">Same as Current Address</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label asp-for="PermanetAddress" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-10">
-                    <textarea asp-for="PermanetAddress" class="form-control"></textarea>
-                    <span asp-validation-for="PermanetAddress" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label asp-for="State" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <input asp-for="State" class="form-control" autocomplete="off" />
-                </div>
-                <label asp-for="City" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <input asp-for="City" class="form-control" autocomplete="off" />
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label asp-for="Mobile" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-4">
-                    <input asp-for="Mobile" class="form-control" maxlength="10" autocomplete="off" />
-                    <span asp-validation-for="Mobile" class="text-danger"></span>
-                </div>
-                <label asp-for="WhatsApp" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-3">
-                    <input asp-for="WhatsApp" class="form-control" maxlength="10" autocomplete="off" />
-                    <span asp-validation-for="WhatsApp" class="text-danger"></span>
+                <div class="col-sm-1">
+                    <button type="button" id="View" name="View" class="btn btn-outline-success float-right" onclick="PushRow();">V</button>
                 </div>
                 <div class="col-sm-1">
-                    <div class="form-check float-right">
-                        <input type="checkbox" class="form-check-input" id="samemobile">
-                        <label class="form-check-label" for="samemobile">Same</label>
-                    </div>
+                    <button type="button" id="Opp" name="Opp" class="btn btn-outline-success float-right" onclick="PushRow();">C</button>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label asp-for="Email" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-10">
-                    <input asp-for="Email" class="form-control" autocomplete="off" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="DateOfAdmission" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <input asp-for="DateOfAdmission" type="date" class="form-control">
+                    <span asp-validation-for="DateOfAdmission" class="text-danger"></span>
                 </div>
+                <label asp-for="ClassID" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <select asp-for="ClassID" class="form-control select2" asp-items="@School.Areas.Admin.Controllers.FeesStructureController.GetClassList()"> </select>
+                    <span asp-validation-for="ClassID" class="text-danger"></span>
+                </div>
+            </div>
+
+            <h5 class="sub-title">Student Education Details</h5>
+            <hr />
+            <!-- Row start -->
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <label class="form-control-label">Fees Head</label>
+                    <input type="text" id="FeesHead" name="FeesHead" class="form-control" />
+                    <input type="hidden" id="FeesHeadID" name="FeesHeadID" />
+                    <input type="hidden" id="OldFeesHeadID" name="FeesHeadID" />
+                    <input type="hidden" id="FeesStructureTransTempID" name="FeesHeadID" />
+                </div>
+                <div class="col-sm-2">
+                    <label class="form-control-label">Amount</label>
+                    <input type="text" id="FeesAmount" name="FeesAmount" class="form-control" />
+                </div>
+
+                <div class="col-sm-3">
+                    <label class=" form-control-label">Billing Cycle</label>
+                    <input type="text" id="BillingCycle" name="BillingCycle" disabled="disabled" class="form-control" />
+                </div>
+
+                <div class="col-sm-2">
+                    <label class="form-control-label">Due On</label>
+                    <input type="text" id="DueOn" name="DueOn" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                </div>
+                <div class="col-sm-1">
+                    <label class="form-control-label">Action</label>
+                    <button type="button" id="Add" name="Add" class="btn btn-outline-success float-right" onclick="PushRow();">Add</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <table id='dtTable' class='table table-sm'>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Class Name</th>
+                            <th>Board</th>
+                            <th>Passing Year</th>
+                            <th>Total Mark</th>
+                            <th>Recieved Mark</th>
+                            <th>Percent/Grade</th>                           
+                            <th>Edit</th>
+                            <th>Del</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
             </div>
 
             <div class="form-group row">
-                <label asp-for="Picture" class="col-sm-2 col-form-label"></label>
-                <div class="col-md-6">
-                    <p>Passport Picture (Size: 250px X 350px)</p>
-                    <img id="img-passport" src="~/uploadfiles/commonfile/cameraIcon.png" alt="" class="img-fluid img-thumbnail" />
-                </div>
-                <div class="col-md-4">
-                    <input type='file' name="file_passport" onchange="uploadpassort(this);" class="btn btn-outline-info pull-right" />
-                </div>
-            </div>
-
-            <div class="form-group row">              
                 <div class="col-sm-12">
                     <button type="submit" class="btn btn-outline-primary float-right" on><i class="fas fa-plus"></i> Create</button>
                 </div>
