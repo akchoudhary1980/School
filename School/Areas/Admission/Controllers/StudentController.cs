@@ -57,14 +57,14 @@ namespace School.Areas.Admission.Controllers
                 var list = (from t1 in db.StudentModels // state                                                                    
                            
                             select new
-                            {
+                            {                                
                                 t1.StudentID,
                                 t1.Picture,
                                 t1.StudentName,
                                 t1.FatherName,
                                 t1.City,
                                 t1.Mobile,
-                                t1.WhatsApp,
+                                t1.WhatsApp,                               
                             });
 
 
@@ -138,7 +138,7 @@ namespace School.Areas.Admission.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult Edit(StudentModel obj)
+        public IActionResult Edit(StudentModel obj, IFormFile file_passport)
         {
             if (ModelState.IsValid)
             {
@@ -155,6 +155,15 @@ namespace School.Areas.Admission.Controllers
                     }
                     else
                     {
+                        // Picture
+                        if (TextLib.UploadFilewithHTMLControl(file_passport, Environment.ContentRootPath, "Student" + obj.StudentID) != "No.png")
+                        {
+                            obj.Picture = TextLib.UploadFilewithHTMLControl(file_passport, Environment.ContentRootPath, "Student" + obj.StudentID);
+                        }
+                        else
+                        {
+                            obj.Picture = oldvalue.Picture;
+                        }
 
                         db.Entry(obj).State = EntityState.Modified;
                         db.SaveChanges();
@@ -164,6 +173,15 @@ namespace School.Areas.Admission.Controllers
                 }
                 else
                 {
+                    // Picture
+                    if (TextLib.UploadFilewithHTMLControl(file_passport, Environment.ContentRootPath, "Student" + obj.StudentID) != "No.png")
+                    {
+                        obj.Picture = TextLib.UploadFilewithHTMLControl(file_passport, Environment.ContentRootPath, "Student" + obj.StudentID);
+                    }
+                    else
+                    {
+                        obj.Picture = oldvalue.Picture;
+                    }
 
                     db.Entry(obj).State = EntityState.Modified;
                     db.SaveChanges();
