@@ -10,7 +10,7 @@ using School;
 namespace School.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20220110033014_CityModel")]
+    [Migration("20220112172231_CityModel")]
     partial class CityModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -689,6 +689,37 @@ namespace School.Migrations
                     b.ToTable("UserModels");
                 });
 
+            modelBuilder.Entity("School.Areas.Admission.Models.ActivityTransModel", b =>
+                {
+                    b.Property<int>("ActivityTransID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ActivityName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ActivityYear")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AnyAward")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PlaceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TokenActID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ActivityTransID");
+
+                    b.ToTable("ActivityTransModels");
+                });
+
             modelBuilder.Entity("School.Areas.Admission.Models.AdmissionModel", b =>
                 {
                     b.Property<int>("AdmissionID")
@@ -714,6 +745,43 @@ namespace School.Migrations
                     b.ToTable("AdmissionModels");
                 });
 
+            modelBuilder.Entity("School.Areas.Admission.Models.EducationTransModel", b =>
+                {
+                    b.Property<int>("EducationTransID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Board")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClassName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PassingYear")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PercentGrade")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RecievedMark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TokenEduID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TotalMark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EducationTransID");
+
+                    b.ToTable("EducationTransModels");
+                });
+
             modelBuilder.Entity("School.Areas.Admission.Models.StudentModel", b =>
                 {
                     b.Property<int>("StudentID")
@@ -731,14 +799,16 @@ namespace School.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FatherName")
-                        .HasColumnType("int");
+                    b.Property<string>("FatherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mobile")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MotherName")
-                        .HasColumnType("int");
+                    b.Property<string>("MotherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PermanetAddress")
                         .HasColumnType("nvarchar(max)");
@@ -749,8 +819,12 @@ namespace School.Migrations
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StudentName")
-                        .HasColumnType("int");
+                    b.Property<string>("StudentCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WhatsApp")
                         .HasColumnType("nvarchar(max)");

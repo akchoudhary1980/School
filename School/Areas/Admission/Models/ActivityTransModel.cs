@@ -12,7 +12,8 @@ namespace School.Areas.Admission.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public intActivityTransID { get; set; }
+
+        public int ActivityTransID { get; set; }
 
         public int TokenActID { get; set; } // Education
 

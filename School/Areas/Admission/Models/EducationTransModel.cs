@@ -31,7 +31,7 @@ namespace School.Areas.Admission.Models
         [Display(Name = "Recieved Mark")]
         public string RecievedMark { get; set; }
 
-        [Display(Name = "Percent/Grade)]
+        [Display(Name = "Percent/Grade")]
         public string PercentGrade { get; set; }
         public int SessionYearID { get; set; }
         public int ClassID { get; set; }

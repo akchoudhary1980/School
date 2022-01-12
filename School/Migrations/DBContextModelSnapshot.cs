@@ -687,6 +687,37 @@ namespace School.Migrations
                     b.ToTable("UserModels");
                 });
 
+            modelBuilder.Entity("School.Areas.Admission.Models.ActivityTransModel", b =>
+                {
+                    b.Property<int>("ActivityTransID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ActivityName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ActivityYear")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AnyAward")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PlaceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TokenActID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ActivityTransID");
+
+                    b.ToTable("ActivityTransModels");
+                });
+
             modelBuilder.Entity("School.Areas.Admission.Models.AdmissionModel", b =>
                 {
                     b.Property<int>("AdmissionID")
@@ -710,6 +741,43 @@ namespace School.Migrations
                     b.HasKey("AdmissionID");
 
                     b.ToTable("AdmissionModels");
+                });
+
+            modelBuilder.Entity("School.Areas.Admission.Models.EducationTransModel", b =>
+                {
+                    b.Property<int>("EducationTransID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Board")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClassName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PassingYear")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PercentGrade")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RecievedMark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TokenEduID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TotalMark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EducationTransID");
+
+                    b.ToTable("EducationTransModels");
                 });
 
             modelBuilder.Entity("School.Areas.Admission.Models.StudentModel", b =>
