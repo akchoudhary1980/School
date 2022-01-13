@@ -54,28 +54,40 @@
 
             <h5 class="sub-title">Student Education Details</h5>
             <hr />
-            <!-- Row start -->
+            <!-- Education start -->
             <div class="form-group row">
-                <div class="col-sm-4">
-                    <label class="form-control-label">Fees Head</label>
-                    <input type="text" id="FeesHead" name="FeesHead" class="form-control" />
-                    <input type="hidden" id="FeesHeadID" name="FeesHeadID" />
-                    <input type="hidden" id="OldFeesHeadID" name="FeesHeadID" />
-                    <input type="hidden" id="FeesStructureTransTempID" name="FeesHeadID" />
+                <div class="col-sm-2">
+                    <label class="form-control-label">Class Name</label>
+                    <input type="text" id="ClassName" name="ClassName" class="form-control" />
+                    <input type="hidden" id="ClassID" name="ClassID" />
+                    @*<input type="hidden" id="OldFeesHeadID" name="FeesHeadID" />*@
+                    <input type="hidden" id="EducationTransID" name="EducationTransID" />
                 </div>
                 <div class="col-sm-2">
-                    <label class="form-control-label">Amount</label>
-                    <input type="text" id="FeesAmount" name="FeesAmount" class="form-control" />
-                </div>
-
-                <div class="col-sm-3">
-                    <label class=" form-control-label">Billing Cycle</label>
-                    <input type="text" id="BillingCycle" name="BillingCycle" disabled="disabled" class="form-control" />
+                    <label class="form-control-label">Board</label>
+                    <input type="text" id="Board" name="Board" class="form-control" />
                 </div>
 
                 <div class="col-sm-2">
-                    <label class="form-control-label">Due On</label>
-                    <input type="text" id="DueOn" name="DueOn" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                    <label class=" form-control-label">Institute</label>
+                    <input type="text" id="Institute" name="Institute" disabled="disabled" class="form-control" />
+                </div>
+
+                <div class="col-sm-1">
+                    <label class="form-control-label">Passing Year</label>
+                    <input type="text" id="PassingYear" name="PassingYear" class="form-control">
+                </div>
+                <div class="col-sm-1">
+                    <label class="form-control-label">Total Mark</label>
+                    <input type="text" id="TotalMark" name="TotalMark" class="form-control">
+                </div>
+                <div class="col-sm-1">
+                    <label class="form-control-label">Recieved Mark</label>
+                    <input type="text" id="RecievedMark" name="RecievedMark" class="form-control">
+                </div>
+                <div class="col-sm-1">
+                    <label class="form-control-label">Percent Grade</label>
+                    <input type="text" id="PercentGrade" name="PercentGrade" class="form-control">
                 </div>
                 <div class="col-sm-1">
                     <label class="form-control-label">Action</label>
@@ -89,10 +101,11 @@
                             <th>#</th>
                             <th>Class Name</th>
                             <th>Board</th>
+                            <th>Institute</th>
                             <th>Passing Year</th>
                             <th>Total Mark</th>
                             <th>Recieved Mark</th>
-                            <th>Percent/Grade</th>                           
+                            <th>Percent/Grade</th>
                             <th>Edit</th>
                             <th>Del</th>
                         </tr>
@@ -100,8 +113,55 @@
                     <tbody>
                     </tbody>
                 </table>
-
             </div>
+            <!-- Education End  -->
+            <!-- Activity  -->
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <label class="form-control-label">Activity Name</label>
+                    <input type="text" id="ActivityName" name="ActivityName" class="form-control" />
+                    <input type="hidden" id="ActivityID" name="ActivityID" />
+                    <input type="hidden" id="OldActivityID" name="OldActivityID" />
+                    <input type="hidden" id="ActivityTransID" name="ActivityTransID" />
+                </div>
+                <div class="col-sm-2">
+                    <label class="form-control-label">Place Name</label>
+                    <input type="text" id="PlaceName" name="PlaceName" class="form-control" />
+                </div>
+
+                <div class="col-sm-3">
+                    <label class=" form-control-label">Activity Year</label>
+                    <input type="text" id="ActivityYear" name="ActivityYear" class="form-control" />
+                </div>
+
+                <div class="col-sm-2">
+                    <label class="form-control-label">Any Award</label>
+                    <input type="text" id="AnyAward" name="AnyAward" class="form-control">
+                </div>
+                <div class="col-sm-1">
+                    <label class="form-control-label">Action</label>
+                    <button type="button" id="Add" name="Add" class="btn btn-outline-success float-right" onclick="PushRow();">Add</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <table id='dtTable' class='table table-sm'>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Activity Name</th>
+                            <th>Place Name</th>
+                            <th>Activity Year</th>
+                            <th>Any Award</th>
+                            <th>Edit</th>
+                            <th>Del</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Activity End  -->
+
 
             <div class="form-group row">
                 <div class="col-sm-12">

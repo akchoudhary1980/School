@@ -22,6 +22,9 @@ namespace School.Areas.Admission.Models
         [Display(Name = "Board Name")]
         public string Board { get; set; }
 
+        [Display(Name = "Institute Name")]
+        public string Institute { get; set; }
+
         [Display(Name = "Passing Year")]
         public string PassingYear { get; set; }
 
