@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace School.Areas.Admin.Models
+namespace School.Areas.Admission.Models
 {
     public class ActivityModel
     {
