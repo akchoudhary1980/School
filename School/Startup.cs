@@ -30,7 +30,7 @@ namespace School
 
             services.AddDistributedMemoryCache();
             services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(15);//You can set Time   
+                options.IdleTimeout = TimeSpan.FromMinutes(15);//You can set Time   xcx
             });
 
             services.AddControllersWithViews();
