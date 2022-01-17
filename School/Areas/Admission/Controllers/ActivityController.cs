@@ -74,7 +74,7 @@ namespace School.Areas.Admission.Controllers
             {
                 // Check Duplicate and prevet duplication at the time of edit 
                 DBContext db1 = new DBContext();
-                var oldvalue = db1.ActivityModels.Where(x => x.ActivityName == obj.ActivityName).SingleOrDefault();
+                var oldvalue = db1.ActivityModels.Where(x => x.ActivityID == obj.ActivityID).SingleOrDefault();
                 if (oldvalue.ActivityName != obj.ActivityName)
                 {
                     bool duplicate = db1.SectionModels.Any(x => x.SectionName == obj.ActivityName);

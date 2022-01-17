@@ -1,12 +1,13 @@
 ﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
 @model School.Areas.Admission.Models.AdmissionModel
+@using School.Areas.Admission.Models;
 @using School.Areas.Admin.Models;
 @{
     Layout = "~/Areas/Admission/Views/Shared/_Layout.cshtml";
 }
 
 @*<script src="~/jquery-app/tr-student.js"></script>
-<script src="~/jquery-app/vl-student.js"></script>*@
+    <script src="~/jquery-app/vl-student.js"></script>*@
 
 <partial name="_Breadcrumb" , model="new BreadcrumbView{PageTitle = @ViewData["PageTitle"].ToString(), ControllerName = @ViewData["ControllerName"].ToString()}" />
 
@@ -28,22 +29,28 @@
             <div class="form-group row">
                 <label asp-for="StudentID" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-8">
-                    <input asp-for="StudentID" class="form-control" autocomplete="off" />
+                    <input id="StudentName" name="StudentName" class="form-control" autocomplete="off" />
+                    <input asp-for="StudentID" type="hidden" />
                     <span asp-validation-for="StudentID" class="text-danger"></span>
                 </div>
                 <div class="col-sm-1">
-                    <button type="button" id="View" name="View" class="btn btn-outline-success float-right" onclick="PushRow();">V</button>
+                    <button type="button" id="View" name="View" class="btn btn-outline-success float-right" onclick="PushRow();"><i class="fas fa-search-plus"></i></button>
                 </div>
                 <div class="col-sm-1">
-                    <button type="button" id="Opp" name="Opp" class="btn btn-outline-success float-right" onclick="PushRow();">C</button>
+                    <button type="button" id="Opp" name="Opp" class="btn btn-outline-info float-right" onclick="PushRow();"><i class="fas fa-plus"></i></button>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label asp-for="DateOfAdmission" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-4">
-                    <input asp-for="DateOfAdmission" type="date" class="form-control">
-                    <span asp-validation-for="DateOfAdmission" class="text-danger"></span>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </div>
+                        <input asp-for="DateOfAdmission" type="date" class="form-control">
+                        <span asp-validation-for="DateOfAdmission" class="text-danger"></span>
+                    </div>
                 </div>
                 <label asp-for="ClassID" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-4">
@@ -51,49 +58,71 @@
                     <span asp-validation-for="ClassID" class="text-danger"></span>
                 </div>
             </div>
+            <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+                <!-- Accordion card -->
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header" role="tab" id="headingOne1">
+                        <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                           aria-controls="collapseOne1">
+                            <h5 class="mb-0">
+                                Student Previous Education Details <i class="fas fa-angle-down rotate-icon float-right"></i>
+                            </h5>
+                        </a>
+                    </div>
+                    <!-- Card body -->
+                    <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+                         data-parent="#accordionEx">
+                        <div class="card-body">
+                            <!-- Education start -->
+                            <div class="form-group row m-0">
+                                <label class="col-sm-2 col-form-label">Class Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="EduClassName" name="EduClassName" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                            <div class="form-group row m-0">
+                                <label class="col-sm-2 col-form-label">Board</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="EduBoard" name="EduBoard" class="form-control form-control-sm" />
+                                </div>
+                                <label class="col-sm-2 col-form-label">Institute</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="EduInstitute" name="EduInstitute" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                            <div class="form-group row m-0">
+                                <label class="col-sm-2 col-form-label">Passing Year</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="EduYear" name="EduYear" class="form-control form-control-sm" />
+                                </div>
+                                <label class="col-sm-2 col-form-label">Total Mark</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="EduTotalMark" name="EduTotalMark" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                            <div class="form-group row m-0">
+                                <label class="col-sm-2 col-form-label">Recieved Mark</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="EduRecievedMark" name="EduRecievedMark" class="form-control form-control-sm" />
+                                </div>
+                                <label class="col-sm-2 col-form-label">Percent/Grade</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="EduPercentGrade" name="EduPercentGrade" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <button type="button" id="EduAdd" name="EduAdd" class="btn btn-outline-success float-right" onclick="PushRow();">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <h5 class="sub-title">Student Education Details</h5>
-            <hr />
-            <!-- Education start -->
-            <div class="form-group row">
-                <div class="col-sm-2">
-                    <label class="form-control-label">Class Name</label>
-                    <input type="text" id="ClassName" name="ClassName" class="form-control" />
-                    <input type="hidden" id="ClassID" name="ClassID" />
-                    @*<input type="hidden" id="OldFeesHeadID" name="FeesHeadID" />*@
-                    <input type="hidden" id="EducationTransID" name="EducationTransID" />
-                </div>
-                <div class="col-sm-2">
-                    <label class="form-control-label">Board</label>
-                    <input type="text" id="Board" name="Board" class="form-control" />
-                </div>
-
-                <div class="col-sm-2">
-                    <label class=" form-control-label">Institute</label>
-                    <input type="text" id="Institute" name="Institute" disabled="disabled" class="form-control" />
-                </div>
-
-                <div class="col-sm-1">
-                    <label class="form-control-label">Passing Year</label>
-                    <input type="text" id="PassingYear" name="PassingYear" class="form-control">
-                </div>
-                <div class="col-sm-1">
-                    <label class="form-control-label">Total Mark</label>
-                    <input type="text" id="TotalMark" name="TotalMark" class="form-control">
-                </div>
-                <div class="col-sm-1">
-                    <label class="form-control-label">Recieved Mark</label>
-                    <input type="text" id="RecievedMark" name="RecievedMark" class="form-control">
-                </div>
-                <div class="col-sm-1">
-                    <label class="form-control-label">Percent Grade</label>
-                    <input type="text" id="PercentGrade" name="PercentGrade" class="form-control">
-                </div>
-                <div class="col-sm-1">
-                    <label class="form-control-label">Action</label>
-                    <button type="button" id="Add" name="Add" class="btn btn-outline-success float-right" onclick="PushRow();">Add</button>
                 </div>
             </div>
+
             <div class="form-group row">
                 <table id='dtTable' class='table table-sm'>
                     <thead>
@@ -115,32 +144,58 @@
                 </table>
             </div>
             <!-- Education End  -->
-            <!-- Activity  -->
-            <div class="form-group row">
-                <div class="col-sm-4">
-                    <label class="form-control-label">Activity Name</label>
-                    <input type="text" id="ActivityName" name="ActivityName" class="form-control" />
-                    <input type="hidden" id="ActivityID" name="ActivityID" />
-                    <input type="hidden" id="OldActivityID" name="OldActivityID" />
-                    <input type="hidden" id="ActivityTransID" name="ActivityTransID" />
-                </div>
-                <div class="col-sm-2">
-                    <label class="form-control-label">Place Name</label>
-                    <input type="text" id="PlaceName" name="PlaceName" class="form-control" />
-                </div>
+            <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+                <!-- Accordion card -->
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header" role="tab" id="headingOne1">
+                        <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne2" aria-expanded="true"
+                           aria-controls="collapseOne1">
+                            <h5 class="mb-0">
+                                Student Previous Activity Details <i class="fas fa-angle-down rotate-icon float-right"></i>
+                            </h5>
+                        </a>
+                    </div>
+                    <!-- Card body -->
+                    <div id="collapseOne2" class="collapse" role="tabpanel" aria-labelledby="headingOne1"
+                         data-parent="#accordionEx">
+                        <div class="card-body">
+                            <!-- Education start -->
+                            <div class="form-group row m-0">
+                                <label class="col-sm-2 col-form-label">Activity Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="ActivityName" name="ActivityName" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                            <div class="form-group row m-0">
+                                <label class="col-sm-2 col-form-label">Place Name</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="PlaceName" name="PlaceName" class="form-control form-control-sm" />
+                                </div>
+                                <label class="col-sm-2 col-form-label">Institute</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="ActivityInstitute" name="ActivityInstitute" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                            <div class="form-group row m-0">
+                                <label class="col-sm-2 col-form-label">Activity Year</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="ActivityYear" name="ActivityYear" class="form-control form-control-sm" />
+                                </div>
+                                <label class="col-sm-2 col-form-label">Award</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="AnyAward" name="AnyAward" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <button type="button" id="ActivityAdd" name="ActivityAdd" class="btn btn-outline-success float-right" onclick="PushRow();">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="col-sm-3">
-                    <label class=" form-control-label">Activity Year</label>
-                    <input type="text" id="ActivityYear" name="ActivityYear" class="form-control" />
-                </div>
-
-                <div class="col-sm-2">
-                    <label class="form-control-label">Any Award</label>
-                    <input type="text" id="AnyAward" name="AnyAward" class="form-control">
-                </div>
-                <div class="col-sm-1">
-                    <label class="form-control-label">Action</label>
-                    <button type="button" id="Add" name="Add" class="btn btn-outline-success float-right" onclick="PushRow();">Add</button>
                 </div>
             </div>
             <div class="form-group row">
@@ -150,6 +205,7 @@
                             <th>#</th>
                             <th>Activity Name</th>
                             <th>Place Name</th>
+                            <th>Institute</th>
                             <th>Activity Year</th>
                             <th>Any Award</th>
                             <th>Edit</th>
@@ -178,5 +234,26 @@
 </div>
 
 
-
+<!-- Student Model -->
+<div class="modal fade" id="student-lg">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">New Student</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <partial name="\Views\Student\_Create.cshtml" , model="new StudentModel { }" />
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 

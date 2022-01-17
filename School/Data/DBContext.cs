@@ -41,6 +41,7 @@ namespace School
         public DbSet<EducationTransModel> EducationTransModels { get; set; }
         public DbSet<ActivityModel> ActivityModels { get; set; }
         public DbSet<ActivityTransModel> ActivityTransModels { get; set; }
+        public DbSet<PaymentModel> PaymentModels { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
