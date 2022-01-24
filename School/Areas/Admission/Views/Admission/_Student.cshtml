@@ -1,0 +1,131 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@model School.Areas.Admission.Models.StudentModel
+<script src="~/jquery-app/tr-student.js"></script>
+<script src="~/jquery-app/vl-student.js"></script>
+
+<form id="vlform" name="vlform" method="post" enctype="multipart/form-data" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group row">
+                <label asp-for="StudentCode" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <input asp-for="StudentCode" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="StudentCode" class="text-danger"></span>
+                </div>
+                <label asp-for="DateOfBirth" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </div>
+                        <input asp-for="DateOfBirth" type="date"  class="form-control">
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="StudentName" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="StudentName" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="StudentName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="FatherName" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <input asp-for="FatherName" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="FatherName" class="text-danger"></span>
+                </div>
+                <label asp-for="MotherName" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <input asp-for="MotherName" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="MotherName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="CurrentAddress" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <textarea asp-for="CurrentAddress" class="form-control"></textarea>
+                    <span asp-validation-for="CurrentAddress" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="offset-sm-8 col-sm-4">
+                    <div class="form-check float-right">
+                        <input type="checkbox" class="form-check-input" id="sameaddress">
+                        <label class="form-check-label" for="sameaddress">Same as Current Address</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="PermanetAddress" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <textarea asp-for="PermanetAddress" class="form-control"></textarea>
+                    <span asp-validation-for="PermanetAddress" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="State" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <input asp-for="State" class="form-control" autocomplete="off" />
+                </div>
+                <label asp-for="City" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <input asp-for="City" class="form-control" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Mobile" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-4">
+                    <input asp-for="Mobile" class="form-control" maxlength="10" autocomplete="off" />
+                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                </div>
+                <label asp-for="WhatsApp" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-3">
+                    <input asp-for="WhatsApp" class="form-control" maxlength="10" autocomplete="off" />
+                    <span asp-validation-for="WhatsApp" class="text-danger"></span>
+                </div>
+                <div class="col-sm-1">
+                    <div class="form-check float-right">
+                        <input type="checkbox" class="form-check-input" id="samemobile">
+                        <label class="form-check-label" for="samemobile">Same</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Email" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Picture" class="col-sm-2 col-form-label"></label>
+                <div class="col-md-6">
+                    <p>Passport Picture (Size: 250px X 350px)</p>
+                    <img id="img-passport" src="~/uploadfiles/commonfile/cameraIcon.png" alt="" class="img-fluid img-thumbnail" />
+                </div>
+                <div class="col-md-4">
+                    <input type='file' name="file_passport" onchange="uploadpassort(this);" class="btn btn-outline-info pull-right" />
+                </div>
+            </div>
+
+            <div class="form-group row">              
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-outline-primary float-right" on><i class="fas fa-plus"></i> Create</button>
+                </div>
+            </div>
+
+        </form>
+
+
+
+

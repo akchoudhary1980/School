@@ -44,8 +44,23 @@ namespace School.Controllers
             return Json(list, new Newtonsoft.Json.JsonSerializerSettings());
         }
 
+        // Get Student Auto Complete
+        public JsonResult StudentAutoComplete(string Prefix)
+        {
+            var list = db.StudentModels.Where(x => x.StudentName.Contains(Prefix))
+                       .Select(x => new { x.StudentID, x.StudentName }).ToList();
+            return Json(list, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+        // Get Activity Auto Complete
+        public JsonResult ActivityAutoComplete(string Prefix)
+        {
+            var list = db.ActivityModels.Where(x => x.ActivityName.Contains(Prefix))
+                       .Select(x => new { x.ActivityID, x.ActivityName }).ToList();
+            return Json(list, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+
         //  Get firm Name 
-        
+
 
 
         //  Get firm Name 
