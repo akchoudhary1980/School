@@ -10,8 +10,8 @@ using School;
 namespace School.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20220117033136_PaymentModel")]
-    partial class PaymentModel
+    [Migration("20220205032005_CityModel")]
+    partial class CityModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -740,6 +740,37 @@ namespace School.Migrations
                     b.ToTable("ActivityTransModels");
                 });
 
+            modelBuilder.Entity("School.Areas.Admission.Models.ActivityTransTempModel", b =>
+                {
+                    b.Property<int>("ActivityTransTempID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ActivityName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ActivityYear")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AnyAward")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PlaceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TokenActID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ActivityTransTempID");
+
+                    b.ToTable("ActivityTransTempModels");
+                });
+
             modelBuilder.Entity("School.Areas.Admission.Models.AdmissionModel", b =>
                 {
                     b.Property<int>("AdmissionID")
@@ -805,6 +836,46 @@ namespace School.Migrations
                     b.ToTable("EducationTransModels");
                 });
 
+            modelBuilder.Entity("School.Areas.Admission.Models.EducationTransTempModel", b =>
+                {
+                    b.Property<int>("EducationTransTempID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Board")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClassName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Institute")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PassingYear")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PercentGrade")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RecievedMark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionYearID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TokenEduID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TotalMark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EducationTransTempID");
+
+                    b.ToTable("EducationTransTempModels");
+                });
+
             modelBuilder.Entity("School.Areas.Admission.Models.PaymentModel", b =>
                 {
                     b.Property<int>("PaymentID")
@@ -813,14 +884,11 @@ namespace School.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
+                    b.Property<int>("FeesHeadID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("PaymentDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("PaymentFor")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaymentGroup")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PaymentMethod")
                         .HasColumnType("nvarchar(max)");

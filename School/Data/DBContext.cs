@@ -39,10 +39,11 @@ namespace School
         public DbSet<StudentModel> StudentModels { get; set; }
         public DbSet<AdmissionModel> AdmissionModels { get; set; }
         public DbSet<EducationTransModel> EducationTransModels { get; set; }
-        public DbSet<ActivityModel> ActivityModels { get; set; }
+        public DbSet<EducationTransTempModel> EducationTransTempModels { get; set; }
+        public DbSet<ActivityModel> ActivityModels { get; set; }       
         public DbSet<ActivityTransModel> ActivityTransModels { get; set; }
+        public DbSet<ActivityTransTempModel> ActivityTransTempModels { get; set; }
         public DbSet<PaymentModel> PaymentModels { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer(@"Data Source = (localdb)\ProjectsV13; Initial Catalog = Rohit; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");

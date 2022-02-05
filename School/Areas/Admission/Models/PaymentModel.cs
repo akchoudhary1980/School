@@ -15,7 +15,7 @@ namespace School.Areas.Admission.Models
         public int PaymentID { get; set; }
 
         [Display(Name = "Payment For")]
-        public string PaymentFor { get; set; } // Jan // Feb // March 
+        public int FeesHeadID { get; set; } // FeesHeadID 
 
         [Display(Name = "Payment Mode")]
         public string PaymentMode { get; set; } // Cash // Cheque // RTGS / NEFT // Electronic Media   
@@ -29,10 +29,7 @@ namespace School.Areas.Admission.Models
 
         [Display(Name = "Remark")]
         [DataType(DataType.MultilineText)]
-        public string Remark { get; set; }
-
-        [Display(Name = "Payment Group")]
-        public string PaymentGroup { get; set; } // R for Reciept // P for payment
+        public string Remark { get; set; }       
 
         [Display(Name = "Payment Method")]
         public string PaymentMethod { get; set; } // R for Reciept // P for payment

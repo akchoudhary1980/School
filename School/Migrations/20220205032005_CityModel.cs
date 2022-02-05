@@ -6,11 +6,26 @@ namespace School.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "PaymentFor",
+                table: "PaymentModels");
+
+            migrationBuilder.DropColumn(
+                name: "PaymentGroup",
+                table: "PaymentModels");
+
+            migrationBuilder.AddColumn<int>(
+                name: "FeesHeadID",
+                table: "PaymentModels",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
             migrationBuilder.CreateTable(
-                name: "ActivityTransModels",
+                name: "ActivityTransTempModels",
                 columns: table => new
                 {
-                    ActivityTransID = table.Column<int>(type: "int", nullable: false),
+                    ActivityTransTempID = table.Column<int>(type: "int", nullable: false),
                     TokenActID = table.Column<int>(type: "int", nullable: false),
                     ActivityName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PlaceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -21,17 +36,18 @@ namespace School.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActivityTransModels", x => x.ActivityTransID);
+                    table.PrimaryKey("PK_ActivityTransTempModels", x => x.ActivityTransTempID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EducationTransModels",
+                name: "EducationTransTempModels",
                 columns: table => new
                 {
-                    EducationTransID = table.Column<int>(type: "int", nullable: false),
+                    EducationTransTempID = table.Column<int>(type: "int", nullable: false),
                     TokenEduID = table.Column<int>(type: "int", nullable: false),
                     ClassName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Board = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Institute = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PassingYear = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TotalMark = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RecievedMark = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -41,17 +57,33 @@ namespace School.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EducationTransModels", x => x.EducationTransID);
+                    table.PrimaryKey("PK_EducationTransTempModels", x => x.EducationTransTempID);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ActivityTransModels");
+                name: "ActivityTransTempModels");
 
             migrationBuilder.DropTable(
-                name: "EducationTransModels");
+                name: "EducationTransTempModels");
+
+            migrationBuilder.DropColumn(
+                name: "FeesHeadID",
+                table: "PaymentModels");
+
+            migrationBuilder.AddColumn<string>(
+                name: "PaymentFor",
+                table: "PaymentModels",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "PaymentGroup",
+                table: "PaymentModels",
+                type: "nvarchar(max)",
+                nullable: true);
         }
     }
 }

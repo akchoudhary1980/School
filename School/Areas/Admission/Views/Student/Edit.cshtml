@@ -132,7 +132,7 @@
                 <label asp-for="Picture" class="col-sm-2 col-form-label"></label>
                 <div class="col-md-6">
                     <p>Passport Picture (Size: 250px X 350px)</p>
-                    <img id="img-passport" src="~/uploadfiles/commonfile/cameraIcon.png" alt="" class="img-fluid img-thumbnail" />
+                    <img id="img-passport" src="~/uploadfiles/@Url.Content(Model.Picture)" alt="" class="img-fluid img-thumbnail" />
                 </div>
                 <div class="col-md-4">
                     <input type='file' name="file_passport" onchange="uploadpassort(this);" class="btn btn-outline-info pull-right" />

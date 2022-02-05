@@ -152,7 +152,7 @@ namespace School.Areas.Admin.Controllers
                     db.FeesStructureTransModels.AddRange(fst);
                     db.SaveChanges();
 
-                    // fees trans save 
+                    // Fees Structure Save 
                     obj.SessionYearID = 1;
                     obj.TokenID = token;
                     obj.Pictures = TextLib.UploadFilewithHTMLControl(file_icon, Environment.ContentRootPath, "FeesIcon" + obj.FeesStructureID);
